@@ -1,1 +1,1 @@
-Styling Components -- Tailwind CSS
+Using Tailwind CSS
