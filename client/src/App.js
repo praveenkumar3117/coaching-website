@@ -6,11 +6,13 @@ import Footer from './components/Footer';
 import React from 'react';
 import Content from './components/Home/content';
 import Director from './components/Home/director';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
     <div className="App bg-gray-100">
       <BrowserRouter>
+      <Navbar/>
         <Routes>
           <Route path = "/" element={<div><Hero/> <Content/> <Director/></div>}/>
           
