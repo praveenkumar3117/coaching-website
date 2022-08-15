@@ -29,7 +29,7 @@ function Director() {
           </div>
 
           <div>
-                <p className="leading-relaxed">Dear students 
+                <p className="leading-relaxed font-lato w-11/12 mx-auto">Dear students, 
                 Welcome to Vulture Institute 
 
                 We would like to communicate our appreciation for your belief instilled in Vulture.
