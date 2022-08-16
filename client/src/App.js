@@ -7,6 +7,7 @@ import React from 'react';
 import Content from './components/Home/content';
 import Director from './components/Home/director';
 import Navbar from './components/Navbar/Navbar';
+import Products from './components/Home/products';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <BrowserRouter>
       <Navbar/>
         <Routes>
-          <Route path = "/" element={<div><Hero/> <Content/> <Director/></div>}/>
+          <Route path = "/" element={<div><Hero/> <Content/> <Director/><Products/></div>}/>
           
           <Route path ="/add" element = {<h1>Hello</h1>} />
 
