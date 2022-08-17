@@ -17,7 +17,7 @@ function Hero() {
       'content':'Courses for NTSE and Olympiads'
     }
 
-  ]
+  ];
 
   return (
     <div className='flex flex-col md:flex-row'>
@@ -27,7 +27,7 @@ function Hero() {
       ))
       }
     </div>
-  )
+  );
 }
 
 export default Hero;

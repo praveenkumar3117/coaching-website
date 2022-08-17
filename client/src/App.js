@@ -8,6 +8,7 @@ import Content from './components/Home/content';
 import Director from './components/Home/director';
 import Navbar from './components/Navbar/Navbar';
 import Products from './components/Home/products';
+import Login from './components/Login/login';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Routes>
           <Route path = "/" element={<div><Hero/> <Content/> <Director/><Products/></div>}/>
           
-          <Route path ="/add" element = {<h1>Hello</h1>} />
+          <Route path ="/login" element = {<Login/>} />
 
         </Routes>
         <Footer/>
