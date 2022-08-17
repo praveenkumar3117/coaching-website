@@ -6,17 +6,19 @@ import Footer from './components/Footer';
 import React from 'react';
 import Content from './components/Home/content';
 import Director from './components/Home/director';
-import Navbar from './components/Navbar/Navbar';
+import Products from './components/Home/products';
+import Login from './components/Login/login';
+import Contact from './components/Contact/contact';
 
 function App() {
   return (
-    <div className="App bg-gray-100">
+    <div className="App bg-gray-100 font-lato">
       <BrowserRouter>
-      <Navbar/>
         <Routes>
-          <Route path = "/" element={<div><Hero/> <Content/> <Director/></div>}/>
+          <Route path = "/" element={<div><Hero/> <Content/> <Director/><Products/> </div>}/>
           
-          <Route path ="/add" element = {<h1>Hello</h1>} />
+          <Route path ="/login" element = {<Login/>} />
+          <Route path ="/contact" element = {<Contact/>} />
 
         </Routes>
         <Footer/>
