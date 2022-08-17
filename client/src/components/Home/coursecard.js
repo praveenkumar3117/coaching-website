@@ -1,18 +1,21 @@
 import React from 'react'
-import {FcBusinesswoman} from 'react-icons/fc';
+// import {FcBusinesswoman} from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 
 function Card(props) {
-    const {title, content} = props;
+
+      const Icon = props.iconName;
+      const iconClassName = `mb-3 w-20 h-20 relative bottom-10 rounded-full shadow-lg ${props.bgColor}`;
+      console.log(iconClassName);
 
   return (
     <div className="py-2 my-16 w-9/12 md:w-1/4 justify-center items-center flex flex-col mx-auto">
         
         <div className="px-4 w-full bg-white rounded-lg hover:drop-shadow-2xl ring-offset-transparent ring-black shadow-md dark:bg-sky-500 dark:border-gray-700">
           
-
         <div className="flex flex-col items-center pb-10">
-          <FcBusinesswoman className="mb-3 w-20 h-20 bg-red-300 relative bottom-10  rounded-full shadow-lg"/>
+          
+          <Icon className={iconClassName}/>
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{props.title}</h5>
           <span className="text-sm text-white font-lato dark:text-white">{props.content}</span>
 
