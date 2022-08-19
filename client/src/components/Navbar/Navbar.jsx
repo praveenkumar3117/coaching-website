@@ -6,15 +6,15 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
 
   let Links = [
-    { name: "Home", l: "home" },
-    { name: "Courses", l: "projects" },
-    { name: "SEAT/VSAT", l: "contact" },
-    { name: "Users", l: "contact" },
-    { name: "Payments", l: "contact" },
-    { name: "Our Centers", l: "contact" },
-    { name: "About Us", l: "contact" },
-    { name: "Gallery", l: "contact" },
-    { name: "Contact Us", l: "contact" }
+    { name: "Home", l: "/" },
+    { name: "Courses", l: "/Courses"},
+    { name: "SEAT/VSAT", l: "contact"},
+    { name: "Payments", l: "contact"},
+    { name: "Our Centers", l: "contact"},
+    { name: "About Us", l: "/about"},
+    { name: "Gallery", l: "contact"},
+    { name: "Contact Us", l: "contact"},
+    { name: "Login", l: "contact"},
 
   ];
   let [open, setOpen] = useState(false);

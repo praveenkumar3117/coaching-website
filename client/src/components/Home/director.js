@@ -9,7 +9,7 @@ function Director() {
             <div className="lg:w-1/2 lg:mb-0 mb-6 mx-auto p-4">
 
               <div className="h-full text-center ">
-                <img alt="testimonial" className="md:w-96 sm:w-72 sm:h-72 md:h-96 mb-8 object-cover object-center hover:-translate-y-3 ease-in duration-300 p-1 mx-auto inline-block border-2 border-gray-200 bg-gray-100" src="../images/user.png" />
+                <img alt="testimonial" className="md:w-96 sm:w-72 sm:h-72 md:h-96 mb-8 object-cover object-center hover:-translate-y-3 ease-in duration-300 p-1 mx-auto inline-block border-2 border-gray-200 bg-gray-300" src="../images/user.png" />
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">PRADEEP PRAJAPATI</h2>
                 <p className="text-gray-500">Managing Director</p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4" />
@@ -19,7 +19,7 @@ function Director() {
 
             <div className="lg:w-1/2 lg:mb-0 mb-6 p-4 mx-auto">
               <div className="h-full text-center">
-                <img alt="testimonial" className="md:w-96 sm:w-72 sm:h-72 md:h-96 mb-8 object-cover object-center hover:-translate-y-3 ease-in duration-300 p-1 inline-block  bg-gray-100" src="../images/user.png" />
+                <img alt="testimonial" className="md:w-96 sm:w-72 sm:h-72 md:h-96 mb-8 object-cover object-center hover:-translate-y-3 ease-in duration-300 p-1 inline-block  bg-gray-300" src="../images/user.png" />
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">CHETNA</h2>
                 <p className="text-gray-500">Academic Director</p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4" />

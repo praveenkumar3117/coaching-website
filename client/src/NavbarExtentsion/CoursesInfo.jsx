@@ -1,9 +1,9 @@
 import React from 'react'
-import Card from './Coursecard';
-import {FcBusinesswoman} from 'react-icons/fc';
-import { GiCaduceus, GiBrain } from 'react-icons/gi';
+import { FcBusinesswoman } from 'react-icons/fc'
+import { GiBrain, GiCaduceus } from 'react-icons/gi'
+import Card from '../components/Home/Coursecard'
 
-function Hero() {
+const CoursesInfo = () => {
 
   const CardInfo = [
     {
@@ -29,13 +29,13 @@ function Hero() {
 
   return (
     <div className='flex flex-col md:flex-row'>
-      {
-      CardInfo.map((cardItem)=>(
-        <Card title={cardItem.title} content={cardItem.content} iconName = {cardItem.iconName} bgColor = {cardItem.bgColor} />
-      ))
-      }
-    </div>
-  );
+    {
+    CardInfo.map((cardItem)=>(
+      <Card title={cardItem.title} content={cardItem.content} iconName = {cardItem.iconName} bgColor = {cardItem.bgColor} />
+    ))
+    }
+  </div>
+  )
 }
 
-export default Hero;
+export default CoursesInfo

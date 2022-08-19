@@ -9,7 +9,7 @@ function Card(props) {
       console.log(iconClassName);
 
   return (
-    <div className="py-2 my-16 w-9/12 md:w-1/4 justify-center items-center flex flex-col mx-auto">
+    <div className="pt-24 my-16 w-9/12 md:w-1/4 justify-center items-center flex flex-col mx-auto">
         
         <div className="px-4 w-full bg-white rounded-lg hover:drop-shadow-2xl ring-offset-transparent ring-black shadow-md dark:bg-sky-500 dark:border-gray-700">
           

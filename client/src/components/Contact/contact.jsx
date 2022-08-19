@@ -5,7 +5,7 @@ import {MdOutlineEmail} from 'react-icons/md';
 
 function Contact() {
   return (
-    <section className="bg-white flex justify-center">
+    <section className="bg-white flex justify-center pt-24">
         <div className="
         container 
         flex 
