@@ -1,5 +1,4 @@
 import React from 'react'
-import {SiFacebook} from 'react-icons/si';
 import {BsGoogle} from 'react-icons/bs';
 
 function Login() {
@@ -12,12 +11,7 @@ function Login() {
               <form>
                 <div className="flex flex-row items-center justify-center lg:justify-center">
                   <p className="text-lg mb-0 mr-4">Sign in with</p>
-                  <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light" className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
-                    {/* Facebook */}
-                    <SiFacebook className='w-4 h-4'/>
-                  </button>
-
-                  <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light" className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
+                  <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light" className="inline-block p-3 bg-blue-600 text-white font-medium text-xl leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
                     {/* Google */}
                     <BsGoogle/>
                   </button>
