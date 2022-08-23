@@ -7,6 +7,8 @@ function Contact() {
   return (
     <section className="bg-white flex justify-center pt-24">
         <div className="
+        md:pt-4
+        lg:pt-4
         container 
         flex 
         flex-col 
