@@ -7,7 +7,7 @@ import teacher from './images/teacher.jpg'
 
 const LoginCheck = () => {
   return (
-    <section class="text-black bg-gray-100 body-font">
+    <section class="text-black md:pt-12 lg:pt-12 bg-gray-100 body-font">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-wrap -m-4">
       <div class="p-4 md:w-1/3">
