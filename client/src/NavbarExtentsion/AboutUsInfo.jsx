@@ -9,7 +9,7 @@ const AboutUsInfo = () => {
         <section className="text-gray-400 bg-gray-100 body-font pt-16">
             <div className="container px-5 py-24 mx-auto">
                 <div className="flex flex-col text-center w-full mb-20">
-                    <h1 className="text-4xl md:text-6xl font-medium title-font mb-4 text-black">About Us</h1>
+                    <h1 className="border-b-2 border-blue-700 w-1/4 py-2 mx-auto text-4xl md:text-6xl font-medium title-font mb-4 text-black">About Us</h1>
                 </div>
                 <div className="flex flex-wrap -m-4 text-center">
 

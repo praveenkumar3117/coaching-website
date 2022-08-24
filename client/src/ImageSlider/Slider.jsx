@@ -29,12 +29,12 @@ const Image = () => {
 		infinite: true,
 		prevArrow: (
 			<div>
-				 <AiOutlineDoubleLeft className="text-4xl md:text-6xl md:mx-5 bg-blue-500 p-2 rounded-lg"/>
+				 <AiOutlineDoubleLeft className="hidden lg:block md:text-5xl md:mx-60 bg-gray-200 p-2 rounded-lg"/>
 			</div>
 		),
 		nextArrow: (
 			<div >
-			<AiOutlineDoubleRight className="text-4xl md:text-6xl md:mx-5 bg-blue-500 p-2 rounded-lg"/>
+			<AiOutlineDoubleRight className="hidden lg:block md:text-5xl md:mx-60 bg-gray-200 p-2 rounded-lg"/>
 			</div>
 		),
 	};
@@ -46,7 +46,7 @@ const Image = () => {
 				{images.map((img, index) => (
 					<div key={index} className="flex justify-center w-full mx-auto">
 						<img
-							className="w-3/4 object-cover rounded-lg shadow-xl"
+							className="lg:w-full object-cover rounded-lg shadow-xl"
 							src={img}
                             alt='images'
 						/>
