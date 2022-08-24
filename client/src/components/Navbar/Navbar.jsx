@@ -24,6 +24,7 @@ const Navbar = () => {
       <div className='md:flex items-center justify-between bg-gray-100 py-4 md:px-10 px-7'>
         <div className='font-bold text-4xl md:text-4xl select-none flex items-center 
        text-blue-700 font-signature'>
+        
           Vulture Institute
         </div>
 
