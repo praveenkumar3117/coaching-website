@@ -9,18 +9,20 @@ import Products from './components/Home/products';
 import Login from './components/Login/login';
 import Contact from './components/Contact/contact';
 import Navbar from './components/Navbar/Navbar'
-import AboutUsInfo from './NavbarExtentsion/AboutUsInfo';
-import CoursesInfo from './NavbarExtentsion/CoursesInfo';
-import Slider from './ImageSlider/Slider' 
+import AboutUsInfo from './components/NavbarExtentsion/AboutUsInfo';
+import CoursesInfo from './components/NavbarExtentsion/CoursesInfo';
+import Slider from './components/ImageSlider/Slider' 
 import LoginCheck from './components/Login/LoginCheck';
 import SuperUser from './components/superuser/SuperUser';
 import AddUser from './components/superuser/AddUser';
 import DeleteUser from './components/superuser/DeleteUser';
+import AuthState from './context/Auth/AuthState';
 // import SideBar from './components/Sidebar/SideBarNoHover';
 
 function App() {
   return (
-    <div className="App bg-gray-100 font-lato">
+    <AuthState>
+      <div className="App bg-gray-100 font-lato">
       <BrowserRouter>
       <Navbar />
         <Routes>
@@ -40,6 +42,7 @@ function App() {
         <Footer/>
       </BrowserRouter>
     </div>
+    </AuthState>
   );
 }
 
