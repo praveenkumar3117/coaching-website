@@ -27,6 +27,7 @@ function App() {
       <Navbar />
         <Routes>
           <Route path = "/" element={<div ><Slider/><Hero/> <Content/> <Director/><Products/> </div>}/>
+          
           <Route path ="/login" element = {<LoginCheck/>} />
           <Route path ="/login/student" element = {<Login/>} />
           <Route path ="/login/teacher" element = {<Login/>} />
@@ -34,7 +35,7 @@ function App() {
           <Route path ="/contact" element = {<Contact/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
-          <Route path ="/admin" element = {<SuperUser/>} /> 
+          <Route path ="/admin" element = {<SuperUser/>} />
           <Route path ="/admin/adduser" element = {<AddUser/>} />
           <Route path ="/admin/deleteuser" element = {<DeleteUser/>} />
         </Routes>
