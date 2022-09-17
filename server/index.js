@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
-const mongoose = require('mongoose')
 const connectDB = require('./db')
+const SuperUserRoutes = require('./routes/SuperUserRoutes')
 
 const app = express()
 app.use(express.json())
@@ -10,4 +10,5 @@ require("dotenv").config()
 connectDB()
 const PORT = 5000
 
-app.listen(process.env.PORT||5000, console.log(`running`, PORT))
+app.use('/api/SuperUser',SuperUserRoutes)
+app.listen(PORT, console.log(`running`, PORT))
