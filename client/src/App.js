@@ -16,12 +16,12 @@ import LoginCheck from './components/Login/LoginCheck';
 import SuperUser from './components/superuser/SuperUser';
 import AddUser from './components/superuser/AddUser';
 import DeleteUser from './components/superuser/DeleteUser';
-import AuthState from './context/Auth/AuthState';
+//import AuthState from './context/Auth/AuthState';
 // import SideBar from './components/Sidebar/SideBarNoHover';
 
 function App() {
   return (
-    <AuthState>
+    <div>
       <div className="App bg-gray-100 font-lato">
       <BrowserRouter>
       <Navbar />
@@ -42,7 +42,7 @@ function App() {
         <Footer/>
       </BrowserRouter>
     </div>
-    </AuthState>
+    </div>
   );
 }
 
