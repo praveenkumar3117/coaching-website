@@ -7,10 +7,11 @@ exports.login = async (req, res) => {
         const superUser = await SuperUser.findOne({ email }).select('+password')
 
         if (superUser && (await superUser.matchPassword(password))) {
+            let token =  generateToken(superUser._id)
             res.status(201).json({
                 _id: superUser._id,
                 email: superUser.email,
-                token: generateToken(superUser._id)
+                token: token
             })
         }
         else {
