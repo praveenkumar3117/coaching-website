@@ -17,7 +17,6 @@ import SuperUser from './components/superuser/SuperUser';
 import AddUser from './components/superuser/AddUser';
 import DeleteUser from './components/superuser/DeleteUser';
 import AuthState from './context/Auth/AuthState';
-// import SideBar from './components/Sidebar/SideBarNoHover';
 
 function App() {
   return (
