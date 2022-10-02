@@ -1,0 +1,71 @@
+const generateToken = require('../generateToken')
+const User = require('../models/User')
+
+exports.registerUser = async (req, res) => {
+    try {
+
+        const { name, email, password, phone, enRoll, batch, year, pic, role } = req.body
+
+        let user = await User.findOne({ email })
+        if (user) {
+            return res.status(404).json({ success: false, message: 'User already exists' })
+        }
+
+        user = await User.create({
+            name,
+            email,
+            password,
+            phone,
+            enRoll,
+            batch,
+            year,
+            role,
+            pic
+        })
+
+        res.status(201).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            enRoll: user.enRoll,
+            batch: user.batch,
+            year: user.year,
+            pic: user.pic,
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.authUser = async (req, res) => {
+    try {
+
+        const { email, password } = req.body
+        const user = await User.findOne({ email }).select('+password')
+
+        if (user && ((await user.matchPassword(password)))) {
+            res.status(201).json({
+                user,
+                token: generateToken(user._id)
+            })
+        }
+        else {
+            res.status(401);
+            throw new Error("Invalid Email or Password");
+        }
+
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+
+    }
+}

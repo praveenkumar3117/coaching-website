@@ -27,26 +27,33 @@ const Image = () => {
 		duration: 5000,
 		transitionDuration: 500,
 		infinite: true,
-		prevArrow: (
+		prevArrow:(
 			<div>
-				 <AiOutlineDoubleLeft className="hidden lg:block md:text-5xl md:mx-60 bg-gray-200 p-2 rounded-lg"/>
 			</div>
 		),
 		nextArrow: (
-			<div >
-			<AiOutlineDoubleRight className="hidden lg:block md:text-5xl md:mx-60 bg-gray-200 p-2 rounded-lg"/>
-			</div>
-		),
+			<div></div>
+		)
+		// prevArrow: (
+		// 	<div>
+		// 		 <AiOutlineDoubleLeft className="hidden lg:block md:text-5xl md:mx-60 bg-gray-200 p-2 rounded-lg"/>
+		// 	</div>
+		// ),
+		// nextArrow: (
+		// 	<div >
+		// 	<AiOutlineDoubleRight className="hidden lg:block md:text-5xl md:mx-60 bg-gray-200 p-2 rounded-lg"/>
+		// 	</div>
+		// ),
 	};
 
   return (
      <>
-     <div className="pt-28 lg:pt-32 md:32">
+     <div className="pt-20 lg:pt-20 md:pt-24">
 			<Zoom {...zoomInProperties}>
 				{images.map((img, index) => (
 					<div key={index} className="flex justify-center w-full mx-auto">
 						<img
-							className="lg:w-full object-cover rounded-lg shadow-xl"
+							className="lg:w-full object-cover shadow-xl"
 							src={img}
                             alt='images'
 						/>

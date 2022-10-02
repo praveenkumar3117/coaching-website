@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema(
         email: { type: String, unique: true, required: true },
         password: { type: String, required: true },
         phone: { type: Number, required: true },
-        eRoll: { type: String, required: true },
+        enRoll: { type: String, required: true },
         batch: { 
             type: String,
             enum: ['JEE', 'NEET', 'Foundation'],

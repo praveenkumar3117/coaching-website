@@ -7,19 +7,19 @@ exports.login = async (req, res) => {
         const superUser = await SuperUser.findOne({ email }).select('+password')
 
         if (superUser && (await superUser.matchPassword(password))) {
-            res.status(201).json({
+            let token =  generateToken(superUser._id)
+            res.status(201).send({
                 _id: superUser._id,
                 email: superUser.email,
-                token: generateToken(superUser._id)
+                token: token
             })
         }
         else {
-            res.status(401);
-            throw new Error("Invalid Email or Password");
+            res.status(401).send(new Error("Invalid Email or Password"));
         }
 
     } catch (error) {
-        res.status(500).json({
+        res.status(500).send({
             success: false,
             message: error.message
         })
