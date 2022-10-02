@@ -28,7 +28,7 @@ function Hero() {
   ];
 
   return (
-    <div className='flex flex-col md:flex-row mt-16'>
+    <div className='flex flex-col md:flex-row mt-4'>
       {
       CardInfo.map((cardItem)=>(
         <Card title={cardItem.title} content={cardItem.content} iconName = {cardItem.iconName} bgColor = {cardItem.bgColor} />

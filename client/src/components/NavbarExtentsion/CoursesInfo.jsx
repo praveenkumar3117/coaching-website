@@ -30,12 +30,12 @@ const CoursesInfo = () => {
   return (
     <div className='flex flex-col md:flex-row mt-16'>
     {
-    CardInfo.map((cardItem)=>(
-      <Card title={cardItem.title} content={cardItem.content} iconName = {cardItem.iconName} bgColor = {cardItem.bgColor} />
+    CardInfo.map((cardItem, index)=>(
+      <Card key={index} title={cardItem.title} content={cardItem.content} iconName = {cardItem.iconName} bgColor = {cardItem.bgColor} />
     ))
     }
   </div>
   )
 }
 
-export default CoursesInfo
+export default CoursesInfo;

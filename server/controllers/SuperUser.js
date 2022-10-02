@@ -8,19 +8,18 @@ exports.login = async (req, res) => {
 
         if (superUser && (await superUser.matchPassword(password))) {
             let token =  generateToken(superUser._id)
-            res.status(201).json({
+            res.status(201).send({
                 _id: superUser._id,
                 email: superUser.email,
                 token: token
             })
         }
         else {
-            res.status(401);
-            throw new Error("Invalid Email or Password");
+            res.status(401).send(new Error("Invalid Email or Password"));
         }
 
     } catch (error) {
-        res.status(500).json({
+        res.status(500).send({
             success: false,
             message: error.message
         })
