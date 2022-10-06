@@ -11,11 +11,15 @@ exports.login = async (req, res) => {
             res.status(201).send({
                 _id: superUser._id,
                 email: superUser.email,
-                token: token
-            })
+                token: token,
+            });
         }
         else {
-            res.status(401).send(new Error("Invalid Email or Password"));
+            res.status(401).send({
+                _id:null,
+                email: null,
+                token: null
+            });
         }
 
     } catch (error) {

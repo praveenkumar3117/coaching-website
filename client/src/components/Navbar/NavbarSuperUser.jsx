@@ -5,12 +5,13 @@ import { FiLogIn } from "react-icons/fi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import { BsFillFilePersonFill } from "react-icons/bs";
+import {BiUserCircle} from 'react-icons/bi'
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
 
 
-const Navbar = () => {
+const NavbarSuperUser = () => {
 
   // Get email from Login-Context
   const {SuperUserloggedIn, setSuperUserLoggedIn, email} = useContext(LoginContext);
@@ -104,45 +105,7 @@ const Navbar = () => {
                  </div>
                  </Link>
                </li>
-              {/* Courses */}
-               <li>
-                 <Link to='/Courses' onClick={()=>{setOpen(!open)}}>
-                 <div
-                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
-                 >
-                   <FaBookReader />
-                   <span class="flex-1 text-2xl whitespace-nowrap">
-                     {open ? "Courses" : ""}
-                   </span>
-                 </div>
-                 </Link>
-               </li>
-               {/* Gallery */}
-               <li>
-                 <Link to="/gallery" onClick={()=>{setOpen(!open)}}>
-                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
-                >
-                  <IoMdPhotos />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
-                    {open ? "Gallery" : ""}
-                  </span>
-                </div>
-                </Link>
-              </li>
-              {/* Admission */}
-              <li>
-                <Link to="/admission" onClick={()=>{setOpen(!open)}}>
-                <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
-                >
-                  <BsFillFilePersonFill />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
-                    {open ? "Admission" : ""}
-                  </span>
-                </div>
-                </Link>
-              </li>
+              
               {/* Login - Logout */}
               <li>
                 {/* Check for logged in */}
@@ -174,33 +137,20 @@ const Navbar = () => {
                 
                 
               </li>
-              {/* About Us */}
+
+              {/* Do something with users */}
               <li>
-                <Link to="/about" onClick={()=>{setOpen(!open)}}>
-                <div
-                  class="flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
-                >
-                  <HiInformationCircle />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
-                    {open ? "About Us" : ""}
-                  </span>
-                </div>
-                </Link>
-              </li>
-              {/* Contact Us */}
-              <li>
-                <Link to="/contact" onClick={()=>{setOpen(!open)}}>
+              <Link to="/admin" onClick={()=>{setOpen(!open)}}>
                 <div
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
-                  <MdContactPage />
+                  <BiUserCircle />
                   <span class="flex-1 text-2xl whitespace-nowrap">
-                    {open ? "Contact Us" : ""}
+                    {open ? "Update Users" : ""}
                   </span>
                 </div>
                 </Link>
               </li>
-              
             </ul>
           </div>
         </aside>
@@ -213,4 +163,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarSuperUser;
