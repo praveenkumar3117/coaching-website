@@ -1,7 +1,8 @@
 import React from 'react'
 import { FcBusinesswoman } from 'react-icons/fc'
 import { GiBrain, GiCaduceus } from 'react-icons/gi'
-import Card from './CoursesInfo'
+// import Card from './CoursesInfo'
+import Card from '../Home/Coursecard'
 
 const CoursesInfo = () => {
 

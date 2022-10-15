@@ -1,12 +1,24 @@
 import React from 'react'
-import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { LoginContext } from '../Contexts/LoginContext';
 
+function LoginSuperUser() {
 
-function Login() {
+  // v1v2v3v4v5v6v7v8v9v10
 
-  const [email, setEmail] = useState("");
+  const {email, setEmail, SuperUserloggedIn, setSuperUserLoggedIn} = useContext(LoginContext);
+  // let {loggedIn} = useContext(LoginContext);
+  // const[loggedIn, setLoggedIn] = useState(false);
+  const[LogInWarning, setLogInWarning] = useState("");
+
+  useEffect(() => {
+    setSuperUserLoggedIn(false);
+  }, []);
+
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogin = async() => {
@@ -17,11 +29,26 @@ function Login() {
         'Content-Type':'application/json'
       }
     });
-    console.log(JSON.stringify({email, password}))
     result = await result.json();
-    navigate('/admin');
-    localStorage.setItem("token",result.token);
     console.log(result);
+    console.log(result._id);  
+    console.log(result._id == null);
+
+    if(result._id != null){
+      setSuperUserLoggedIn(true);
+    }else{
+      setSuperUserLoggedIn(false);
+    }
+    console.log(SuperUserloggedIn);
+
+    if(result._id != null){
+      navigate('/admin');
+      setLogInWarning("");
+    }else{
+      setLogInWarning("Wrong Credentials");
+    }
+
+    localStorage.setItem("data",JSON.stringify(result));
   }
 
 
@@ -36,12 +63,13 @@ function Login() {
             <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
               <form>
                 {/* Email input */}
+                <label htmlFor="warning" className='text-red-400'>{LogInWarning}</label>
                 <div className="mb-6">
-                  <input type="email" onChange={(event)=>{setEmail(event.target.value)}} className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleFormControlInput2" placeholder="Email address" />
+                  <input type="email" onChange={(event)=>{setEmail(event.target.value)}} className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleFormControlInputEmail" placeholder="Email address" />
                 </div>
                 {/* Password input */}
                 <div className="mb-6">
-                  <input type="password" onChange={(event)=>{setPassword(event.target.value)}} className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleFormControlInput2" placeholder="Password" />
+                  <input type="password" onChange={(event)=>{setPassword(event.target.value)}} className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleFormControlInputPassword" placeholder="Password" />
                 </div>
                 <div className="flex justify-between items-center mb-6">
                   <div className="form-group form-check">
@@ -67,4 +95,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default LoginSuperUser;
