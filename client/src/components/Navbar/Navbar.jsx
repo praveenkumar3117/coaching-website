@@ -23,16 +23,6 @@ const Navbar = () => {
   //   { name: "Login", l: "/login" },
   // ];
 
-  // Changing sidebar login btn text
-  useEffect(()=>{
-    
-    if(SuperUserloggedIn){
-      setLogBtn("Logout");
-      }else{
-      setLogBtn("Login");
-    }
-
-  }, [SuperUserloggedIn]);
 
   let [open, setOpen] = useState(false);
 
@@ -40,10 +30,6 @@ const Navbar = () => {
     setOpen(false);
   }, []);
 
-  const Email = {email};
-  console.log(Email);
-
-  const navigate = useNavigate();
 
   const handleLogoutBtn = async () =>{
     setOpen(!open);

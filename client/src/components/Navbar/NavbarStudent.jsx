@@ -1,16 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaTimes, FaHome } from "react-icons/fa";
+import { FaTimes, FaBookReader, FaHome } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
-import {BiUserCircle} from 'react-icons/bi'
-import { Link } from "react-router-dom";
+import { IoMdPhotos } from "react-icons/io";
+import { MdContactPage } from "react-icons/md";
+import { BsFillFilePersonFill } from "react-icons/bs";
+import { Link, useNavigate } from "react-router-dom";
+import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
 
 
-const NavbarSuperUser = () => {
+const NavbarStudent = () => {
 
-  // Get email from Login-Context
-  const {userloggedin,setUserloggedin, email, checkNavbarToLoad} = useContext(LoginContext);
+  // Get info from Login-Context
+  const {userloggedin, setUserloggedin, email} = useContext(LoginContext);
+  const [LogBtn, setLogBtn] = useState("Login");
 
 
   let [open, setOpen] = useState(false);
@@ -19,13 +23,13 @@ const NavbarSuperUser = () => {
     setOpen(false);
   }, []);
 
-  const handleLogoutBtn = async () =>{
+
+  const handleStudentLogoutBtn = async () =>{
     setOpen(!open);
-    if(userloggedin===0){
-      localStorage.removeItem("data");
+    if(userloggedin === 1){
       setUserloggedin(-1);
+      localStorage.removeItem("data");
     }
-    checkNavbarToLoad();
   }
 
 
@@ -49,8 +53,8 @@ const NavbarSuperUser = () => {
          </div>
        </div>
 
-       <div className="text-2xl break-all bg-white text-black">
-        {userloggedin===0 ? email:""}
+       <div className="text-2xl bg-white break-all text -black">
+        {userloggedin===1 ? email:""}
        </div>
 
 
@@ -79,14 +83,51 @@ const NavbarSuperUser = () => {
                  </div>
                  </Link>
                </li>
-              
+              {/* Courses */}
+               <li>
+                 <Link to='/Courses' onClick={()=>{setOpen(!open)}}>
+                 <div
+                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                 >
+                   <FaBookReader />
+                   <span class="flex-1 text-2xl whitespace-nowrap">
+                     {open ? "Courses" : ""}
+                   </span>
+                 </div>
+                 </Link>
+               </li>
+               {/* Gallery */}
+               <li>
+                 <Link to="/gallery" onClick={()=>{setOpen(!open)}}>
+                 <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <IoMdPhotos />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Gallery" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+              {/* Admission */}
+              <li>
+                <Link to="/admission" onClick={()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <BsFillFilePersonFill />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Admission" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
               {/* Login - Logout */}
-              {/* Optimize this by removing one of the links as there are different navbars for different users */}
               <li>
                 {/* Check for logged in */}
-                {userloggedin===0 ? 
-                // if logged in
-                <Link to="/" onClick={handleLogoutBtn}>
+                {userloggedin === 1 ? 
+                // if not logged in
+                <Link to="/" onClick={handleStudentLogoutBtn}>
                 <div
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
@@ -112,20 +153,33 @@ const NavbarSuperUser = () => {
                 
                 
               </li>
-
-              {/* Do something with users */}
+              {/* About Us */}
               <li>
-              <Link to="/admin" onClick={()=>{setOpen(!open)}}>
+                <Link to="/about" onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  class="flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
-                  <BiUserCircle />
+                  <HiInformationCircle />
                   <span class="flex-1 text-2xl whitespace-nowrap">
-                    {open ? "Update Users" : ""}
+                    {open ? "About Us" : ""}
                   </span>
                 </div>
                 </Link>
               </li>
+              {/* Contact Us */}
+              <li>
+                <Link to="/contact" onClick={()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <MdContactPage />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Contact Us" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+              
             </ul>
           </div>
         </aside>
@@ -138,4 +192,4 @@ const NavbarSuperUser = () => {
   );
 };
 
-export default NavbarSuperUser;
+export default NavbarStudent;
