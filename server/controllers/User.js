@@ -4,11 +4,11 @@ const User = require('../models/User')
 exports.registerUser = async (req, res) => {
     try {
 
-        const { name, email, password, phone, enRoll, batch, year, pic, role } = req.body
+        const { name, email, password, phone, enRoll, batch, year, pic, role, fatherName } = req.body
 
         let user = await User.findOne({ email })
         if (user) {
-            return res.status(404).json({ success: false, message: 'User already exists' })
+            return res.status(404).send({ success: false, message: 'User already exists' })
         }
 
         user = await User.create({
@@ -20,10 +20,12 @@ exports.registerUser = async (req, res) => {
             batch,
             year,
             role,
-            pic
+            pic,
+            fatherName
         })
 
-        res.status(201).json({
+        res.status(201).send({
+            success:true,
             _id: user._id,
             name: user.name,
             email: user.email,
@@ -35,7 +37,7 @@ exports.registerUser = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
+        res.status(500).send({
             success: false,
             message: error.message
         })
@@ -49,22 +51,29 @@ exports.authUser = async (req, res) => {
         const user = await User.findOne({ email }).select('+password')
 
         if (user && ((await user.matchPassword(password)))) {
-            res.status(201).json({
-                user,
-                token: generateToken(user._id)
+            res.status(201).send({
+                success:true,
+                name: user.name,
+                email: user.email,
+                enRoll: user.enRoll,
+                fatherName: user.fatherName,
+                pic: user.pic,
+                token: generateToken(user._id),
+
             })
         }
         else {
             res.status(401);
-            throw new Error("Invalid Email or Password");
+            throw new Error("Wrong Email or Password");
         }
 
 
     } catch (error) {
 
-        res.status(500).json({
+        res.status(500).send({
             success: false,
-            message: error.message
+            message: error.message,
+
         })
 
     }

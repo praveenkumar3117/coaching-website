@@ -1,10 +1,11 @@
 const express = require('express')
 const { authUser,registerUser } = require('../controllers/User')
 const { Superprotect } = require('../middleware/SuperAuth')
+const {protect} = require('../middleware/auth');
 
 const router = express.Router()
 
-router.route('/registerUser').post(Superprotect,registerUser)
-router.route('/loginUser').post(authUser)
+router.route('/register/user').post(Superprotect, registerUser);
+router.route('/login/user').post(authUser);
 
 module.exports = router

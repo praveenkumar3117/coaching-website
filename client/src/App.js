@@ -15,32 +15,64 @@ import CoursesInfo from './components/NavbarExtentsion/CoursesInfo';
 import Slider from './components/ImageSlider/Slider' 
 import LoginCheck from './components/Login/LoginCheck';
 import SuperUser from './components/superuser/SuperUser';
-import AddUser from './components/superuser/AddUser';
 import DeleteUser from './components/superuser/DeleteUser';
 import LoginFaculty from './components/Login/LoginFaculty';
 import LoginStudent from './components/Login/LoginStudent';
 import Logout from './components/Logout/Logout';
-
 import {LoginContext} from './components/Contexts/LoginContext'
 import { useState } from 'react';
+import { useEffect } from 'react';
+import NavbarStudent from './components/Navbar/NavbarStudent';
+import AddStudent from './components/superuser/AddStudent';
 
 
 function App() {
   const [email, setEmail] = useState("");
-  const[SuperUserloggedIn, setSuperUserLoggedIn] = useState(false);
 
   // Checks which navbar to load
-  const checkNavbarToLoad = ()=>{
-    if(SuperUserloggedIn){
-      console.log("SuperUser is = ");
-      console.log(SuperUserloggedIn);
-      return <NavbarSuperUser/>;
-    }else{
-      console.log("SuperUser is = ");
-      console.log(SuperUserloggedIn);
-      return <Navbar/>;
+  const log = localStorage.getItem("data");
+  const data = JSON.parse(log);
+  
+  const [userloggedin, setUserloggedin] = useState(-1);
+  
+  useEffect(()=>{
+    if(data?.userloggedin===0){ 
+      setUserloggedin(0);
+    }else if(data?.userloggedin===1){
+      setUserloggedin(1);
+    }else if(data?.userloggedin===2){
+      setUserloggedin(2);
     }
+  })
+  
+  const checkNavbarToLoad = ()=>{
+    try{
 
+      if(userloggedin === 0){ // 0 for superuser
+        return <NavbarSuperUser/>;
+      }else if(userloggedin === 1){ // 1 for Student
+        return <NavbarStudent/>;
+      }else if(userloggedin === 2){ // 2 for faculty
+        return <Navbar/>;
+      }else{
+        return <Navbar/>;
+      }
+    }catch(err){
+      console.log(err);
+    }
+      
+  }
+
+  useEffect(()=>{
+    checkNavbarToLoad();
+  }, []);
+
+  const loginContextparams = {
+    email, 
+    setEmail,
+    userloggedin, 
+    setUserloggedin,
+    checkNavbarToLoad
   }
 
   return (
@@ -48,7 +80,7 @@ function App() {
     <div>
       <div className="App bg-gray-100 font-lato">
       <BrowserRouter>
-      <LoginContext.Provider value = {{ email, setEmail, SuperUserloggedIn, setSuperUserLoggedIn}}>
+      <LoginContext.Provider value = {loginContextparams}>
       
       {checkNavbarToLoad()}
 
@@ -67,13 +99,13 @@ function App() {
 
           <Route path ="/login/teacher" element = {<LoginFaculty/>} />
           <Route path ="/logout" element = {<Logout/>} />
-          <Route path ="/admin" element = { SuperUserloggedIn ? <SuperUser/> : <LoginSuperUser/>} />
+          <Route path ="/admin" element = { userloggedin===0 ? <SuperUser/> : <LoginSuperUser/>} />
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
           
           <Route path ="/contact" element = {<Contact/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
-          <Route path ="/admin/adduser" element = {<AddUser/>} />
+          <Route path ="/admin/addstudent" element = {<AddStudent/>} />
           <Route path ="/admin/deleteuser" element = {<DeleteUser/>} />
         </Routes>
         <Footer/>

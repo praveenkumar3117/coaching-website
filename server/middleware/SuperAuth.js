@@ -4,22 +4,25 @@ const asyncHandler = require("express-async-handler");
 
 const Superprotect = asyncHandler(async (req, res, next) => {
     let token;
+    console.log(req.headers);
 
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith("Bearer")
     ) {
+        console.log(req.headers);
         try {
             token = req.headers.authorization.split(" ")[1];
 
             //decoded token id
             const decoded = jwt.verify(token, "process.env.secret")
-
+            
             let user = await SuperUser.findById(decoded.id).select("-password") 
             if(user === null)
             { 
-                res.status(404)
+                res.status(404);
                 throw new Error("Not authorized, token failed");
+
             }
             else{
                 req.superUser = user
@@ -34,7 +37,9 @@ const Superprotect = asyncHandler(async (req, res, next) => {
 
     if (!token) {
         res.status(401);
-        throw new Error("Not authorized, no token");
+        console.log(new Error("Not authorized, no token"));
+        // throw new Error("Not authorized, no token");
+        
     }
 });
 

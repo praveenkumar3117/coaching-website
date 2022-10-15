@@ -9,17 +9,14 @@ exports.login = async (req, res) => {
         if (superUser && (await superUser.matchPassword(password))) {
             let token =  generateToken(superUser._id)
             res.status(201).send({
+                success: true,
                 _id: superUser._id,
                 email: superUser.email,
                 token: token,
             });
-        }
-        else {
-            res.status(401).send({
-                _id:null,
-                email: null,
-                token: null
-            });
+        }else{
+            res.status(401);
+            throw new Error("Wrong Email or Password");
         }
 
     } catch (error) {

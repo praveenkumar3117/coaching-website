@@ -8,14 +8,12 @@ function LoginSuperUser() {
 
   // v1v2v3v4v5v6v7v8v9v10
 
-  const {email, setEmail, SuperUserloggedIn, setSuperUserLoggedIn} = useContext(LoginContext);
-  // let {loggedIn} = useContext(LoginContext);
-  // const[loggedIn, setLoggedIn] = useState(false);
+  const {email, setEmail, userloggedin, setUserloggedin} = useContext(LoginContext);
   const[LogInWarning, setLogInWarning] = useState("");
 
-  useEffect(() => {
-    setSuperUserLoggedIn(false);
-  }, []);
+  // useEffect(() => {
+  //   setSuperUserLoggedIn(false);
+  // }, []);
 
   const [password, setPassword] = useState("");
 
@@ -31,29 +29,25 @@ function LoginSuperUser() {
     });
     result = await result.json();
     console.log(result);
-    console.log(result._id);  
-    console.log(result._id == null);
-
-    if(result._id != null){
-      setSuperUserLoggedIn(true);
-    }else{
-      setSuperUserLoggedIn(false);
-    }
-    console.log(SuperUserloggedIn);
-
-    if(result._id != null){
+    console.log(result.success);
+    
+    if(result.success){
+      console.log("hello");
+      console.log(userloggedin);
+      setUserloggedin(0);
+      localStorage.setItem("data",JSON.stringify({result, ...{userloggedin:0, loggedin: true}}));
       navigate('/admin');
       setLogInWarning("");
     }else{
       setLogInWarning("Wrong Credentials");
     }
-
-    localStorage.setItem("data",JSON.stringify(result));
+    
+    
   }
 
 
-  const id = window.location.href
-  console.log(id.slice(28))
+  // const id = window.location.href
+  // console.log(id.slice(28))
 
   return (
     <section className="h-screen">
@@ -72,10 +66,6 @@ function LoginSuperUser() {
                   <input type="password" onChange={(event)=>{setPassword(event.target.value)}} className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleFormControlInputPassword" placeholder="Password" />
                 </div>
                 <div className="flex justify-between items-center mb-6">
-                  <div className="form-group form-check">
-                    <input type="checkbox" className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" id="exampleCheck2" />
-                    <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2">Remember me</label>
-                  </div>
                   <a href="#!" className="text-gray-800">Forgot password?</a>
                 </div>
                 <div className="text-center lg:text-left">

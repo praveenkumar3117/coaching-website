@@ -1,6 +1,7 @@
 const express = require('express')
 const { login } = require('../controllers/SuperUser')
-const { protect } = require('../middleware/auth')
+// const { protect } = require('../middleware/auth');
+const { Superprotect } = require('../middleware/SuperAuth');
 
 const router = express.Router()
 
