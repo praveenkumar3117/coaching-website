@@ -4,7 +4,7 @@ const User = require('../models/User')
 exports.registerUser = async (req, res) => {
     try {
 
-        const { name, email, password, phone, enRoll, batch, year, pic, role, fatherName } = req.body
+        const { name, email, password, phone, enRoll, batch, year, pic, role, fatherName, DOB } = req.body
 
         let user = await User.findOne({ email })
         if (user) {
@@ -21,11 +21,12 @@ exports.registerUser = async (req, res) => {
             year,
             role,
             pic,
+            DOB,
             fatherName
         })
 
         res.status(201).send({
-            success:true,
+            success: true,
             _id: user._id,
             name: user.name,
             email: user.email,
@@ -34,6 +35,7 @@ exports.registerUser = async (req, res) => {
             batch: user.batch,
             year: user.year,
             pic: user.pic,
+            DOB: user.DOB
         })
 
     } catch (error) {
@@ -52,7 +54,7 @@ exports.authUser = async (req, res) => {
 
         if (user && ((await user.matchPassword(password)))) {
             res.status(201).send({
-                success:true,
+                success: true,
                 name: user.name,
                 email: user.email,
                 enRoll: user.enRoll,
