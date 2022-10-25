@@ -10,7 +10,7 @@ const videoSchema = mongoose.Schema(
             enum: ['JEE', 'NEET', 'Foundation'],
             required: true,
         },
-        topic: {
+        subject : {
             type: String,
             required: true
         },
@@ -18,11 +18,19 @@ const videoSchema = mongoose.Schema(
             type: String,
             required: true
         },
+        topic : {
+            type: Number,
+            required: true
+        },
         pic: {
             type: "String",
             default:
                 "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
         },
+        url: {
+            type: String,
+            required : true
+        }
     },
     { timestaps: true }
 )

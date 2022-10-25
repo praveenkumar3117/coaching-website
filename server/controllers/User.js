@@ -4,7 +4,7 @@ const User = require('../models/User')
 exports.registerUser = async (req, res) => {
     try {
 
-        const { name, email, password, phone, enRoll, batch, year, pic, role, fatherName, DOB } = req.body
+        const { name, email, password, phone, enRoll, batch, year, pic, fatherName, DOB } = req.body
 
         let user = await User.findOne({ email })
         if (user) {
@@ -19,7 +19,6 @@ exports.registerUser = async (req, res) => {
             enRoll,
             batch,
             year,
-            role,
             pic,
             DOB,
             fatherName
@@ -30,7 +29,6 @@ exports.registerUser = async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            role: user.role,
             enRoll: user.enRoll,
             batch: user.batch,
             year: user.year,
