@@ -54,13 +54,6 @@ const AddStudent = () => {
         if(result.success){
           navigate('/');
         }
-        // else{
-        //     return (
-        //       <>
-        //         <h1>Something Went Wrong</h1>
-        //       </>
-        //     )
-        // }
     }
   }
 

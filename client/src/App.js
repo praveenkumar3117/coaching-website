@@ -24,6 +24,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import NavbarStudent from './components/Navbar/NavbarStudent';
 import AddStudent from './components/superuser/AddStudent';
+import AddFaculty from './components/superuser/AddFaculty';
+import Mailsent from './components/Redirecting/Mailsent';
 
 
 function App() {
@@ -106,7 +108,9 @@ function App() {
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
           <Route path ="/admin/addstudent" element = {<AddStudent/>} />
+          <Route path ="/admin/addfaculty" element = {<AddFaculty/>} />
           <Route path ="/admin/deleteuser" element = {<DeleteUser/>} />
+          <Route path ="/mailsent" element = {<Mailsent/> } />
         </Routes>
         <Footer/>
         </LoginContext.Provider>
