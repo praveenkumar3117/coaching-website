@@ -1,5 +1,6 @@
 const generateToken = require('../generateToken')
 const User = require('../models/User')
+const RegistrationMailer = require('../middleware/RegistrationMail');
 
 exports.registerUser = async (req, res) => {
     try {
@@ -24,17 +25,22 @@ exports.registerUser = async (req, res) => {
             fatherName
         })
 
-        res.status(201).send({
-            success: true,
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            enRoll: user.enRoll,
-            batch: user.batch,
-            year: user.year,
-            pic: user.pic,
-            DOB: user.DOB
-        })
+        if(res.status(201)){
+            // Sending Mail
+            RegistrationMailer(user.email, password);
+
+            res.send({
+                success:true,
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                enRoll: user.enRoll,
+                batch: user.batch,
+                year: user.year,
+                pic: user.pic
+            })
+        }
 
     } catch (error) {
         res.status(500).send({

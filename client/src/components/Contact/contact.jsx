@@ -2,9 +2,45 @@ import React from "react";
 import {HiOutlineOfficeBuilding} from 'react-icons/hi';
 import {AiOutlinePhone} from 'react-icons/ai';
 import {MdOutlineEmail} from 'react-icons/md';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {LoadingBar} from 'react-top-loading-bar'
 
 function Contact() {
+
+    const [name, setSenderName] = useState('noname');
+    const [senderEmail, setEmail] = useState('');
+    const [phone, setPhoneNumber] = useState('');
+    const [visitorMessage, setMessage] = useState('');
+
+    const navigate = useNavigate();
+
+    const sendEmailMessage = async (event)=>{
+        // Stop reloading
+        event.preventDefault();
+
+        let result = await fetch("http://localhost:5000/api/visitor/message",{
+            method:'post',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({name, senderEmail, phone, visitorMessage})
+        });
+        result = await result.json();
+        console.log(result);
+
+        if(result.success){
+            console.log('yayyy');
+            // navigate ('/mailsent');
+            // 
+            <LoadingBar color='#f11946'
+            LoadingBar
+        }
+
+    }
+    
   return (
+    <form onSubmit={sendEmailMessage}>
     <section className="bg-white flex justify-center pt-24">
         <div className="
         md:pt-4
@@ -121,6 +157,7 @@ function Contact() {
                 </div>
             </div>
 
+            
             {/* Message */}
             <div className="
                 flex 
@@ -137,7 +174,7 @@ function Contact() {
                 ">
 
                 {/* Name */}
-                <input type="email" name="email" id="email" placeholder="Your Name" className="
+                <input onChange={(event)=>{setSenderName(event.target.value)}} type="text" name="name" id="name" placeholder="Your Name" required className="
                 bg-white
                 p-2
                 rounded
@@ -150,7 +187,7 @@ function Contact() {
                 my-2"/>
 
                 {/* Email */}
-                <input type="email" name="email" id="email" placeholder="Your Email" className="
+                <input onChange={(event)=>{setEmail(event.target.value)}} type="email" name="email" id="email" placeholder="Your Email" required className="
                 bg-white
                 p-2
                 rounded
@@ -163,7 +200,7 @@ function Contact() {
                 my-2"/>
 
                 {/* Phone NUmber */}
-                <input type="email" name="email" id="email" placeholder="Your Phone Number" className="
+                <input onChange={(event)=>{setPhoneNumber(event.target.value)}} type="tel" name="number" id="number" placeholder="Your Phone Number" required className="
                 bg-white
                 p-2
                 rounded
@@ -176,7 +213,7 @@ function Contact() {
                 my-2"/>
 
                 {/* Message */}
-                <textarea
+                <textarea onChange={(event)=>{setMessage(event.target.value)}}
                         rows="6"
                         placeholder="Your Message"
                         class="
@@ -192,11 +229,12 @@ function Contact() {
                         focus-visible:shadow-none
                         focus:border-primary
                         "
-                        ></textarea>
+                       required ></textarea>
 
                         <button type="submit" className="
                         w-1/2
                         rounded
+                        active:bg-blue-400
                         bg-blue-500
                         text-white
                         mx-auto
@@ -205,9 +243,11 @@ function Contact() {
                         font-inter
                         text-lg">Send Message</button>
             </div>
+            
         </div>
 
     </section>
+    </form>
   );
 }
 
