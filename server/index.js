@@ -4,7 +4,7 @@ const connectDB = require('./db')
 const SuperUserRoutes = require('./routes/SuperUserRoutes')
 const UserRoutes = require('./routes//userRoutes')
 const MessageMailRoutes = require('./routes/MessageMailRoutes')
-
+const teachRoutes = require('./routes/TeachRoutes')
 const app = express()
 
 
@@ -18,6 +18,11 @@ const PORT = 5000
 
 
 app.use('/api/SuperUser',SuperUserRoutes)
+
 app.use('/api/User',UserRoutes)
+
 app.use('/api/visitor',MessageMailRoutes);
+
+app.use('/api/Teach',teachRoutes)
+
 app.listen(PORT, console.log(`running`, PORT))

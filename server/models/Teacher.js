@@ -1,35 +1,29 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcryptjs")
 
-const userSchema = mongoose.Schema(
+const teacherSchema = mongoose.Schema(
     {
         name: { type: String, required: true },
         email: { type: String, unique: true, required: true },
         DOB : {type: Date, required: true},
-        fatherName: {type: String, required: true},
+        subject: { type: String, required: true },
         password: { type: String, required: true },
         phone: { type: Number, required: true },
-        enRoll: { type: String, required: true },
-        batch: { 
-            type: String,
-            enum: ['JEE', 'NEET', 'Foundation'],
-            required: true,
-        },
-        year: { type: Number, required: true },
+        tCode: { type: String, required: true, unique: true },
         pic: {
             type: "String",
             default:
                 "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
-        }
+        },
     },
     { timestaps: true }
 )
 
-userSchema.methods.matchPassword = async function (enteredPassword) {
+teacherSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
-userSchema.pre("save", async function (next) {
+teacherSchema.pre("save", async function (next) {
     if (!this.isModified) {
         next()
     }
@@ -38,6 +32,6 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, salt)
 })
 
-const User = mongoose.model("User", userSchema)
+const Teaacher = mongoose.model("Teacher", teacherSchema)
 
-module.exports = User
+module.exports = Teaacher
