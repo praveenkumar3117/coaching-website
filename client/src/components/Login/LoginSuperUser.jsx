@@ -45,10 +45,6 @@ function LoginSuperUser() {
     
   }
 
-
-  // const id = window.location.href
-  // console.log(id.slice(28))
-
   return (
     <section className="h-screen">
         <div className="px-6 h-full text-gray-800">
@@ -72,10 +68,6 @@ function LoginSuperUser() {
                   <button onClick={handleLogin} type="button" className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                     Login
                   </button>
-                  <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                    Don't have an account?
-                    <a href="#!" className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"> Register</a>
-                  </p>
                 </div>
               </form>
             </div>

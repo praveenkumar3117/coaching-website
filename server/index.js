@@ -21,8 +21,9 @@ app.use('/api/SuperUser',SuperUserRoutes)
 
 app.use('/api/User',UserRoutes)
 
+app.use('/api/Teach',teachRoutes)
+
 app.use('/api/visitor',MessageMailRoutes);
 
-app.use('/api/Teach',teachRoutes)
 
 app.listen(PORT, console.log(`running`, PORT))
