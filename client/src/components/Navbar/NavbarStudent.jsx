@@ -14,8 +14,6 @@ const NavbarStudent = () => {
 
   // Get info from Login-Context
   const {userloggedin, setUserloggedin, email} = useContext(LoginContext);
-  const [LogBtn, setLogBtn] = useState("Login");
-
 
   let [open, setOpen] = useState(false);
 

@@ -38,7 +38,8 @@ exports.registerUser = async (req, res) => {
                 enRoll: user.enRoll,
                 batch: user.batch,
                 year: user.year,
-                pic: user.pic
+                pic: user.pic,
+                dob: user.DOB
             })
         }
 

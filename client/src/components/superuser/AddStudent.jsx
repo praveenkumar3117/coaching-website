@@ -15,10 +15,13 @@ const AddStudent = () => {
   const [enRoll, setEnrollNum] = useState('');
   const [phone, setPhoneNumber] = useState(0);
   const [year, setYear] = useState(0);
+  const [DOB, setDOB] = useState(new Date());
   
-  // const options = ["Student", "Faculty"];
   const batches = ['JEE', 'NEET', 'Foundation'];
 
+  const handleDOB = (event)=>{
+    setDOB(new Date(`${event.target.value}Z`));
+  }
   
   // Navigation
   const navigate = useNavigate();
@@ -43,7 +46,7 @@ const AddStudent = () => {
             'Content-Type':'application/json',
             'authorization':'Bearer '+Token
           },
-          body:JSON.stringify({name, email, password, phone, enRoll, batch, year, role, fatherName})
+          body:JSON.stringify({name, email, password, phone, enRoll, batch, year, role, fatherName, DOB})
 
         });
 
@@ -94,8 +97,8 @@ const AddStudent = () => {
               <input required onChange={(event)=>{setYear(event.target.value)}} type="text" className="block border border-grey-light w-full p-3 rounded mb-4" name="text" placeholder="Year of Joining" />
 
               {/* For DOB */}
-              {/* <label htmlFor="dob" className='text-left mr-64 font-bold text-gray-500'>DOB</label> */}
-              {/* <input required onChange={(event)=>{setUserEmail(event.target.value)}} type="date" className="block border border-grey-light w-full p-3 rounded mb-4" name="date" placeholder="Date of Birth" onFocus={(e)=>{e.target.type='date'}} onBlur={(e)=>{e.target.type='text'}} /> */}
+              <label htmlFor="dob" className='text-left mr-64 font-bold text-gray-500'>DOB</label>
+              <input required onChange={handleDOB} type="date" className="block border border-grey-light w-full p-3 rounded mb-4" name="date" placeholder="Date of Birth" />
 
               {/* for Phone Number  */}
               <input required onChange={(event)=>{setPhoneNumber(event.target.value)}} type="text" className="block border border-grey-light w-full p-3 rounded mb-4" name="phone" placeholder="Phone" />
