@@ -26,6 +26,7 @@ import NavbarStudent from './components/Navbar/NavbarStudent';
 import AddStudent from './components/superuser/AddStudent';
 import AddFaculty from './components/superuser/AddFaculty';
 import Mailsent from './components/Redirecting/Mailsent';
+import Upload from './components/Videos/Upload';
 
 
 function App() {
@@ -112,6 +113,7 @@ function App() {
           <Route path ="/admin/deleteuser" element = {<DeleteUser/>} />
           <Route path ="/mailsent" element = {<Mailsent/> } />
         </Routes>
+        <Upload/>
         <Footer/>
         </LoginContext.Provider>
       </BrowserRouter>
