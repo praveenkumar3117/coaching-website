@@ -56,6 +56,8 @@ const AddStudent = () => {
         console.log(result.success);
         if(result.success){
           navigate('/');
+        }else{
+          console.log('user already exists');
         }
     }
   }

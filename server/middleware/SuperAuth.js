@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 
 const Superprotect = asyncHandler(async (req, res, next) => {
     let token;
-    console.log(req.headers);
+    // console.log(req.headers);
 
     if (
         req.headers.authorization &&
@@ -22,7 +22,6 @@ const Superprotect = asyncHandler(async (req, res, next) => {
             { 
                 res.status(404);
                 throw new Error("Not authorized, token failed");
-
             }
             else{
                 req.superUser = user
