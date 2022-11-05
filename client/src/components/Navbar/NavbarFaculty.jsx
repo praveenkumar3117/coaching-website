@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaTimes, FaBookReader, FaHome } from "react-icons/fa";
-import { FiLogIn } from "react-icons/fi";
+import { FiLogIn, FiUpload } from "react-icons/fi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import { BsFillFilePersonFill } from "react-icons/bs";
@@ -10,26 +10,25 @@ import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
 
 
-const Navbar = () => {
+const NavbarFaculty = () => {
 
   // Get email from Login-Context
   const {userloggedin,setUserloggedin, email} = useContext(LoginContext);
-  const checkUser = userloggedin===1 || userloggedin===2 || userloggedin===0;
-
   let [open, setOpen] = useState(false);
 
+    // initially keep the side bar closed
   useEffect(() => {
     setOpen(false);
   }, []);
 
 
-  // const handleLogoutBtn = async () =>{
-  //   setOpen(!open);
-  //   // if(userloggedin===1){
-  //     // setUserloggedin(-1);
-  //     // localStorage.removeItem("data");
-  //   }
-  // }
+  const handleLogoutBtn = async () =>{
+    setOpen(!open);
+    if(userloggedin===2){
+      setUserloggedin(-1);
+      localStorage.removeItem("data");
+    }
+  }
 
 
   return (
@@ -52,9 +51,9 @@ const Navbar = () => {
          </div>
        </div>
 
-       {/* <div className="text-2xl bg-white text-black">
-        {userloggedin===1 ? email:""}
-       </div> */}
+       <div className="text-2xl bg-white text-black">
+        {userloggedin===2 ? email:""}
+       </div>
 
 
       {/* -----------------SIDE BAR--------------------- */}
@@ -124,8 +123,8 @@ const Navbar = () => {
               {/* Login - Logout */}
               <li>
                 {/* Check for logged in */}
-                {/* {userloggedin===1 ?  */}
-                {/* // if not logged in
+                {userloggedin===2 ? 
+                // if not logged in
                 <Link to="/" onClick={handleLogoutBtn}>
                 <div
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
@@ -136,8 +135,8 @@ const Navbar = () => {
                   </span>
                 </div>
                 </Link>
-                :  */}
-                {/* // if not logged in already */}
+                : 
+                // if not logged in already
                 <Link to = "/login" onClick = {()=>{setOpen(!open)}}>
                 <div
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
@@ -148,10 +147,23 @@ const Navbar = () => {
                   </span>
                 </div>
                 </Link>
-                {/* } */}
+                }
                 
                 
-              </li> 
+              </li>
+              {/* Upload Video Option */}
+              <li>
+                <Link to="/upload-video" onClick={()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <FiUpload />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Upload Video" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
               {/* About Us */}
               <li>
                 <Link to="/about" onClick={()=>{setOpen(!open)}}>
@@ -191,4 +203,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarFaculty;

@@ -27,8 +27,7 @@ import AddStudent from './components/superuser/AddStudent';
 import AddFaculty from './components/superuser/AddFaculty';
 import Mailsent from './components/Redirecting/Mailsent';
 import Upload from './components/Videos/Upload';
-
-
+import NavbarFaculty from './components/Navbar/NavbarFaculty';
 function App() {
   const [email, setEmail] = useState("");
 
@@ -56,7 +55,7 @@ function App() {
       }else if(userloggedin === 1){ // 1 for Student
         return <NavbarStudent/>;
       }else if(userloggedin === 2){ // 2 for faculty
-        return <Navbar/>;
+        return <NavbarFaculty/>;
       }else{
         return <Navbar/>;
       }
@@ -106,6 +105,7 @@ function App() {
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
           
           <Route path ="/contact" element = {<Contact/>} />
+          <Route path ="/upload-video" element = {<Upload/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
           <Route path ="/admin/addstudent" element = {<AddStudent/>} />
@@ -113,7 +113,6 @@ function App() {
           <Route path ="/admin/deleteuser" element = {<DeleteUser/>} />
           <Route path ="/mailsent" element = {<Mailsent/> } />
         </Routes>
-        <Upload/>
         <Footer/>
         </LoginContext.Provider>
       </BrowserRouter>
