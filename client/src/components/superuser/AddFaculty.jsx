@@ -1,3 +1,4 @@
+import { response } from 'express';
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +20,8 @@ const AddFaculty = () => {
   const handleDOB = (event)=>{
     setDOB(new Date(`${event.target.value}Z`));
   }
+
+  const [userexists, setUserExists] = useState('');
   
   // Navigation
   const navigate = useNavigate();
