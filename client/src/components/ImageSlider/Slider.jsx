@@ -22,7 +22,7 @@ const Image = () => {
 	];
 
 	const zoomInProperties = {
-		indicators: true,
+		indicators: false,
 		scale: 1.2,
 		duration: 5000,
 		transitionDuration: 500,
