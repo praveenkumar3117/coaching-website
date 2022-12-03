@@ -5,21 +5,61 @@ import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 
+// Naming convention in the video storage
+// videotitle_uuid
+
+
 const Upload = () => {
 
   const [video, setVideo] = useState(null)
-  const [url, setUrl] = useState([])
+  const [uploadDate, setUploadDate]=useState(new Date())
+  
+  // Setting today's date
+  useEffect(()=>{
+    setUploadDate(new Date());
+  }, []);
+
+  
+  const [videoInfo, setVideoInfo]=useState(
+    {title: "",
+    subject:"",
+    teacher:"",
+    chapterNum:0, 
+    JEE:false, 
+    NEET:false, 
+    Foundation:false,
+    vidurl:"URL",
+    date: uploadDate
+  });
+  
+  
+  const [url, setUrl] = useState("")
   const [showWarning, setWarning] = useState(false);
-  const [show, setShow] = useState(false);
-  const [batchName, setbatchName] = useState('')
   const [fileName, setFileName ] = useState('None');
   const videoListRef = ref(storage, 'videos/')
- 
-
   const navigate = useNavigate();
 
 
-  const uploadVideo = (e) => {
+  // This function sends the video data to mongodb and stores the information of that video in the database
+  const sendDataToDB = async()=>{
+    console.log("url is ",url)
+
+
+    let result = await fetch("http://localhost:5000/api/Teach/Upload-Video",{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(videoInfo)
+    })
+    result = await result.json();
+    console.log(result);
+  }
+
+
+
+  // This function uploads video to Firebase
+  const uploadVideo = async (e) => {
     e.preventDefault();
     console.log("uploading")
 
@@ -29,44 +69,53 @@ const Upload = () => {
       return;
     }
 
-
-    const videoRef = ref(storage, `videos/${video.name + uuidv4()}`)
-    uploadBytes(videoRef, video).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setUrl((prev) => [...prev, url])
+    const videoRef = ref(storage, `videos/${video + uuidv4()}`)
+    await uploadBytes(videoRef, video).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((URL) => {
+        console.log(URL)  
+        setUrl(URL);
       })
     })
+
+    console.log(url);
+    // Call SendDataToDB to send the data of the video
+    await sendDataToDB();
+
     navigate('/');
-   console.log(url);
+
   }
 
-  // useEffect(() => {
-  //   listAll(videoListRef).then((res) => {
-  //     res.items.forEach((item) => {
-  //       getDownloadURL(item).then((url) => {
-  //         setUrl((prev) => [...prev, url])
-  //       })
-  //     })
-  //   })
-  //   console.log(url)
-  // }, [])
-
+  // Handling files
   const handleFile = (e)=>{
     setVideo(e.target.files[0]);
     setFileName(e.target.files[0].name);
     setWarning(false);
   }
 
+  // Handling Storing information of the video
+  const setMyVideoInfo = (e)=>{
 
-  const fillBatch=(enteredbatchName)=>{
-    setShow(!show);
-    setbatchName(enteredbatchName);
-    console.log(batchName);
+    if(e.target.value ==="on" && (e.target.name ==="JEE" || e.target.name ==="NEET" || e.target.name ==="Foundation")){
+      setVideoInfo(existingValues=>({
+        ...existingValues,
+        [e.target.name]: e.target.checked
+      }));
+    }else if(e.target.name==="chapterNum"){
+      setVideoInfo(existingValues=>({
+        ...existingValues,
+        [e.target.name]: parseInt(e.target.value)
+      }));
+    }else{
+      setVideoInfo(existingValues =>({
+        ...existingValues,
+        [e.target.name] : e.target.value
+      }));
+    }
+
+    console.log(videoInfo)
   }
-  useEffect(()=>{
-    setbatchName('');
-    console.log(batchName)
-  }, [])
+  
+  
 
 
   return (
@@ -92,13 +141,13 @@ const Upload = () => {
           <div className='flex flex-col md:flex-row lg:flex-row p-2 mx-2'>
 
             <div className='mx-4'>
-            <label htmlFor="subject" className='mt-4 mx-4 '>Title</label>
-            <input type="text" name="subject" id="subject" placeholder='Title'  className="p-4 rounded border border-black"/>
+            <label htmlFor="title" className='mt-4 mx-4 '>Title</label>
+            <input type="text" onChange={setMyVideoInfo} name="title" id="title" placeholder='Title'  className="p-4 rounded border border-black"/>
             </div>
 
             <div className='mx-4'>
             <label htmlFor="subject" className='mt-4 mx-2'>Subject</label>
-            <input type="text" name="subject" id="subject" placeholder='Subject' className="p-4 rounded border border-black"/>
+            <input type="text" onChange={setMyVideoInfo} name="subject" id="subject" placeholder='Subject' className="p-4 rounded border border-black"/>
             </div>
 
           </div>
@@ -106,38 +155,33 @@ const Upload = () => {
           <div className='flex flex-col md:flex-row lg:flex-row p-2 mx-2'>
             <div className='m-2'>
               <label htmlFor="teacher" className='mt-4 mx-2'>Teacher's Code</label>
-              <input type="text" name="teacher-name" id="teacher" placeholder="Teacher's Code" className="p-4 rounded border border-black"/>
+              <input type="text" onChange={setMyVideoInfo} name="teacher" id="teacher" placeholder="Teacher's Code" className="p-4 rounded border border-black"/>
             </div>
             <div className='m-2'>
               <label htmlFor="Chapter Number" className='mt-4 mx-2'>Chapter Number</label>
-              <input type="number" name="chapter-num" id="chapter" placeholder="Chapter Number" className="p-4 rounded border border-black"/>
+              <input type="number" onChange={setMyVideoInfo} name="chapterNum" id="chapterNum" placeholder="Chapter Number" className="p-4 rounded border border-black"/>
             </div>
           </div>
 
-          {/* <label htmlFor="subject">Batch</label> */}
-          <div className='w-2/3 flex justify-center'>
-            {/* Batch menu button */}
-            <div className='w-full items-center justify-center select-none flex flex-row bg-slate-300 p-4 mx-4 mt-4 rounded hover:bg-slate-400' onClick={()=>{setShow(!show)}}>
-              
-              { batchName===''? 
-              <div>
-                Batch
-                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                </svg> 
-              </div> : batchName}
+          <div className='w-2/3 flex justify-center flex-col md:flex-row lg:flex-row'>
+            {/* Batch menu button */} 
+
+            <div className='mx-2 px-2'>  
+              <label className='mx-2' htmlFor="JEE">JEE</label>
+              <input type="checkbox" onChange={setMyVideoInfo} name="JEE" id="JEE" />
             </div>
-            <div className={show?"w-fit border border-black absolute bg-slate-300 p-4 rounded my-0":"hidden" }>
-              <div className='m-2 p-2 select-none text-black hover:text-white rounded hover:bg-slate-500' onClick={()=>fillBatch('JEE')}>
-                JEE
-              </div>
-              <div className='m-2 p-2 select-none text-black hover:text-white rounded hover:bg-slate-500' onClick={()=>fillBatch('NEET')}>
-                NEET
-              </div>
-              <div className='m-2 p-2 select-none text-black hover:text-white rounded hover:bg-slate-500' onClick={()=>fillBatch('Foundation')}>
-                Foundation
-              </div>
+
+            <div className='mx-2 px-2'>
+              <label htmlFor="NEET" className='mx-2'>NEET</label>
+              <input type="checkbox" onChange={setMyVideoInfo} name="NEET" id="NEET" />
             </div>
+
+            <div className='mx-2 px-2'>
+              <label htmlFor="Foundation" className='mx-2'>Foundation</label>
+              <input type="checkbox" onChange={setMyVideoInfo} name="Foundation" id="Foundation" />
+            </div>
+
+            
           </div>
 
           <div className='flex justify-center items-center'>

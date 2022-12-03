@@ -28,6 +28,8 @@ import AddFaculty from './components/superuser/AddFaculty';
 import Mailsent from './components/Redirecting/Mailsent';
 import Upload from './components/Videos/Upload';
 import NavbarFaculty from './components/Navbar/NavbarFaculty';
+import View from './components/Videos/View';
+
 function App() {
   const [email, setEmail] = useState("");
 
@@ -106,6 +108,7 @@ function App() {
           
           <Route path ="/contact" element = {<Contact/>} />
           <Route path ="/upload-video" element = {<Upload/>} />
+          <Route path ="/watch" element = {<View/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
           <Route path ="/admin/addstudent" element = {<AddStudent/>} />

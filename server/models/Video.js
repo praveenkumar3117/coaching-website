@@ -3,11 +3,22 @@ const mongoose = require("mongoose")
 const videoSchema = mongoose.Schema(
     {
         title: { type: String, required: true },
-        teacher: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        Date : {type: Date, required: true},
-        batch: { 
-            type: String,
-            enum: ['JEE', 'NEET', 'Foundation'],
+        // teacher: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        teacher:{
+            type:String,
+            required:true
+        },
+        Date : {type: Date},
+        JEE: { 
+            type: Boolean,
+            required: true,
+        },
+        NEET: { 
+            type: Boolean,
+            required: true,
+        },
+        Foundation: { 
+            type: Boolean,
             required: true,
         },
         subject : {
@@ -18,16 +29,12 @@ const videoSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        topic : {
-            type: Number,
-            required: true
-        },
         pic: {
             type: "String",
             default:
                 "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
         },
-        url: {
+        vidurl: {
             type: String,
             required : true
         }
@@ -36,6 +43,6 @@ const videoSchema = mongoose.Schema(
 )
 
 
-const Video = mongoose.model("Video", videoSchema)
+const Video = mongoose.model("videos", videoSchema)
 
 module.exports = Video
