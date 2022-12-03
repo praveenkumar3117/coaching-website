@@ -1,12 +1,10 @@
 import React from 'react'
-// import {FcBusinesswoman} from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 
 function Card(props) {
 
       const Icon = props.iconName;
       const iconClassName = `mb-3 w-20 h-20 relative bottom-10 rounded-full shadow-lg ${props.bgColor}`;
-      console.log(iconClassName);
 
   return (
     <div className="pt-24 my-4 w-9/12 md:w-1/4 justify-center items-center flex flex-col mx-auto">
