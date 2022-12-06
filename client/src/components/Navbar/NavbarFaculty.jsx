@@ -4,7 +4,8 @@ import { FaTimes, FaBookReader, FaHome } from "react-icons/fa";
 import { FiLogIn, FiUpload } from "react-icons/fi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
-import { BsFillFilePersonFill } from "react-icons/bs";
+import {AiOutlinePlayCircle} from 'react-icons/ai'
+import { BsFillFilePersonFill, BsFillPersonFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
@@ -48,6 +49,9 @@ const NavbarFaculty = () => {
             <div className="w-full text-center">
             <Link to="/"> Vulture Institute</Link>
             </div>
+            <div className="hidden lg:flex lg:relative">
+              <Link to="/profile/faculty"><BsFillPersonFill/></Link>
+            </div>
          </div>
        </div>
 
@@ -81,6 +85,19 @@ const NavbarFaculty = () => {
                  </div>
                  </Link>
                </li>
+               {/* Profile */}
+              <li>
+                <Link to='/profile/faculty' onClick={()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <BsFillPersonFill />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Profile" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
               {/* Courses */}
                <li>
                  <Link to='/Courses' onClick={()=>{setOpen(!open)}}>
@@ -107,6 +124,20 @@ const NavbarFaculty = () => {
                 </div>
                 </Link>
               </li>
+              {/* Watch Video */}
+              <li>
+                <Link to="/watch/faculty" onClick={()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <AiOutlinePlayCircle />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Watch Videos" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+
               {/* Admission */}
               <li>
                 <Link to="/admission" onClick={()=>{setOpen(!open)}}>
@@ -155,7 +186,7 @@ const NavbarFaculty = () => {
               <li>
                 <Link to="/upload-video" onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <FiUpload />
                   <span class="flex-1 text-2xl whitespace-nowrap">
@@ -168,7 +199,7 @@ const NavbarFaculty = () => {
               <li>
                 <Link to="/about" onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <HiInformationCircle />
                   <span class="flex-1 text-2xl whitespace-nowrap">

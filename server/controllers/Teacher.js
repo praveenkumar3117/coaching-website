@@ -51,7 +51,7 @@ exports.authTeacher = async (req, res) => {
 
         if (teach && ((await teach.matchPassword(password)))) {
             res.status(201).send({
-                success: teach,
+                success: true,
                 name: teach.name,
                 email: teach.email,
                 enRoll: teach.enRoll,
