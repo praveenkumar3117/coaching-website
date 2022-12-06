@@ -19,21 +19,10 @@ const Upload = () => {
     setUploadDate(new Date());
   }, []);
 
-  
-  const [videoInfo, setVideoInfo]=useState(
-    {title: "",
-    subject:"",
-    teacher:"",
-    chapterNum:0, 
-    JEE:false, 
-    NEET:false, 
-    Foundation:false,
-    vidurl:"URL",
-    date: uploadDate
-  });
-  
-  
   const [url, setUrl] = useState("")
+  
+  
+  
   const [showWarning, setWarning] = useState(false);
   const [fileName, setFileName ] = useState('None');
   const videoListRef = ref(storage, 'videos/')
@@ -41,21 +30,6 @@ const Upload = () => {
 
 
   // This function sends the video data to mongodb and stores the information of that video in the database
-  const sendDataToDB = async()=>{
-    console.log("url is ",url)
-
-
-    let result = await fetch("http://localhost:5000/api/Teach/Upload-Video",{
-      method:'post',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(videoInfo)
-    })
-    result = await result.json();
-    console.log(result);
-  }
-
 
 
   // This function uploads video to Firebase
@@ -72,14 +46,17 @@ const Upload = () => {
     const videoRef = ref(storage, `videos/${video + uuidv4()}`)
     await uploadBytes(videoRef, video).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((URL) => {
-        console.log(URL)  
         setUrl(URL);
+        sendDataToDB(URL)
+        console.log(URL)  
       })
+    }).catch((er)=>{
+      console.log(er);
     })
 
     console.log(url);
     // Call SendDataToDB to send the data of the video
-    await sendDataToDB();
+    // await sendDataToDB(url);
 
     navigate('/');
 
@@ -115,7 +92,35 @@ const Upload = () => {
     console.log(videoInfo)
   }
   
-  
+  const [videoInfo, setVideoInfo]=useState(
+    {title: "",
+    subject:"",
+    teacher:"",
+    chapterNum:0, 
+    JEE:false, 
+    NEET:false, 
+    Foundation:false,
+    date: uploadDate
+  });
+
+  const sendDataToDB = async(URL)=>{
+    
+    let data = {...videoInfo}
+    data.vidurl = URL
+    console.log("url is ",data)
+
+  let result = await fetch("http://localhost:5000/api/Teach/Upload-Video",{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'
+      },
+
+      body:JSON.stringify(data)
+    })
+    result = await result.json();
+    console.log("resullts",result);
+  }
+
 
 
   return (
