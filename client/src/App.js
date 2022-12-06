@@ -28,7 +28,12 @@ import AddFaculty from './components/superuser/AddFaculty';
 import Mailsent from './components/Redirecting/Mailsent';
 import Upload from './components/Videos/Upload';
 import NavbarFaculty from './components/Navbar/NavbarFaculty';
-import View from './components/Videos/View';
+import ViewFaculty from './components/Videos/ViewFaculty';
+import ViewJEE from './components/Videos/ViewJEE';
+import ViewNEET from './components/Videos/ViewNEET';
+import ViewFoundation from './components/Videos/ViewFoundation';
+import Student from './components/Profile/Student';
+import Faculty from './components/Profile/Faculty';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -95,20 +100,20 @@ function App() {
               <Slider/><Hero/> <Content/> <Director/><Products/>
           </div>
           }/>
-          
           <Route path ="/login" element = {<LoginCheck/>} />
-          <Route path ="/login/student" element = {
-            <LoginStudent/>
-          } />
-
+          <Route path ="/login/student" element = {<LoginStudent/>} />
           <Route path ="/login/teacher" element = {<LoginFaculty/>} />
           <Route path ="/logout" element = {<Logout/>} />
           <Route path ="/admin" element = { userloggedin===0 ? <SuperUser/> : <LoginSuperUser/>} />
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
-          
           <Route path ="/contact" element = {<Contact/>} />
           <Route path ="/upload-video" element = {<Upload/>} />
-          <Route path ="/watch" element = {<View/>} />
+          <Route path ="/profile/student" element = {<Student/>} />
+          <Route path ="/profile/faculty" element = {<Faculty/>} />
+          <Route path ="/watch/faculty" element = {<ViewFaculty/>} />
+          <Route path ="/watch/student/jee" element = {<ViewJEE/>} />
+          <Route path ="/watch/student/neet" element = {<ViewNEET/>} />
+          <Route path ="/watch/student/foundation" element = {<ViewFoundation/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
           <Route path ="/admin/addstudent" element = {<AddStudent/>} />

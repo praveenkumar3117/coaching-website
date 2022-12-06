@@ -1,6 +1,7 @@
 const generateToken = require('../generateToken')
 const User = require('../models/User')
 const RegistrationMailer = require('../middleware/RegistrationMail');
+const { findOne } = require('../models/User');
 
 exports.registerUser = async (req, res) => {
     try {
@@ -64,6 +65,7 @@ exports.authUser = async (req, res) => {
                 email: user.email,
                 enRoll: user.enRoll,
                 fatherName: user.fatherName,
+                batch:user.batch,
                 pic: user.pic,
                 token: generateToken(user._id),
 

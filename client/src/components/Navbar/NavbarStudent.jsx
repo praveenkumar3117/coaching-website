@@ -4,7 +4,8 @@ import { FaTimes, FaBookReader, FaHome } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
-import { BsFillFilePersonFill } from "react-icons/bs";
+import { BsFillFilePersonFill, BsFillPersonFill } from "react-icons/bs";
+import {AiOutlinePlayCircle} from 'react-icons/ai'
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
@@ -15,10 +16,15 @@ const NavbarStudent = () => {
   // Get info from Login-Context
   const {userloggedin, setUserloggedin, email} = useContext(LoginContext);
 
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [batch, setBatch] = useState("Fetching...");
 
   useEffect(() => {
     setOpen(false);
+    let data = localStorage.getItem("data");
+    data = JSON.parse(data);
+    setBatch(data.result.batch);
+    
   }, []);
 
 
@@ -47,6 +53,9 @@ const NavbarStudent = () => {
             </button>
             <div className="w-full text-center">
             <Link to="/"> Vulture Institute</Link>
+            </div>
+            <div className="hidden lg:flex lg:relative">
+              <Link to="/profile/student"><BsFillPersonFill/></Link>
             </div>
          </div>
        </div>
@@ -81,6 +90,20 @@ const NavbarStudent = () => {
                  </div>
                  </Link>
                </li>
+              {/* Profile */}
+              <li>
+                <Link to='/profile/student' onClick={()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <BsFillPersonFill />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Profile" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+
               {/* Courses */}
                <li>
                  <Link to='/Courses' onClick={()=>{setOpen(!open)}}>
@@ -107,6 +130,23 @@ const NavbarStudent = () => {
                 </div>
                 </Link>
               </li>
+              {/* Watch Video */}
+              <li>
+                <Link to={`/watch/student/${batch}`} onClick={()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <AiOutlinePlayCircle />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Watch Videos" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+
+
+
+
               {/* Admission */}
               <li>
                 <Link to="/admission" onClick={()=>{setOpen(!open)}}>
@@ -155,7 +195,7 @@ const NavbarStudent = () => {
               <li>
                 <Link to="/about" onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <HiInformationCircle />
                   <span class="flex-1 text-2xl whitespace-nowrap">

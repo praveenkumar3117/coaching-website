@@ -1,3 +1,4 @@
+const { find, findOne } = require('../models/Video');
 const Video = require('../models/Video');
 
 exports.AddVideo = async(req, res) => {
@@ -40,4 +41,14 @@ exports.AddVideo = async(req, res) => {
             message:error.message
         })
     }
+}
+
+exports.FetchVideos = async(req, res)=>{
+
+    // const data = Video.find({"JEE":true})
+    let data = await Video.find(req)
+    
+    // data = await data;
+    console.log(data)
+    res.send("Done")
 }
