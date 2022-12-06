@@ -28,10 +28,10 @@ import AddFaculty from './components/superuser/AddFaculty';
 import Mailsent from './components/Redirecting/Mailsent';
 import Upload from './components/Videos/Upload';
 import NavbarFaculty from './components/Navbar/NavbarFaculty';
-import ViewFaculty from './components/Videos/ViewFaculty';
-import ViewJEE from './components/Videos/ViewJEE';
-import ViewNEET from './components/Videos/ViewNEET';
-import ViewFoundation from './components/Videos/ViewFoundation';
+import ViewFaculty from './components/Videos/View/ViewFaculty';
+import ViewJEE from './components/Videos/View/ViewJEE';
+import ViewNEET from './components/Videos/View/ViewNEET';
+import ViewFoundation from './components/Videos/View/ViewFoundation';
 import Student from './components/Profile/Student';
 import Faculty from './components/Profile/Faculty';
 
