@@ -29,6 +29,10 @@ const videoSchema = mongoose.Schema(
             type: String,
             required: true
         },
+        lecture: {
+            type: String,
+            required: true
+        },
         pic: {
             type: "String",
             default:

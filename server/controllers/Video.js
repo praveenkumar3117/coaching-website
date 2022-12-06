@@ -4,7 +4,7 @@ const Video = require('../models/Video');
 exports.AddVideo = async(req, res) => {
     try{
 
-        const {title, subject, teacher, chapterNum, JEE, NEET, Foundation, Date, vidurl}=req.body;
+        const {title, subject, teacher, chapterNum, JEE, NEET, Foundation, Date, vidurl,lecture}=req.body;
         console.log(req.body);
         const chapter = chapterNum;
         let video = await Video.create({
@@ -16,7 +16,8 @@ exports.AddVideo = async(req, res) => {
             JEE,
             NEET,
             Foundation,
-            vidurl
+            vidurl,
+            lecture
         })
 
         if(res.status(201)){
@@ -31,7 +32,8 @@ exports.AddVideo = async(req, res) => {
                 NEET: video.NEET,
                 Foundation:video.Foundation,
                 Date:video.Date,
-                vidurl:video.vidurl
+                vidurl:video.vidurl,
+                lecture:video.lecture
             })
         }
         
