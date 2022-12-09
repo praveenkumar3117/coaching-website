@@ -45,12 +45,122 @@ exports.AddVideo = async(req, res) => {
     }
 }
 
-exports.FetchVideos = async(req, res)=>{
+exports.FetchVideosJEEPHY = async(req, res)=>{
+    try {
+        const data = await Video.find({"JEE":true},{"subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
 
-    // const data = Video.find({"JEE":true})
-    let data = await Video.find(req)
-    
-    // data = await data;
-    console.log(data)
-    res.send("Done")
+exports.FetchVideosJEECHEM = async(req, res)=>{
+    try {
+        const data = await Video.find({"JEE":true},{"Subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+exports.FetchVideosJEEMATH = async(req, res)=>{
+    try {
+        const data = await Video.find({"JEE":true},{"Subject":"Maths"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+exports.FetchVideosNEETBIO = async(req, res)=>{
+    try {
+        const data = await Video.find({"NEET":true},{"Subject":"Biology"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+exports.FetchVideosNEETCHEM = async(req, res)=>{
+    try {
+        const data = await Video.find({"NEET":true},{"Subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+exports.FetchVideosNEETPHY = async(req, res)=>{
+    try {
+        const data = await Video.find({"NEET":true},{"Subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+exports.FetchVideosFoundPHY = async(req, res)=>{
+    try {
+        const data = await Video.find({"Foundation":true},{"Subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+exports.FetchVideosFoundCHEM = async(req, res)=>{
+    try {
+        const data = await Video.find({"Foundation":true},{"Subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+exports.FetchVideosFoundMATH = async(req, res)=>{
+    try {
+        const data = await Video.find({"Foundation":true},{"Subject":"Maths"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+exports.FetchVideosFoundBIO = async(req, res)=>{
+    try {
+        const data = await Video.find({"Foundation":true},{"Subject":"Biology"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:error.message
+        })
+    }
 }

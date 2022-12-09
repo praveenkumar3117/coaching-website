@@ -27,7 +27,7 @@ const videoSchema = mongoose.Schema(
         },
         chapter: {
             type: String,
-            required: true
+            //required: true
         },
         lecture: {
             type: String,
