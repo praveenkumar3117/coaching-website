@@ -1,8 +1,5 @@
 import React from "react";
-// import { Link } from 'react-router-dom'
-//import { AiFillHome } from "react-icons/ai";
 import { FiUserPlus, FiUserX } from "react-icons/fi";
-// import { MdSpaceDashboard } from "rea
 import { useNavigate } from "react-router-dom";
 
 const SuperUser = () => {

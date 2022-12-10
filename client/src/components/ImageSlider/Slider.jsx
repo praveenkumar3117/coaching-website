@@ -34,16 +34,6 @@ const Image = () => {
 		nextArrow: (
 			<div></div>
 		)
-		// prevArrow: (
-		// 	<div>
-		// 		 <AiOutlineDoubleLeft className="hidden lg:block md:text-5xl md:mx-60 bg-gray-200 p-2 rounded-lg"/>
-		// 	</div>
-		// ),
-		// nextArrow: (
-		// 	<div >
-		// 	<AiOutlineDoubleRight className="hidden lg:block md:text-5xl md:mx-60 bg-gray-200 p-2 rounded-lg"/>
-		// 	</div>
-		// ),
 	};
 
   return (

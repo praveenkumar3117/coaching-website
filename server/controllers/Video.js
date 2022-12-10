@@ -47,7 +47,7 @@ exports.AddVideo = async(req, res) => {
 
 exports.FetchVideosJEEPHY = async(req, res)=>{
     try {
-        const data = await Video.find({"JEE":true},{"subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"JEE":true, "subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -59,7 +59,7 @@ exports.FetchVideosJEEPHY = async(req, res)=>{
 
 exports.FetchVideosJEECHEM = async(req, res)=>{
     try {
-        const data = await Video.find({"JEE":true},{"Subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"JEE":true, "subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -71,7 +71,7 @@ exports.FetchVideosJEECHEM = async(req, res)=>{
 
 exports.FetchVideosJEEMATH = async(req, res)=>{
     try {
-        const data = await Video.find({"JEE":true},{"Subject":"Maths"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"JEE":true,"subject":"Maths"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -83,7 +83,7 @@ exports.FetchVideosJEEMATH = async(req, res)=>{
 
 exports.FetchVideosNEETBIO = async(req, res)=>{
     try {
-        const data = await Video.find({"NEET":true},{"Subject":"Biology"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"NEET":true,"subject":"Biology"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -95,7 +95,7 @@ exports.FetchVideosNEETBIO = async(req, res)=>{
 
 exports.FetchVideosNEETCHEM = async(req, res)=>{
     try {
-        const data = await Video.find({"NEET":true},{"Subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"NEET":true,"subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -107,7 +107,7 @@ exports.FetchVideosNEETCHEM = async(req, res)=>{
 
 exports.FetchVideosNEETPHY = async(req, res)=>{
     try {
-        const data = await Video.find({"NEET":true},{"Subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"NEET":true,"subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -119,7 +119,7 @@ exports.FetchVideosNEETPHY = async(req, res)=>{
 
 exports.FetchVideosFoundPHY = async(req, res)=>{
     try {
-        const data = await Video.find({"Foundation":true},{"Subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"Foundation":true,"subject":"Physics"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -131,7 +131,7 @@ exports.FetchVideosFoundPHY = async(req, res)=>{
 
 exports.FetchVideosFoundCHEM = async(req, res)=>{
     try {
-        const data = await Video.find({"Foundation":true},{"Subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"Foundation":true,"subject":"Chemistry"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -143,7 +143,7 @@ exports.FetchVideosFoundCHEM = async(req, res)=>{
 
 exports.FetchVideosFoundMATH = async(req, res)=>{
     try {
-        const data = await Video.find({"Foundation":true},{"Subject":"Maths"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"Foundation":true,"subject":"Maths"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -155,7 +155,7 @@ exports.FetchVideosFoundMATH = async(req, res)=>{
 
 exports.FetchVideosFoundBIO = async(req, res)=>{
     try {
-        const data = await Video.find({"Foundation":true},{"Subject":"Biology"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({"Foundation":true,"subject":"Biology"}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({

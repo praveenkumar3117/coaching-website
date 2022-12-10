@@ -1,8 +1,9 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Hero from './components/Home/hero';
 import Footer from './components/Footer';
 import React from 'react';
+import { useState, useEffect } from 'react';
 import Content from './components/Home/content';
 import Director from './components/Home/director';
 import Products from './components/Home/products';
@@ -20,8 +21,6 @@ import LoginFaculty from './components/Login/LoginFaculty';
 import LoginStudent from './components/Login/LoginStudent';
 import Logout from './components/Logout/Logout';
 import {LoginContext} from './components/Contexts/LoginContext'
-import { useState } from 'react';
-import { useEffect } from 'react';
 import NavbarStudent from './components/Navbar/NavbarStudent';
 import AddStudent from './components/superuser/AddStudent';
 import AddFaculty from './components/superuser/AddFaculty';
@@ -34,6 +33,11 @@ import ViewNEET from './components/Videos/View/ViewNEET';
 import ViewFoundation from './components/Videos/View/ViewFoundation';
 import Student from './components/Profile/Student';
 import Faculty from './components/Profile/Faculty';
+import Physics from './components/Videos/Subject/Physics';
+import Chemistry from './components/Videos/Subject/Chemistry';
+import Maths from './components/Videos/Subject/Maths';
+import Biology from './components/Videos/Subject/Biology';
+import Layout from './components/Layout';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -52,7 +56,7 @@ function App() {
     }else if(data?.userloggedin===2){
       setUserloggedin(2);
     }
-  })
+  }, [data?.userloggedin])
   
   const checkNavbarToLoad = ()=>{
     try{
@@ -84,19 +88,22 @@ function App() {
     checkNavbarToLoad
   }
 
+  // const navigate = useNavigate();
+
   return (
     
     <div>
       <div className="App bg-gray-100 font-lato">
-      <BrowserRouter>
+      {/* <BrowserRouter> */}
       <LoginContext.Provider value = {loginContextparams}>
       
       {checkNavbarToLoad()}
 
         <Routes>
-          
+          <Route path="/" element={<Layout/>}>
+          {/* ---------------------------public routes ---------------------------*/}
           <Route path = "/" element={
-          <div >
+          <div>
               <Slider/><Hero/> <Content/> <Director/><Products/>
           </div>
           }/>
@@ -107,23 +114,46 @@ function App() {
           <Route path ="/admin" element = { userloggedin===0 ? <SuperUser/> : <LoginSuperUser/>} />
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
           <Route path ="/contact" element = {<Contact/>} />
-          <Route path ="/upload-video" element = {<Upload/>} />
-          <Route path ="/profile/student" element = {<Student/>} />
-          <Route path ="/profile/faculty" element = {<Faculty/>} />
-          <Route path ="/watch/faculty" element = {<ViewFaculty/>} />
-          <Route path ="/watch/student/jee" element = {<ViewJEE/>} />
-          <Route path ="/watch/student/neet" element = {<ViewNEET/>} />
-          <Route path ="/watch/student/foundation" element = {<ViewFoundation/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
+
+          {/* ------------------protected routes------------------- */}
+
+          <Route path ="/upload-video" element = {<Upload/>} />
+          <Route path ="/profile/student" element = {userloggedin===1 ? <Student/>:<LoginStudent/>} />
+          <Route path ="/profile/faculty" element = {userloggedin===2 ? <Faculty/>: <LoginFaculty/>} />
+          {/* Faculty */}
+          <Route path ="/watch/faculty" element = {<ViewFaculty/>} />
+          {/* JEE Student */}
+          <Route path ="/watch/student/JEE" element = {<ViewJEE/>} />
+          <Route path ="/watch/student/JEE/Physics" element = {<Physics batch="JEE"/>} />
+          <Route path ="/watch/student/JEE/Chemistry" element = {<Chemistry batch="JEE"/>} />
+          <Route path ="/watch/student/JEE/Maths" element = {<Maths batch="JEE"/>} />
+          {/* NEET Student */}
+          <Route path ="/watch/student/NEET" element = {<ViewNEET/>} />
+          <Route path ="/watch/student/NEET/Physics" element = {<Physics batch="NEET"/>} />
+          <Route path ="/watch/student/NEET/Chemistry" element = {<Chemistry batch="NEET"/>} />
+          <Route path ="/watch/student/NEET/Biology" element = {<Biology batch="NEET"/>} />
+          {/* Foundation Student */}
+          <Route path ="/watch/student/Foundation" element = {<ViewFoundation/>} />
+          <Route path ="/watch/student/Foundation/Physics" element = {<Physics batch="Foundation"/>} />
+          <Route path ="/watch/student/Foundation/Chemistry" element = {<Chemistry batch="Foundation"/>} />
+          <Route path ="/watch/student/Foundation/Maths" element = {<Maths batch="Foundation"/>} />
+          <Route path ="/watch/student/Foundation/Biology" element = {<Biology batch="Foundation"/>} />
+          
           <Route path ="/admin/addstudent" element = {<AddStudent/>} />
           <Route path ="/admin/addfaculty" element = {<AddFaculty/>} />
           <Route path ="/admin/deleteuser" element = {<DeleteUser/>} />
+
+          {/* Success Redirects */}
           <Route path ="/mailsent" element = {<Mailsent/> } />
+
+          </Route>
+          
         </Routes>
         <Footer/>
         </LoginContext.Provider>
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
     </div>
     </div>
   );
