@@ -4,6 +4,7 @@ import { useState,useEffect } from 'react'
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import {IoIosArrowDropdownCircle} from 'react-icons/io'
 
 // Naming convention in the video storage
 // videotitle_uuid
@@ -13,25 +14,46 @@ const Upload = () => {
 
   const [video, setVideo] = useState(null)
   const [uploadDate, setUploadDate]=useState(new Date())
-  
-  // Setting today's date
+  const [show, setShow ] = useState(false);
+
+  // Setting today's date and closing the subject dropdown
   useEffect(()=>{
     setUploadDate(new Date());
+    setShow(false);
   }, []);
 
-  const [url, setUrl] = useState("")
-  
-  
-  
+  const [url, setUrl] = useState("")  
   const [showWarning, setWarning] = useState(false);
   const [fileName, setFileName ] = useState('None');
   const videoListRef = ref(storage, 'videos/')
   const navigate = useNavigate();
+  const [subject, setSubject] = useState("Subject");
+
+  const [videoInfo, setVideoInfo]=useState(
+    {title: "",
+    subject:subject,
+    teacher:"",
+    chapterNum:0, 
+    lecture:0,
+    JEE:false, 
+    NEET:false, 
+    Foundation:false,
+    date: uploadDate
+  });
+
+  const setMySubject = (e)=>{
+    console.log(e)
+    console.log(videoInfo.subject)
+    setSubject(e)
+    setVideoInfo(existingValues=>({
+      ...existingValues,
+      subject:e
+    }))
+    setShow(!show);
+  }
 
 
   // This function sends the video data to mongodb and stores the information of that video in the database
-
-
   // This function uploads video to Firebase
   const uploadVideo = async (e) => {
     e.preventDefault();
@@ -40,6 +62,12 @@ const Upload = () => {
     if (video === null) {
       console.log("no video found")
       setWarning(true);
+      return;
+    }
+    
+    if(videoInfo.subject==="Subject"){
+      setWarning(true);
+      console.log("Not uploaded")
       return;
     }
 
@@ -77,7 +105,7 @@ const Upload = () => {
         ...existingValues,
         [e.target.name]: e.target.checked
       }));
-    }else if(e.target.name==="chapterNum"){
+    }else if(e?.target?.name==="chapterNum"){
       setVideoInfo(existingValues=>({
         ...existingValues,
         [e.target.name]: parseInt(e.target.value)
@@ -92,17 +120,6 @@ const Upload = () => {
     console.log(videoInfo)
   }
   
-  const [videoInfo, setVideoInfo]=useState(
-    {title: "",
-    subject:"",
-    teacher:"",
-    chapterNum:0, 
-    JEE:false, 
-    NEET:false, 
-    Foundation:false,
-    date: uploadDate
-  });
-
   const sendDataToDB = async(URL)=>{
     
     let data = {...videoInfo}
@@ -121,6 +138,7 @@ const Upload = () => {
     console.log("resullts",result);
   }
 
+  
 
 
   return (
@@ -133,7 +151,7 @@ const Upload = () => {
               <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
               <p className="text-xs text-gray-500 dark:text-gray-400">Video</p>
             </div>
-            <input id="dropzone-file" type="file" accept="video/mp4,video/x-m4v,video/*" className="hidden" onChange={handleFile}/>
+            <input id="dropzone-file" type="file" accept="video/mp4,video/x-m4v,video/*" className="hidden" required onChange={handleFile}/>
           </label>
 
           <div>
@@ -143,16 +161,29 @@ const Upload = () => {
             File selected : {fileName}
           </label>
 
-          <div className='flex flex-col md:flex-row lg:flex-row p-2 mx-2'>
+          <div className='flex flex-col md:justify-center md:items-center lg:justify-center lg:items-center md:flex-row lg:flex-row p-2 mx-2'>
 
-            <div className='mx-4'>
-            <label htmlFor="title" className='mt-4 mx-4 '>Title</label>
-            <input type="text" onChange={setMyVideoInfo} name="title" id="title" placeholder='Title'  className="p-4 rounded border border-black"/>
+            <div className='mx-4 lg:flex lg:flex-row '>
+              <label htmlFor="title" className='mt-4 mx-4 '>Title</label>
+              <input type="text" required onChange={setMyVideoInfo} name="title" id="title" placeholder='Title'  className="p-4 rounded border border-black"/>
+            </div>
+            
+            <div className='mx-auto my-2 lg:my-0 w-2/3'>
+              <div className='bg-blue-300 p-4 rounded w-full'>
+                <button onClick={()=>{setShow(!show)}} className="w-full flex flex-row justify-center items-center">{subject}<IoIosArrowDropdownCircle/></button>
+              </div>
+              <div className={show?`absolute flex flex-col bg-gray-300 `:`hidden`}>
+
+                <button onClick={()=>{setMySubject("Physics")}} className='p-2 border border-black'>Physics</button>
+                <button onClick={()=>{setMySubject("Chemistry")}} className='p-2 border border-black'>Chemistry</button>
+                <button onClick={()=>{setMySubject("Maths")}} className='p-2 border border-black'>Maths</button>
+                <button onClick={()=>{setMySubject("Biology")}} className='p-2 border border-black'>Biology</button>
+              </div>
             </div>
 
-            <div className='mx-4'>
-            <label htmlFor="subject" className='mt-4 mx-2'>Subject</label>
-            <input type="text" onChange={setMyVideoInfo} name="subject" id="subject" placeholder='Subject' className="p-4 rounded border border-black"/>
+            <div className='mx-4 lg:flex lg:flex-row '>
+              <label htmlFor="title" className='mt-4 mx-4 '>Lecture</label>
+              <input type="number" onChange={setMyVideoInfo} name="lecture" id="lecture" placeholder='Lecture' required className="p-4 rounded border border-black"/>
             </div>
 
           </div>
@@ -160,11 +191,11 @@ const Upload = () => {
           <div className='flex flex-col md:flex-row lg:flex-row p-2 mx-2'>
             <div className='m-2'>
               <label htmlFor="teacher" className='mt-4 mx-2'>Teacher's Code</label>
-              <input type="text" onChange={setMyVideoInfo} name="teacher" id="teacher" placeholder="Teacher's Code" className="p-4 rounded border border-black"/>
+              <input required type="text" onChange={setMyVideoInfo} name="teacher" id="teacher" placeholder="Teacher's Code" className="p-4 rounded border border-black"/>
             </div>
             <div className='m-2'>
               <label htmlFor="Chapter Number" className='mt-4 mx-2'>Chapter Number</label>
-              <input type="number" onChange={setMyVideoInfo} name="chapterNum" id="chapterNum" placeholder="Chapter Number" className="p-4 rounded border border-black"/>
+              <input required type="number" onChange={setMyVideoInfo} name="chapterNum" id="chapterNum" placeholder="Chapter Number" className="p-4 rounded border border-black"/>
             </div>
           </div>
 
@@ -196,29 +227,6 @@ const Upload = () => {
           </div>
           
         </div>
-
-
-
-
-
-
-
-        {/* <div className='m-4'>
-          <label htmlFor="files" className="m-8 p-4 bg-gray-500 rounded">+</label>
-          <input onClick={conlog} required accept = "video/*" id="files" onChange={(e) => { setVideo(e.target.files[0]) }} className='hidden' type="file"/>
-          {
-            <img src={video} />
-          }
-        </div>
-
-
-        <input type="text" name="title" id="title" placeholder="Video Name" className='m-2 p-2'/>
-        <input type="text" name="subject" id="subject" placeholder="Subject Name" className='m-2 p-2'/>
-        <input type="text" name="chapter" id="chapter" placeholder="Chapter Name" className='m-2 p-2'/>
-        <input type='submit' className='p-4 rounded text-white bg-blue-500 hover:bg-blue-400 active:bg-blue-500' value="Upload"/>
-          {url.map((item) => {
-            return <img src={item} />
-          })} */}
 
     </form>
   )

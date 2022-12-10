@@ -1,5 +1,5 @@
 const express = require('express')
-const { FetchVideosJEEPHY,FetchVideosJEEMATH,FetchVideosJEECHEM,FetchVideosFoundBIO,FetchVideosFoundMATH,FetchVideosFoundCHEM,FetchVideosFoundPHY,FetchVideosNEETCHEM,FetchVideosNEETBIO,FetchVideosNEETPHY } = require('../controllers/Video')
+const { FetchVideosJEEPHY,FetchVideosJEEMATH,FetchVideosJEECHEM,FetchVideosFoundBIO,FetchVideosFoundMATH,FetchVideosFoundCHEM,FetchVideosFoundPHY,FetchVideosNEETCHEM,FetchVideosNEETBIO,FetchVideosNEETPHY, FetchVideosFaculty } = require('../controllers/Video')
 
 const router = express.Router()
 
@@ -15,5 +15,7 @@ router.route('/Foundation/Physics').get(FetchVideosFoundPHY)
 router.route('/Foundation/Maths').get(FetchVideosFoundMATH)
 router.route('/Foundation/Chemistry').get(FetchVideosFoundCHEM)
 router.route('/Foundation/Biology').get(FetchVideosFoundBIO)
+
+router.route('/faculty').post(FetchVideosFaculty)
 
 module.exports = router

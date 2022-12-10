@@ -25,10 +25,10 @@ const Chemistry = (props) => {
   }, []);
   
   return (
-    <main className='py-32 flex lg:flex-row md:flex-row lg:mx-4 flex-col justify-center items-center'>
+    <main className='py-32 flex flex-col lg:grid-cols-3 lg:grid-rows-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
     {
       lectures.map((item, index)=>(
-        <Lectures key={index} subject="Chemistry" title={item.title} pic={item.pic} batch = {batch}/>
+        <Lectures key={index} link={item.vidurl} subject="Chemistry" title={item.title} pic={item.pic} batch = {batch}/>
       ))
     }
     </main>
