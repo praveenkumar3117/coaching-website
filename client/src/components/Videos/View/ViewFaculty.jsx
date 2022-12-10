@@ -1,46 +1,43 @@
 import React from 'react'
-import {FcEngineering} from 'react-icons/fc'
-import {MdLocalHospital} from 'react-icons/md'
-import {GiFlyingFlag} from 'react-icons/gi'
 import ViewNEET from './ViewNEET'
 import ViewJEE from './ViewJEE'
 import ViewFoundation from './ViewFoundation'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import Lectures from '../Subject/Lectures'
 
 const ViewFaculty = () => {
-  
-  const array = [
-    {
-      'title':'JEE',
-      'icon':FcEngineering
-    },
-    {
-      'title':'NEET',
-      'icon':MdLocalHospital
-    }, 
-    {
-      'title':'Foundation',
-      'icon':GiFlyingFlag
-    }]
+    
+    const fetchVideos = async()=>{
+      let localdata = localStorage.getItem("data");
+      localdata = JSON.parse(localdata)
+      console.log(localdata.result.email)
+      
+      let data = await fetch("http://localhost:5000/api/fetchVideos/faculty", {
+        method:'post',
+        body:JSON.stringify({teacher:localdata.result.email}),
+        headers:{
+          'Content-Type':'application/json'
+        }
+      })
+      data = await data.json();
+      console.log(data)
+      setArray(data);
+    }
+
+    const [array, setArray] = useState([]);
+    useEffect(()=>{
+      fetchVideos();
+    }, [])
   
 
   return (
-    <div className='my-32 flex flex-col md:flex-row lg:flex-row px-2 justify-center items-center'>
+    <div className='py-32 flex flex-col lg:grid-cols-3 lg:grid-rows-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
 
       {
-        array.map((item)=>(
-          <div className="mx-auto max-w-sm rounded overflow-hidden shadow-lg lg:border lg:border-red-200 lg:w-96 lg:mx-4 my-4 px-4 hover:bg-gray-200 active:bg-gray-300">
-            <Link to= {`/watch/${item.title}`}>
-              <item.icon className=" mx-auto w-48 h-48"/>
-              {/* <img className="w-full" src="./images/user.png" alt="Sunset in the mountains" /> */}
-              <div className="px-6 py-4">
-                <div className="font-bold text-2xl mb-2 select-none">{item.title}</div>
-                {/* <p className="text-gray-700 text-base">
-                  Lecture1
-                </p>   */}
-              </div>
-            </Link>
-          </div>
+        array.map((item, index)=>(
+          <Lectures key={index} subject={item.subject} batch={item.batch} title={item.title} pic={item.pic} link={item.vidurl}/>
         ))
       }
 
