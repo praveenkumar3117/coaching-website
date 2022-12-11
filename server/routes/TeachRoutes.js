@@ -8,7 +8,6 @@ const router = express.Router()
 
 router.route('/register/user').post(Superprotect, registerTeacher);
 router.route('/login/user').post(authTeacher);
-router.route('/Upload-Video').post(AddVideo);
-//router.route('/watch').post(FetchVideos);
+router.route('/Upload-Video').post(AddVideo, protect);
 
 module.exports = router

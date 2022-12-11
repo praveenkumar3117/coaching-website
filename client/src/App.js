@@ -38,6 +38,7 @@ import Chemistry from './components/Videos/Subject/Chemistry';
 import Maths from './components/Videos/Subject/Maths';
 import Biology from './components/Videos/Subject/Biology';
 import Layout from './components/Layout';
+import Protected from './components/Protected';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -111,7 +112,7 @@ function App() {
           <Route path ="/login/student" element = {<LoginStudent/>} />
           <Route path ="/login/teacher" element = {<LoginFaculty/>} />
           <Route path ="/logout" element = {<Logout/>} />
-          <Route path ="/admin" element = { userloggedin===0 ? <SuperUser/> : <LoginSuperUser/>} />
+          <Route path ="/admin" element = { <Protected user="admin" Component={SuperUser}/>} />
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
           <Route path ="/contact" element = {<Contact/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
@@ -119,31 +120,31 @@ function App() {
 
           {/* ------------------protected routes------------------- */}
 
-          <Route path ="/upload-video" element = {<Upload/>} />
-          <Route path ="/profile/student" element = {userloggedin===1 ? <Student/>:<LoginStudent/>} />
-          <Route path ="/profile/faculty" element = {userloggedin===2 ? <Faculty/>: <LoginFaculty/>} />
+          <Route path ="/upload-video" element = {<Protected user="faculty" Component={Upload}/>} />
+          <Route path ="/profile/student" element = {<Protected user="student" Component={Student}/>} />
+          <Route path ="/profile/faculty" element = {<Protected user="faculty" Component={Faculty}/>} />
           {/* Faculty */}
-          <Route path ="/watch/faculty" element = {<ViewFaculty/>} />
+          <Route path ="/watch/faculty" element = {<Protected user="faculty" Component = {ViewFaculty}/>} />
           {/* JEE Student */}
-          <Route path ="/watch/student/JEE" element = {<ViewJEE/>} />
-          <Route path ="/watch/student/JEE/Physics" element = {<Physics batch="JEE"/>} />
-          <Route path ="/watch/student/JEE/Chemistry" element = {<Chemistry batch="JEE"/>} />
-          <Route path ="/watch/student/JEE/Maths" element = {<Maths batch="JEE"/>} />
+          <Route path ="/watch/student/JEE" element = {<Protected user="student" Component={ViewJEE}/>} />
+          <Route path ="/watch/student/JEE/Physics" element = {<Protected user="student" batch="JEE" Component={Physics}/>} />
+          <Route path ="/watch/student/JEE/Chemistry" element = {<Protected user="student" batch="JEE" Component={Chemistry}/>} />
+          <Route path ="/watch/student/JEE/Maths" element = {<Protected user="student" batch="JEE" Component={Maths}/>} />
           {/* NEET Student */}
-          <Route path ="/watch/student/NEET" element = {<ViewNEET/>} />
-          <Route path ="/watch/student/NEET/Physics" element = {<Physics batch="NEET"/>} />
-          <Route path ="/watch/student/NEET/Chemistry" element = {<Chemistry batch="NEET"/>} />
-          <Route path ="/watch/student/NEET/Biology" element = {<Biology batch="NEET"/>} />
+          <Route path ="/watch/student/NEET" element = {<Protected user="student" Component={ViewNEET}/>} />
+          <Route path ="/watch/student/NEET/Physics" element = {<Protected user="student" batch="NEET" Component={Physics}/>} />
+          <Route path ="/watch/student/NEET/Chemistry" element = {<Protected user="student" batch="NEET" Component={Chemistry}/>} />
+          <Route path ="/watch/student/NEET/Biology" element = {<Protected user="student" batch="NEET" Component={Biology}/>} />
           {/* Foundation Student */}
-          <Route path ="/watch/student/Foundation" element = {<ViewFoundation/>} />
-          <Route path ="/watch/student/Foundation/Physics" element = {<Physics batch="Foundation"/>} />
-          <Route path ="/watch/student/Foundation/Chemistry" element = {<Chemistry batch="Foundation"/>} />
-          <Route path ="/watch/student/Foundation/Maths" element = {<Maths batch="Foundation"/>} />
-          <Route path ="/watch/student/Foundation/Biology" element = {<Biology batch="Foundation"/>} />
+          <Route path ="/watch/student/Foundation" element = {<Protected user="student" Component={ViewFoundation}/>} />
+          <Route path ="/watch/student/Foundation/Physics" element = {<Protected user="student" batch="Foundation" Component={Physics}/>} />
+          <Route path ="/watch/student/Foundation/Chemistry" element = {<Protected user="student" batch="Foundation" Component={Chemistry}/>} />
+          <Route path ="/watch/student/Foundation/Maths" element = {<Protected user="student" batch="Foundation" Component={Maths}/>} />
+          <Route path ="/watch/student/Foundation/Biology" element = {<Protected user="student" batch="Foundation" Component={Biology}/>} />
           
-          <Route path ="/admin/addstudent" element = {<AddStudent/>} />
-          <Route path ="/admin/addfaculty" element = {<AddFaculty/>} />
-          <Route path ="/admin/deleteuser" element = {<DeleteUser/>} />
+          <Route path ="/admin/addstudent" element = {<Protected user="admin" Component={AddStudent}/>} />
+          <Route path ="/admin/addfaculty" element = {<Protected user="admin" Component={AddFaculty}/>} />
+          <Route path ="/admin/deleteuser" element = {<Protected user="admin" Component={DeleteUser}/>} />
 
           {/* Success Redirects */}
           <Route path ="/mailsent" element = {<Mailsent/> } />

@@ -6,6 +6,7 @@ const UserRoutes = require('./routes//userRoutes')
 const MessageMailRoutes = require('./routes/MessageMailRoutes')
 const teachRoutes = require('./routes/TeachRoutes')
 const fetchVideos = require('./routes/FetchVideos')
+const authRoutes= require('./routes/authRoutes')
 const app = express()
 
 
@@ -27,5 +28,7 @@ app.use('/api/Teach',teachRoutes)
 app.use('/api/visitor',MessageMailRoutes);
 
 app.use('/api/fetchVideos',fetchVideos)
+
+app.use('/api/auth', authRoutes);
 
 app.listen(PORT, console.log(`running`, PORT))

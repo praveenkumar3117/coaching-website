@@ -12,11 +12,13 @@ const ViewFaculty = () => {
     const fetchVideos = async()=>{
       let localdata = localStorage.getItem("data");
       localdata = JSON.parse(localdata)
-      console.log(localdata.result.email)
+      // console.log("locadata", localdata.result.email);
+
+      // console.log(localdata.result.email)
       
       let data = await fetch("http://localhost:5000/api/fetchVideos/faculty", {
         method:'post',
-        body:JSON.stringify({teacher:localdata.result.email}),
+        body:JSON.stringify({"email":localdata.result.email}),
         headers:{
           'Content-Type':'application/json'
         }
@@ -29,6 +31,16 @@ const ViewFaculty = () => {
     const [array, setArray] = useState([]);
     useEffect(()=>{
       fetchVideos();
+      if(array.length===0){
+        const newArr = [{
+          subject:'No Subject',
+          batch:'No batch',
+          title:'No Video found',
+          pic:'No source',
+          vidurl:'/'
+        }]
+        setArray(newArr)
+      }
     }, [])
   
 

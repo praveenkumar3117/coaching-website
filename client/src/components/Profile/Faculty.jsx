@@ -10,24 +10,20 @@ const Faculty = () => {
         userpic:"Fetching..."
     })
 
-
-
-    const findData = ()=>{
-        let data = localStorage.getItem("data");
-        data = JSON.parse(data);
-        setuserinfo(existingdata => ({
-            ...existingdata,
-            name: data.result.name,
-            email: data.result.email,
-            userpic: data.result.pic
-        }))
-        console.log(data.result.email)
-        console.log(userinfo)
-        
-    }
-
-
     useEffect(()=>{
+        const findData = ()=>{
+            let data = localStorage.getItem("data");
+            data = JSON.parse(data);
+            setuserinfo(existingdata => ({
+                ...existingdata,
+                name: data.result.name,
+                email: data.result.email,
+                userpic: data.result.pic
+            }))
+            // console.log(data.result.email)
+            // console.log(userinfo)
+            
+        }
         findData();
     }, [])
 

@@ -4,7 +4,6 @@ import {AiOutlinePhone} from 'react-icons/ai';
 import {MdOutlineEmail} from 'react-icons/md';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {LoadingBar} from 'react-top-loading-bar'
 
 function Contact() {
 
@@ -31,10 +30,7 @@ function Contact() {
 
         if(result.success){
             console.log('yayyy');
-            // navigate ('/mailsent');
-            // 
-            // <LoadingBar color='#f11946'
-            // LoadingBar
+            navigate ('/mailsent');
         }
 
     }

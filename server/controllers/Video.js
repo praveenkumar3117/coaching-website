@@ -167,8 +167,14 @@ exports.FetchVideosFoundBIO = async(req, res)=>{
 
 exports.FetchVideosFaculty = async(req, res)=>{
     try{
-        const data = await Video.find({"email":req.email}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
-        res.status(200).json(data)
+        const email = req.body.email;
+        console.log(email)
+        if(email){
+            const data = await Video.find({"email":req.body.email}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+            res.status(200).json(data)
+        }else{
+            res.status(201).json({success:false})
+        }
     }catch(error){
         res.status(500).send({
             success:false,
