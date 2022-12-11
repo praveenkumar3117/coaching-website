@@ -8,6 +8,10 @@ const videoSchema = mongoose.Schema(
             type:String,
             required:true
         },
+        email:{
+            type : String,
+            required: true
+        },
         Date : {type: Date},
         JEE: { 
             type: Boolean,

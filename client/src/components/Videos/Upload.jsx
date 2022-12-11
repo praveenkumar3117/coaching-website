@@ -38,7 +38,8 @@ const Upload = () => {
     JEE:false, 
     NEET:false, 
     Foundation:false,
-    date: uploadDate
+    date: uploadDate,
+    email: ""
   });
 
   const setMySubject = (e)=>{
@@ -124,6 +125,9 @@ const Upload = () => {
     
     let data = {...videoInfo}
     data.vidurl = URL
+    let localdata = localStorage.getItem("data");
+    localdata = JSON.parse(localdata)
+    data.email = localdata.result.email
     console.log("url is ",data)
     const Token = JSON.parse(localStorage.getItem("data")).result.token;
     console.log(Token)

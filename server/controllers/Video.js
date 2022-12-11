@@ -4,7 +4,7 @@ const Video = require('../models/Video');
 exports.AddVideo = async(req, res) => {
     try{
 
-        const {title, subject, teacher, chapterNum, JEE, NEET, Foundation, Date, vidurl,lecture}=req.body;
+        const {title, email, subject, teacher, chapterNum, JEE, NEET, Foundation, Date, vidurl,lecture}=req.body;
         console.log(req.body);
         const chapter = chapterNum;
         let video = await Video.create({
@@ -17,7 +17,8 @@ exports.AddVideo = async(req, res) => {
             NEET,
             Foundation,
             vidurl,
-            lecture
+            lecture,
+            email
         })
 
         if(res.status(201)){
@@ -33,7 +34,8 @@ exports.AddVideo = async(req, res) => {
                 Foundation:video.Foundation,
                 Date:video.Date,
                 vidurl:video.vidurl,
-                lecture:video.lecture
+                lecture:video.lecture,
+                email: video.email
             })
         }
         
@@ -168,9 +170,9 @@ exports.FetchVideosFoundBIO = async(req, res)=>{
 exports.FetchVideosFaculty = async(req, res)=>{
     try{
         const email = req.body.email;
-        console.log(email)
         if(email){
-            const data = await Video.find({"email":req.body.email}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+            const data = await Video.find({"email" : email}).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+            console.log(data);
             res.status(200).json(data)
         }else{
             res.status(201).json({success:false})
