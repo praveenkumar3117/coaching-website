@@ -5,18 +5,6 @@ import { Link } from 'react-router-dom';
 const Lectures = (props) => {
 //   List all lectures here
     const {subject, batch, title, pic, link} = props;
-
-
-    const getAllLectures = async()=>{
-        console.log(subject)
-        console.log(batch)
-        console.log(title)
-      }
-      useEffect((item)=>{
-        console.log(props)
-        console.log(link)
-    }, []);
-
     return (
 
 

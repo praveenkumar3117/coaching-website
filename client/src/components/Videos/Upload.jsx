@@ -125,17 +125,21 @@ const Upload = () => {
     let data = {...videoInfo}
     data.vidurl = URL
     console.log("url is ",data)
+    const Token = JSON.parse(localStorage.getItem("data")).result.token;
+    console.log(Token)
+    // console.log(JSON.parse(localStorage.getItem("data")).result.token)
 
-  let result = await fetch("http://localhost:5000/api/Teach/Upload-Video",{
-      method:'post',
-      headers:{
-        'Content-Type':'application/json'
-      },
+    let result = await fetch("http://localhost:5000/api/Teach/Upload-Video",{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'authorization':'Bearer '+Token
+        },
 
-      body:JSON.stringify(data)
-    })
-    result = await result.json();
-    console.log("resullts",result);
+        body:JSON.stringify(data)
+      })
+      result = await result.json();
+      console.log("results",result);
   }
 
   

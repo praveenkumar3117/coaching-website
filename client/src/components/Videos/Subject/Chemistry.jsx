@@ -5,22 +5,23 @@ const Chemistry = (props) => {
   
   const {batch} = props;
   const [lectures, setLectures] = useState([]);
-  const fetchVideos = async()=>{
-
-    let result = await fetch(`http://localhost:5000/api/fetchVideos/${batch}/Chemistry`, {
-      method:'get',
-      headers:{
-        'Content-Type':'application/json'
-      }
-    })
-
-    result = await result.json();
-    console.log(result)
-    setLectures([...result]);
-    
-  }
+  
 
   useEffect(()=>{
+    const fetchVideos = async()=>{
+
+      let result = await fetch(`http://localhost:5000/api/fetchVideos/${batch}/Chemistry`, {
+        method:'get',
+        headers:{
+          'Content-Type':'application/json'
+        }
+      })
+  
+      result = await result.json();
+      console.log(result)
+      setLectures([...result]);
+      
+    }
     fetchVideos();
   }, []);
   
