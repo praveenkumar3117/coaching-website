@@ -9,20 +9,31 @@ const Maths = (props) => {
   useEffect(()=>{
     const fetchVideos = async()=>{
 
-      let result = await fetch(`http://localhost:5000/api/fetchVideos/${batch}/Maths`, {
+      fetch(`http://localhost:5000/api/fetchVideos/${batch}/Physics`, {
         method:'get',
         headers:{
           'Content-Type':'application/json'
         }
-      })
-  
-      result = await result.json();
-      console.log(result)
-      setLectures([...result]);
-      console.log("result",result)
-      console.log("lectures",lectures)
+      }).then((response)=>{
+        response.json().then(
+          (lectureArr)=>{
+            lectureArr.sort((vid1, vid2)=>{
+              if(vid1.chapter>vid2.chapter){
+                return 1;
+              }else{
+                return -1;
+              }
+            })
 
-      if(lectures.length===0 && result.length===0){
+            setLectures([...lectureArr])
+          }
+        )
+      })
+      .catch((err)=>{
+        console.log("Error is ",err)
+      })
+      
+      if(lectures.length===0){
         setLectures([{
           subject:"Maths",
           batch:batch,
@@ -31,6 +42,7 @@ const Maths = (props) => {
         }]);
       }
     }
+
     fetchVideos();
   }, []);
 

@@ -16,10 +16,12 @@ const AddStudent = () => {
   const [phone, setPhoneNumber] = useState(0);
   const [year, setYear] = useState(0);
   const [DOB, setDOB] = useState(new Date());
+  const [warning, setWarning]=useState("");
   
   const batches = ['JEE', 'NEET', 'Foundation'];
 
   const handleDOB = (event)=>{
+    console.log(event.target.value);
     setDOB(new Date(`${event.target.value}Z`));
   }
   
@@ -51,13 +53,11 @@ const AddStudent = () => {
         });
 
         result = await result.json();
-        console.log(result);
-        console.log(result.message);
-        console.log(result.success);
         if(result.success){
           navigate('/');
         }else{
-          console.log('user already exists');
+          setWarning("User Already Exists");
+          // console.log('user already exists');
         }
     }
   }
@@ -111,6 +111,9 @@ const AddStudent = () => {
               {/* Confirm Password */}
               <input required onChange={(event)=>{setConfirmedUserPassword(event.target.value)}} type="password" className="block border border-grey-light w-full p-3 rounded mb-4" name="confirm_password" placeholder="Confirm Password" />
 
+              {/* Warning if user already exists */}
+              <label className='text-red-400 font-bold pb-6' htmlFor="warning">{warning}</label>
+
               {/* Matching Password and Confirm Password */}
               {
                 password===confirmeduserpassword ?
@@ -144,7 +147,3 @@ const AddStudent = () => {
 }
 
 export default AddStudent;
-{/* Enrollment Number
-  Batch - JEE NEET fOund
-  Year 
-  Admin, Faculty, Studnet */}

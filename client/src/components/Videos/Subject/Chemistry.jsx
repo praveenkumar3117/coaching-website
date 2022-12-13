@@ -10,18 +10,41 @@ const Chemistry = (props) => {
   useEffect(()=>{
     const fetchVideos = async()=>{
 
-      let result = await fetch(`http://localhost:5000/api/fetchVideos/${batch}/Chemistry`, {
+      fetch(`http://localhost:5000/api/fetchVideos/${batch}/Chemistry`, {
         method:'get',
         headers:{
           'Content-Type':'application/json'
         }
+      }).then((response)=>{
+        response.json().then(
+          (lectureArr)=>{
+            lectureArr.sort((vid1, vid2)=>{
+              if(vid1.chapter>vid2.chapter){
+                return 1;
+              }else{
+                return -1;
+              }
+            })
+
+            setLectures([...lectureArr])
+          }
+        )
       })
-  
-      result = await result.json();
-      console.log(result)
-      setLectures([...result]);
+      .catch((err)=>{
+        console.log("Error is ",err)
+      })
+
+      if(lectures.length===0){
+        setLectures([{
+          subject:"Chemistry",
+          batch:batch,
+          title:"No Videos Uploaded",
+          pic:"../../../images/user.png"
+        }]);
+      }
       
     }
+
     fetchVideos();
   }, []);
   
