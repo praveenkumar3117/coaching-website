@@ -13,7 +13,8 @@ const AddFaculty = () => {
   const [phone, setPhoneNumber] = useState(0);
   const [tCode, setTCode] = useState("");
   const [subject, setSubject] = useState("");
-  const [DOB, setDOB] = useState("")
+  const [DOB, setDOB] = useState("");
+  const [warning, setWarning]= useState("");
 
 
   const handleDOB = (event)=>{
@@ -50,11 +51,10 @@ const AddFaculty = () => {
         });
 
         result = await result.json();
-        console.log(result);
-        console.log(result.message);
-        console.log(result.success);
         if(result.success){
           navigate('/');
+        }else{
+          setWarning("User Already Exists");
         }
     }
   }
@@ -92,6 +92,9 @@ const AddFaculty = () => {
                 
               {/* Confirm Password */}
               <input required onChange={(event)=>{setConfirmedUserPassword(event.target.value)}} type="password" className="block border border-grey-light w-full p-3 rounded mb-4" name="confirm_password" placeholder="Confirm Password" />
+
+              {/* Warning if user already exists */}
+              <label className='text-red-400 font-bold pb-6' htmlFor="warning">{warning}</label>
 
               {/* Matching Password and Confirm Password */}
               {

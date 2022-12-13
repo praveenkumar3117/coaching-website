@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import student from './images/student.jpg'
+// import student from './images/student.jpg'
+import {FaGraduationCap, FaChalkboardTeacher} from 'react-icons/fa';
+import {FcSupport} from 'react-icons/fc';
 import admin from './images/admin.jpg'
 import teacher from './images/teacher.jpg'
 import { useState } from 'react'
@@ -15,14 +17,14 @@ const LoginCheck = () => {
   }
 
   return (
-    <section className="text-black md:pt-12 lg:pt-12 bg-gray-100 body-font">
+    <section className="text-black md:pt-12 mt-20 lg:pt-12 bg-gray-100 body-font">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap -m-4">
-          <div className="p-4 md:w-1/3">
-            <div className="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-              <img className="lg:h-48 md:h-36 w-full object-center" src={student} alt="blog"/>
+          <div className="p-4 md:w-1/3 lg:w-1/3 w-full">
+            <div className="h-full flex flex-col justify-center items-center border-2 border-gray-800 rounded-lg overflow-hidden">
+              <FaGraduationCap className="lg:h-32 md:h-32 h-32 w-full object-center" />
               <div className="p-6 space-y-10">
-                <h2 className="tracking-widest text-4xl title-font font-medium text-black mb-1">Are you a Student ?</h2>
+                <h2 className="tracking-widest text-2xl lg:text-4xl title-font font-medium text-black mb-1">Are you a Student ?</h2>
                 <div className="flex items-center flex-wrap justify-center">
                   <Link to='/login/student' onClick={()=>handleState(0)} className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
                     <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -34,11 +36,11 @@ const LoginCheck = () => {
               </div>
             </div>
           </div>
-          <div className="p-4 md:w-1/3">
-            <div className="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-              <img className="lg:h-48 md:h-36 w-full  object-center" src={teacher} alt="blog"/>
+          <div className="p-4 md:w-1/3 lg:w-1/3 w-full">
+            <div className="h-full border-2 flex flex-col justify-center items-center border-gray-800 rounded-lg overflow-hidden">
+              <FaChalkboardTeacher className="lg:h-32 md:h-32 h-32 pt-4 w-full object-center"/>
               <div className="p-6 space-y-10">
-                <h2 className="tracking-widest text-4xl title-font font-medium text-black mb-1">Are you a Teacher ?</h2>
+                <h2 className="tracking-widest text-2xl lg:text-4xl title-font font-medium text-black mb-1">Are you a Teacher ?</h2>
                 <div className="flex items-center flex-wrap justify-center">
                   <Link to='/login/teacher'  onClick={()=>handleState(1)}   className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
                     <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -50,11 +52,11 @@ const LoginCheck = () => {
               </div>
             </div>
           </div>
-          <div className="p-4 md:w-1/3">
-            <div className="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-              <img className="lg:h-48 md:h-36 w-full object-center" src={admin} alt="blog"/>
+          <div className="p-4 md:w-1/3 lg:w-1/3 w-full">
+            <div className="h-full border-2 flex flex-col justify-center items-center border-gray-800 rounded-lg overflow-hidden">
+              <FcSupport className="lg:h-32 md:h-32 w-full h-32 mt-4 object-center"/>
               <div className="p-6 space-y-10">
-                <h2 className="tracking-widest text-4xl title-font font-medium text-black mb-1">Are you a Administrator ?</h2>
+                <h2 className="tracking-widest text-2xl lg:text-4xl title-font font-medium text-black mb-1">Are you an Administrator ?</h2>
                 <div className="flex items-center flex-wrap justify-center">
                   <Link to='/login/admin'  onClick={()=>handleState(2)}  className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
                     <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
