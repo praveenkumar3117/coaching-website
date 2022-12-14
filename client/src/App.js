@@ -116,7 +116,7 @@ function App() {
           <Route path ="/contact" element = {<Contact/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
-          <Route path ="/videos/:id" element = {<Player/> } />
+          <Route path ="/videos" element = {<Player/> } />
 
           {/* ------------------protected routes------------------- */}
 

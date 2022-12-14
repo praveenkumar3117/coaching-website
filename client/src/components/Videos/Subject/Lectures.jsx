@@ -21,9 +21,11 @@ const Lectures = (props) => {
       link = "/";
     }
 
+    // https://firebasestorage.googleapis.com/v0/b/coaching-website-c1223.appspot.com/o/videos%2F%5Bobject%20File%5Dda59d964-a912-4fb9-961d-6c733dcd9963?alt=media&token=32b918c3-c3cd-4d7b-b9a1-4a24aa56920e
+
     return (
     <div className='flex mx-4 justify-center my-4 lg:mx-4 md:mx-4'>
-      <a href={link}>
+      <Link to={'/videos'} state={{link}}> 
         <div className="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-200 active:bg-gray-300">
           <img className="w-full" src={pic} alt="Sunset in the mountains" />
           <div className="px-6 py-4">
@@ -36,7 +38,7 @@ const Lectures = (props) => {
             <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Lecture: {lecture}</span>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   )
 }
