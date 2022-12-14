@@ -1,20 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import student from './images/student.jpg'
 import {FaGraduationCap, FaChalkboardTeacher} from 'react-icons/fa';
 import {FcSupport} from 'react-icons/fc';
-import admin from './images/admin.jpg'
-import teacher from './images/teacher.jpg'
 import { useState } from 'react'
 
 const LoginCheck = () => {
 
-  const [loginState, setloginState] = useState(null)
-
-  const handleState = (v)=>{
-    setloginState(v);
-    // console.log(loginState)
-  }
 
   return (
     <section className="text-black md:pt-12 mt-20 lg:pt-12 bg-gray-100 body-font">
@@ -26,7 +17,7 @@ const LoginCheck = () => {
               <div className="p-6 space-y-10">
                 <h2 className="tracking-widest text-2xl lg:text-4xl title-font font-medium text-black mb-1">Are you a Student ?</h2>
                 <div className="flex items-center flex-wrap justify-center">
-                  <Link to='/login/student' onClick={()=>handleState(0)} className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
+                  <Link to='/login/student' className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
                     <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M12 5l7 7-7 7"></path>
@@ -42,7 +33,7 @@ const LoginCheck = () => {
               <div className="p-6 space-y-10">
                 <h2 className="tracking-widest text-2xl lg:text-4xl title-font font-medium text-black mb-1">Are you a Teacher ?</h2>
                 <div className="flex items-center flex-wrap justify-center">
-                  <Link to='/login/teacher'  onClick={()=>handleState(1)}   className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
+                  <Link to='/login/teacher' className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
                     <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M12 5l7 7-7 7"></path>
@@ -58,7 +49,7 @@ const LoginCheck = () => {
               <div className="p-6 space-y-10">
                 <h2 className="tracking-widest text-2xl lg:text-4xl title-font font-medium text-black mb-1">Are you an Administrator ?</h2>
                 <div className="flex items-center flex-wrap justify-center">
-                  <Link to='/login/admin'  onClick={()=>handleState(2)}  className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
+                  <Link to='/login/admin'  className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
                     <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M12 5l7 7-7 7"></path>

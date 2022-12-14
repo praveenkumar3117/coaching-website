@@ -5,31 +5,18 @@ import { FiLogIn } from "react-icons/fi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import { BsFillFilePersonFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
 
 
 const Navbar = () => {
 
-  // Get email from Login-Context
-  const {userloggedin,setUserloggedin, email} = useContext(LoginContext);
-  const checkUser = userloggedin===1 || userloggedin===2 || userloggedin===0;
-
   let [open, setOpen] = useState(false);
 
   useEffect(() => {
     setOpen(false);
   }, []);
-
-
-  // const handleLogoutBtn = async () =>{
-  //   setOpen(!open);
-  //   // if(userloggedin===1){
-  //     // setUserloggedin(-1);
-  //     // localStorage.removeItem("data");
-  //   }
-  // }
 
 
   return (
@@ -51,11 +38,6 @@ const Navbar = () => {
             </div>
          </div>
        </div>
-
-       {/* <div className="text-2xl bg-white text-black">
-        {userloggedin===1 ? email:""}
-       </div> */}
-
 
       {/* -----------------SIDE BAR--------------------- */}
               
@@ -123,20 +105,6 @@ const Navbar = () => {
               </li>
               {/* Login - Logout */}
               <li>
-                {/* Check for logged in */}
-                {/* {userloggedin===1 ?  */}
-                {/* // if not logged in
-                <Link to="/" onClick={handleLogoutBtn}>
-                <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
-                >
-                  <FiLogIn />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
-                    {open ? "Logout" : ""}
-                  </span>
-                </div>
-                </Link>
-                :  */}
                 {/* // if not logged in already */}
                 <Link to = "/login" onClick = {()=>{setOpen(!open)}}>
                 <div

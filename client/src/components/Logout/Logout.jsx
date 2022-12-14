@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useContext } from 'react';
-import { useState } from 'react';
 import { LoginContext } from '../Contexts/LoginContext';
 
 const Logout = () => {

@@ -5,7 +5,6 @@ import img3 from './slider/AIR_2019-1.png'
 import img4 from './slider/AIR_2017.png'
 import img5 from './slider/AIR_2015-1.png'
 import img6 from './slider/AIR_2013.png'
-import { AiOutlineDoubleRight, AiOutlineDoubleLeft } from 'react-icons/ai'
 import { Zoom } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 

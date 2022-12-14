@@ -1,7 +1,7 @@
 import React from 'react'
 import { storage } from '../../firebase'
 import { useState,useEffect } from 'react'
-import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import {IoIosArrowDropdownCircle} from 'react-icons/io'
@@ -25,7 +25,6 @@ const Upload = () => {
   const [url, setUrl] = useState("")  
   const [showWarning, setWarning] = useState(false);
   const [fileName, setFileName ] = useState('None');
-  const videoListRef = ref(storage, 'videos/')
   const navigate = useNavigate();
   const [subject, setSubject] = useState("Subject");
 
@@ -93,8 +92,11 @@ const Upload = () => {
 
   // Handling files
   const handleFile = (e)=>{
-    setVideo(e.target.files[0]);
+    setVideo(e.target.files[0].name);
     setFileName(e.target.files[0].name);
+    // const name = e.target.files[0].name.split('.');
+    // setVideo(name[0]);
+    // console.log("name is ", name)
     setWarning(false);
   }
 
