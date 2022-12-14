@@ -1,35 +1,42 @@
 import React from 'react'
-import ViewNEET from './ViewNEET'
-import ViewJEE from './ViewJEE'
-import ViewFoundation from './ViewFoundation'
-// import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import Lectures from '../Subject/Lectures'
 
 const ViewFaculty = () => {
     
-    const fetchVideos = async()=>{
-      let localdata = localStorage.getItem("data");
-      localdata = JSON.parse(localdata)
-      // console.log("locadata", localdata.result.email);
-
-      // console.log(localdata.result.email)
-      
-      let data = await fetch("http://localhost:5000/api/fetchVideos/faculty", {
+    const [array, setArray] = useState([]);
+    useEffect(()=>{
+      const fetchVideos = async()=>{
+        let localdata = localStorage.getItem("data");
+        localdata = JSON.parse(localdata)
+        
+        fetch(`http://localhost:5000/api/fetchVideos/faculty`, {
         method:'post',
         body:JSON.stringify({"email":localdata.result.email}),
         headers:{
           'Content-Type':'application/json'
         }
+      }).then((response)=>{
+        response.json().then(
+          (lectureArr)=>{
+            lectureArr.sort((vid1, vid2)=>{
+              if(vid1.chapter>vid2.chapter){
+                return 1;
+              }else{
+                return -1;
+              }
+            })
+
+            setArray([...lectureArr])
+          }
+        )
       })
-      data = await data.json();
-      console.log(data)
-      setArray(data);
+      .catch((err)=>{
+        console.log("Error is ",err)
+      })
     }
 
-    const [array, setArray] = useState([]);
-    useEffect(()=>{
       fetchVideos();
       if(array.length===0){
         const newArr = [{
@@ -49,7 +56,7 @@ const ViewFaculty = () => {
 
       {
         array.map((item, index)=>(
-          <Lectures key={index} subject={item.subject} batch={item.batch} title={item.title} pic={item.pic} link={item.vidurl}/>
+          <Lectures key={index} chapter={item.chapter} lecture = {item.lecture} subject={item.subject} batch={item.batch} title={item.title} pic={item.pic} link={item.vidurl}/>
         ))
       }
 

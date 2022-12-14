@@ -4,10 +4,10 @@ import { useState } from 'react';
 import Lectures from './Lectures'
 
 const Biology = (props) => {
-  const {batch} = props;
-  const [lectures, setLectures] = useState([]);
   
-
+  const [lectures, setLectures] = useState([]);
+  const {batch} = props;
+  
   useEffect(()=>{
     const fetchVideos = async()=>{
 
@@ -51,7 +51,7 @@ const Biology = (props) => {
     <main className='py-32 flex flex-col lg:grid-cols-3 lg:grid-rows-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
     {
       lectures.map((item, index)=>(
-        <Lectures key={index} link={item.vidurl} subject="Physics" title={item.title} pic={item.pic} batch = {batch}/>
+        <Lectures key={index} chapter={item.chapter} lecture = {item.lecture} link={item.vidurl} subject="Physics" title={item.title} pic={item.pic} batch = {batch}/>
       ))
     }
     </main>

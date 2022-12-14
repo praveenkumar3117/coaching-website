@@ -6,7 +6,7 @@ import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import {AiOutlinePlayCircle} from 'react-icons/ai'
 import { BsFillFilePersonFill, BsFillPersonFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
 

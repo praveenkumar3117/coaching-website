@@ -1,5 +1,4 @@
 import React from 'react'
-import { useEffect } from 'react';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../Contexts/LoginContext';
@@ -10,11 +9,6 @@ function LoginSuperUser() {
 
   const {email, setEmail, userloggedin, setUserloggedin} = useContext(LoginContext);
   const[LogInWarning, setLogInWarning] = useState("");
-
-  // useEffect(() => {
-  //   setSuperUserLoggedIn(false);
-  // }, []);
-
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();

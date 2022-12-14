@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Hero from './components/Home/hero';
 import Footer from './components/Footer';
 import React from 'react';
@@ -39,6 +39,7 @@ import Maths from './components/Videos/Subject/Maths';
 import Biology from './components/Videos/Subject/Biology';
 import Layout from './components/Layout';
 import Protected from './components/Protected';
+import Player from './components/Videos/Player';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -89,19 +90,17 @@ function App() {
     checkNavbarToLoad
   }
 
-  // const navigate = useNavigate();
 
   return (
     
     <div>
       <div className="App bg-gray-100 font-lato">
-      {/* <BrowserRouter> */}
+      <BrowserRouter>
       <LoginContext.Provider value = {loginContextparams}>
       
       {checkNavbarToLoad()}
 
         <Routes>
-          <Route path="/" element={<Layout/>}>
           {/* ---------------------------public routes ---------------------------*/}
           <Route path = "/" element={
           <div>
@@ -117,6 +116,7 @@ function App() {
           <Route path ="/contact" element = {<Contact/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
+          <Route path ="/videos/:id" element = {<Player/> } />
 
           {/* ------------------protected routes------------------- */}
 
@@ -149,12 +149,11 @@ function App() {
           {/* Success Redirects */}
           <Route path ="/mailsent" element = {<Mailsent/> } />
 
-          </Route>
           
         </Routes>
         <Footer/>
         </LoginContext.Provider>
-      {/* </BrowserRouter> */}
+      </BrowserRouter>
     </div>
     </div>
   );

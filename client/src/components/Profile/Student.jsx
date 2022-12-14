@@ -15,25 +15,25 @@ const Student = () => {
 
 
 
-    const findData = ()=>{
-        let data = localStorage.getItem("data");
-        data = JSON.parse(data);
-        setuserinfo(existingdata => ({
-            ...existingdata,
-            name: data.result.name,
-            email: data.result.email,
-            enRoll: data.result.enRoll,
-            fatherName: data.result.fatherName,
-            userpic: data.result.pic,
-            batch: data.result.batch
-        }))
-        console.log(data.result.email)
-        console.log(userinfo)
-        
-    }
+    
 
 
     useEffect(()=>{
+        const findData = ()=>{
+            let data = localStorage.getItem("data");
+            data = JSON.parse(data);
+            setuserinfo(existingdata => ({
+                ...existingdata,
+                name: data.result.name,
+                email: data.result.email,
+                enRoll: data.result.enRoll,
+                fatherName: data.result.fatherName,
+                userpic: data.result.pic,
+                batch: data.result.batch
+            }))
+            console.log(data.result.email)
+            console.log(userinfo)
+        }
         findData();
     }, [])
 

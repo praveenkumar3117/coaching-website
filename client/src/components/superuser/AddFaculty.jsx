@@ -20,8 +20,6 @@ const AddFaculty = () => {
   const handleDOB = (event)=>{
     setDOB(new Date(`${event.target.value}Z`));
   }
-
-  const [userexists, setUserExists] = useState('');
   
   // Navigation
   const navigate = useNavigate();
@@ -129,7 +127,3 @@ const AddFaculty = () => {
 }
 
 export default AddFaculty;
-{/* Enrollment Number
-  Batch - JEE NEET fOund
-  Year 
-  Admin, Faculty, Studnet */}
