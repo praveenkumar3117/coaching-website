@@ -71,7 +71,7 @@ const Upload = () => {
       return;
     }
 
-    const videoRef = ref(storage, `videos/${video + uuidv4()}`)
+    const videoRef = ref(storage, `videos/${video.name + uuidv4()}`)
     await uploadBytes(videoRef, video).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((URL) => {
         setUrl(URL);
@@ -92,11 +92,9 @@ const Upload = () => {
 
   // Handling files
   const handleFile = (e)=>{
-    setVideo(e.target.files[0].name);
+    setVideo(e.target.files[0]);
     setFileName(e.target.files[0].name);
-    // const name = e.target.files[0].name.split('.');
-    // setVideo(name[0]);
-    // console.log("name is ", name)
+    console.log(e.target.files[0]);
     setWarning(false);
   }
 

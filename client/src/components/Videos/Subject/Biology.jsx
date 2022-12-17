@@ -7,6 +7,7 @@ const Biology = (props) => {
   
   const [lectures, setLectures] = useState([]);
   const {batch} = props;
+  const [chapters, setChapters] = useState(()=>new Set());
   
   useEffect(()=>{
     const fetchVideos = async()=>{
@@ -19,13 +20,13 @@ const Biology = (props) => {
       }).then((response)=>{
         response.json().then(
           (lectureArr)=>{
-            lectureArr.sort((vid1, vid2)=>{
-              if(vid1.chapter>vid2.chapter){
-                return 1;
-              }else{
-                return -1;
+            lectureArr.forEach(element => {
+              if(!chapters.has(element.chapter)){
+                setChapters(prev => new Set(prev).add(element.chapter));
+                chapters.add(element.chapter);
+                console.log(chapters)
               }
-            })
+            });
 
             setLectures([...lectureArr])
           }
@@ -50,7 +51,7 @@ const Biology = (props) => {
   return (
     <main className='py-32 flex flex-col lg:grid-cols-3 lg:grid-rows-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
     {
-      lectures.map((item, index)=>(
+      Array.from(chapters).map((item, index)=>(
         <Lectures key={index} chapter={item.chapter} lecture = {item.lecture} link={item.vidurl} subject="Physics" title={item.title} pic={item.pic} batch = {batch}/>
       ))
     }

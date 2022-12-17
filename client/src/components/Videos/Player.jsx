@@ -7,13 +7,13 @@ const Player = () => {
     const params = useParams();
     const location = useLocation();
     useEffect(()=>{
-      console.log(location?.state?.link);
+      console.log("Link is ", location?.state);
       console.log("params == ", params);
     }, [])
 
   return (
     <div className='pt-32 flex justify-center items-center px-2'>
-      <ReactPlayer url={location?.state?.link} controls={true}/>
+      <ReactPlayer url={location?.state} controls={true}/>
     </div>
   )
 }
