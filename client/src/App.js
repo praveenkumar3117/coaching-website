@@ -40,6 +40,8 @@ import Biology from './components/Videos/Subject/Biology';
 import Layout from './components/Layout';
 import Protected from './components/Protected';
 import Player from './components/Videos/Player';
+import Chapters from './components/Videos/Chapters.jsx/Chapters';
+import Lectures from './components/Videos/Subject/Lectures';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -117,6 +119,8 @@ function App() {
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
           <Route path ="/videos" element = {<Player/> } />
+          <Route path ="/chapter" element = {<Chapters/> } />
+          <Route path ="/lectures" element = {<Lectures/> } />
 
           {/* ------------------protected routes------------------- */}
 
