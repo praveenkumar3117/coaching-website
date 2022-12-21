@@ -75,6 +75,7 @@ const Upload = () => {
     await uploadBytes(videoRef, video).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((URL) => {
         setUrl(URL);
+        // send data to the database
         sendDataToDB(URL)
         console.log(URL)  
       })
@@ -83,8 +84,6 @@ const Upload = () => {
     })
 
     console.log(url);
-    // Call SendDataToDB to send the data of the video
-    // await sendDataToDB(url);
 
     navigate('/');
 
@@ -131,7 +130,6 @@ const Upload = () => {
     console.log("url is ",data)
     const Token = JSON.parse(localStorage.getItem("data")).result.token;
     console.log(Token)
-    // console.log(JSON.parse(localStorage.getItem("data")).result.token)
 
     let result = await fetch("http://localhost:5000/api/Teach/Upload-Video",{
         method:'post',
@@ -150,7 +148,7 @@ const Upload = () => {
 
 
   return (
-    <form className='w-4/5 flex flex-col mx-auto justify-center my-24 py-12 border border-black' onSubmit={uploadVideo}>
+    <form className='w-4/5 flex flex-col mx-auto justify-center my-24 pt-24 py-12 border border-black' onSubmit={uploadVideo}>
 
         <div className="flex flex-col justify-center items-center w-full">
           <label htmlFor="dropzone-file" className="flex flex-col justify-center items-center w-full h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -159,7 +157,7 @@ const Upload = () => {
               <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
               <p className="text-xs text-gray-500 dark:text-gray-400">Video</p>
             </div>
-            <input id="dropzone-file" type="file" accept="video/mp4,video/x-m4v,video/*" className="hidden" required onChange={handleFile}/>
+            <input id="dropzone-file" type="file" accept="video/mp4,video/x-m4v,video/*" className="hidden" onChange={handleFile}/>
           </label>
 
           <div>
@@ -175,17 +173,17 @@ const Upload = () => {
               <label htmlFor="title" className='mt-4 mx-4 '>Title</label>
               <input type="text" required onChange={setMyVideoInfo} name="title" id="title" placeholder='Title'  className="p-4 rounded border border-black"/>
             </div>
-            
+
             <div className='mx-auto my-2 lg:my-0 w-2/3'>
               <div className='bg-blue-300 p-4 rounded w-full'>
-                <button onClick={()=>{setShow(!show)}} className="w-full flex flex-row justify-center items-center">{subject}<IoIosArrowDropdownCircle/></button>
+                <button type='button' onClick={()=>{setShow(!show)}} className="w-full flex flex-row justify-center items-center">{subject}<IoIosArrowDropdownCircle/></button>
               </div>
               <div className={show?`absolute flex flex-col bg-gray-300 `:`hidden`}>
 
-                <button onClick={()=>{setMySubject("Physics")}} className='p-2 border border-black'>Physics</button>
-                <button onClick={()=>{setMySubject("Chemistry")}} className='p-2 border border-black'>Chemistry</button>
-                <button onClick={()=>{setMySubject("Maths")}} className='p-2 border border-black'>Maths</button>
-                <button onClick={()=>{setMySubject("Biology")}} className='p-2 border border-black'>Biology</button>
+                <button type='button' onClick={()=>{setMySubject("Physics")}} className='p-2 border border-black'>Physics</button>
+                <button type='button' onClick={()=>{setMySubject("Chemistry")}} className='p-2 border border-black'>Chemistry</button>
+                <button type='button' onClick={()=>{setMySubject("Maths")}} className='p-2 border border-black'>Maths</button>
+                <button type='button' onClick={()=>{setMySubject("Biology")}} className='p-2 border border-black'>Biology</button>
               </div>
             </div>
 

@@ -34,6 +34,8 @@ const Chemistry = (props) => {
       .catch((err)=>{
         console.log("Error is ",err)
       })
+      
+      console.log(lectures)
 
       if(lectures.length===0){
         setLectures([{
@@ -53,7 +55,7 @@ const Chemistry = (props) => {
     <main className='pt-32 lg:grid lg:grid-cols-3 lg:grid-row-3'>
     {
       Array.from(chapters).map((item, index)=>(
-        <Chapters key={index} chapter={item.chapter} subject={"Chemistry"}/>
+        <Chapters key={index} lectures = {lectures} chapter={item} subject={"Chemistry"}/>
       ))
     }
     </main>

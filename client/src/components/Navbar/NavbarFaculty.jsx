@@ -55,9 +55,6 @@ const NavbarFaculty = () => {
          </div>
        </div>
 
-       <div className="text-2xl bg-white text-black">
-        {userloggedin===2 ? email:""}
-       </div>
 
 
       {/* -----------------SIDE BAR--------------------- */}

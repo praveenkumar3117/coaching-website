@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import Chapters from '../Chapters.jsx/Chapters'
 import Lectures from '../Subject/Lectures'
 
 const ViewFaculty = () => {
     
-    const [array, setArray] = useState([]);
+    const [lectures, setArray] = useState([]);
+    const [chapters, setChapters] = useState(()=>new Set());
+
     useEffect(()=>{
       const fetchVideos = async()=>{
         let localdata = localStorage.getItem("data");
@@ -20,13 +23,13 @@ const ViewFaculty = () => {
       }).then((response)=>{
         response.json().then(
           (lectureArr)=>{
-            lectureArr.sort((vid1, vid2)=>{
-              if(vid1.chapter>vid2.chapter){
-                return 1;
-              }else{
-                return -1;
+            lectureArr.forEach(element => {
+              if(!chapters.has(element.chapter)){
+                setChapters(prev => new Set(prev).add(element.chapter));
+                chapters.add(element.chapter);
+                console.log("Chpater is ", chapters)
               }
-            })
+            });
 
             setArray([...lectureArr])
           }
@@ -38,7 +41,7 @@ const ViewFaculty = () => {
     }
 
       fetchVideos();
-      if(array.length===0){
+      if(lectures.length===0){
         const newArr = [{
           subject:'No Subject',
           batch:'No batch',
@@ -52,12 +55,12 @@ const ViewFaculty = () => {
   
 
   return (
-    <div className='py-32 flex flex-col lg:grid-cols-3 lg:grid-rows-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
+    <div className='py-32 flex flex-col lg:grid-cols-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
 
       {
-        array.map((item, index)=>(
-          <Lectures key={index} chapter={item.chapter} lecture = {item.lecture} subject={item.subject} batch={item.batch} title={item.title} pic={item.pic} link={item.vidurl}/>
-        ))
+        Array.from(chapters).map((item, index) =>(
+          <Chapters key={index} lectures = {lectures} chapter={item} subject={"Physics"}/>
+        )) 
       }
 
 
