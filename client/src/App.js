@@ -42,6 +42,7 @@ import Protected from './components/Protected';
 import Player from './components/Videos/Player';
 import Chapters from './components/Videos/Chapters.jsx/Chapters';
 import Lectures from './components/Videos/Subject/Lectures';
+import Test from './components/Tests/Test';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -121,6 +122,7 @@ function App() {
           <Route path ="/videos" element = {<Player/> } />
           <Route path ="/chapter" element = {<Chapters/> } />
           <Route path ="/lectures" element = {<Lectures/> } />
+          <Route path ="/test" element = {<Test/> } />
 
           {/* ------------------protected routes------------------- */}
 

@@ -13,7 +13,14 @@ const Player = () => {
 
   return (
     <div className='pt-32 flex justify-center items-center px-2'>
-      <ReactPlayer url={location?.state} controls={true}/>
+      <ReactPlayer url={location?.state} controls={true} 
+      // Disable download button
+      config={{ file: { attributes: { controlsList: 'nodownload' } } }}
+
+      // Disable right click
+      onContextMenu={e => e.preventDefault()}
+
+      />
     </div>
   )
 }

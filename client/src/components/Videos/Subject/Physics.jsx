@@ -29,13 +29,6 @@ const Physics = (props) => {
                 console.log(chapters)
               }
             });
-            // lectureArr.sort((vid1, vid2)=>{
-            //   if(vid1.chapter>vid2.chapter){
-            //     return 1;
-            //   }else{
-            //     return -1;
-            //   }
-            // })
 
             setLectures([...lectureArr])
           }
