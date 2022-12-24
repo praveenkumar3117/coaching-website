@@ -16,7 +16,9 @@ const Protected = (props) => {
                 'authorization':'Bearer '+Token
             }
         })
+
         check = await check.json();
+        
         if(!(check.success)){
           navigate('/login');
           window.location.reload(true);

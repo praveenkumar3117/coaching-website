@@ -18,8 +18,13 @@ exports.checkAuthUser = async(req, res)=>{
             //decoded token id
             const decoded = jwt.verify(token, "process.env.secret");
 
-            req.user = await User.findById(decoded.id).select("-password");
-            res.status(200).json({success:true})
+            const user = await User.findById(decoded.id).select("-password");
+            if(user){
+                res.status(200).json({success:true})
+            }else{
+                res.status(401).json({success:false})
+            }
+
         } catch (error) {
             res.status(401).json({success:false});
             // throw new Error("Not authorized, token failed");
@@ -45,8 +50,13 @@ exports.checkAuthTeacher = async(req, res)=>{
             //decoded token id
             const decoded = jwt.verify(token, "process.env.secret");
 
-            req.user = await Teacher.findById(decoded.id).select("-password");
-            res.status(200).json({success:true})
+            const user = await Teacher.findById(decoded.id).select("-password");
+            if(user){
+                res.status(200).json({success:true})
+            }else{
+                res.status(401).json({success:false})
+            }
+
         } catch (error) {
             res.status(401).json({success:false});
             // throw new Error("Not authorized, token failed");
@@ -72,8 +82,12 @@ exports.checkAuthSuper = async(req, res)=>{
             //decoded token id
             const decoded = jwt.verify(token, "process.env.secret");
 
-            req.user = await SuperUser.findById(decoded.id).select("-password");
-            res.status(200).json({success:true})
+            const user = await SuperUser.findById(decoded.id).select("-password");
+            if(user){
+                res.status(200).json({success:true})
+            }else{
+                res.status(401).json({success:false})
+            }
         } catch (error) {
             res.status(401).json({success:false});
             // throw new Error("Not authorized, token failed");

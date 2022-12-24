@@ -3,8 +3,19 @@ import { FaPrayingHands } from 'react-icons/fa';
 import { IoPersonAddSharp } from 'react-icons/io5';
 import {AiOutlineTeam} from 'react-icons/ai';
 import { BsFillPenFill } from 'react-icons/bs';
+// import { useEffect } from 'react';
+// import { useState } from 'react';
 
 const AboutUsInfo = () => {
+
+    // const [change, detectChange]=useState(0);
+    // useEffect(()=>{
+    //     window.onblur = (e)=>{
+    //         console.log(e);
+            
+    //     }
+    // }, [])
+
     return (
         <section className="text-gray-400 bg-gray-100 body-font pt-16">
             <div className="container px-5 py-24 mx-auto">

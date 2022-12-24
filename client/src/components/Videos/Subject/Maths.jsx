@@ -5,6 +5,7 @@ const Maths = (props) => {
   const {batch} = props;
   const [lectures, setLectures] = useState([]);
   const [chapters, setChapters] = useState(()=>new Set());
+  const [chapterArr, setChapterArr] = useState([]);
 
   useEffect(()=>{
     const fetchVideos = async()=>{
@@ -26,6 +27,13 @@ const Maths = (props) => {
             });
 
             setLectures([...lectureArr])
+            setChapterArr([...chapters].sort((a,b)=>{
+              if(parseInt(a)<parseInt(b)){
+                return -1;
+              }else{
+                return 1;
+              }
+            }));
           }
         )
       })
@@ -49,7 +57,7 @@ const Maths = (props) => {
   return (
     <main className='py-32 flex flex-col lg:grid-cols-3 lg:grid-rows-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
     {
-      Array.from(chapters).map((item, index)=>(
+      chapterArr.map((item, index)=>(
         <Lectures key={index} lectures = {lectures} chapter={item} subject="Physics"/>
       ))
     }
