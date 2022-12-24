@@ -32,6 +32,6 @@ teacherSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, salt)
 })
 
-const Teaacher = mongoose.model("Teacher", teacherSchema)
+const Teacher = mongoose.model("Teacher", teacherSchema)
 
-module.exports = Teaacher
+module.exports = Teacher
