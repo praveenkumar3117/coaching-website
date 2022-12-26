@@ -10,7 +10,7 @@ import {IoIosArrowDropdownCircle} from 'react-icons/io'
 // videotitle_uuid
 
 
-const Upload = () => {
+const Upload = ({setProgress}) => {
 
   const [video, setVideo] = useState(null)
   const [uploadDate, setUploadDate]=useState(new Date())
@@ -58,29 +58,37 @@ const Upload = () => {
   const uploadVideo = async (e) => {
     e.preventDefault();
     console.log("uploading")
+    setProgress(10);
 
     if (video === null) {
+      setProgress(0);
       console.log("no video found")
       setWarning(true);
       return;
     }
     
     if(videoInfo.subject==="Subject"){
+      setProgress(0);
       setWarning(true);
       console.log("Not uploaded")
       return;
     }
 
     const videoRef = ref(storage, `videos/${video.name + uuidv4()}`)
+    // set progress for loading bar
+    
     await uploadBytes(videoRef, video).then((snapshot) => {
+      console.log(snapshot)
       getDownloadURL(snapshot.ref).then((URL) => {
         setUrl(URL);
         // send data to the database
         sendDataToDB(URL)
         console.log(URL)  
+        setProgress(100);
       })
     }).catch((er)=>{
       console.log(er);
+      setProgress(100);
     })
 
     console.log(url);

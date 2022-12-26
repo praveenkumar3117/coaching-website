@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Chapters = (props) => {
 
     const {subject, chapter, lectures}=props;
-
+    
     const [thisLectures, setLectures] = useState([]);
 
     useEffect(()=>{

@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Hero from './components/Home/hero';
 import Footer from './components/Footer';
 import React from 'react';
+import LoadingBar from 'react-top-loading-bar';
 import { useState, useEffect } from 'react';
 import Content from './components/Home/content';
 import Director from './components/Home/director';
@@ -42,7 +43,13 @@ import Protected from './components/Protected';
 import Player from './components/Videos/Player';
 import Chapters from './components/Videos/Chapters.jsx/Chapters';
 import Lectures from './components/Videos/Subject/Lectures';
-import Test from './components/Tests/Test';
+import AddTests from './components/Tests/AddTests';
+import ViewTestSuper from './components/Tests/ViewTestSuper';
+import ViewTestSuperBatch from './components/Tests/ViewTestSuperBatch';
+import ShowTests from './components/Tests/ShowTests';
+import TestStudent from './components/Tests/TestStudent';
+import TestSuper from './components/Tests/TestSuper';
+
 
 function App() {
   const [email, setEmail] = useState("");
@@ -93,6 +100,7 @@ function App() {
     checkNavbarToLoad
   }
 
+  const [progress, setProgress] = useState(0);
 
   return (
     
@@ -100,6 +108,13 @@ function App() {
       <div className="App bg-gray-100 font-lato">
       <BrowserRouter>
       <LoginContext.Provider value = {loginContextparams}>
+      
+      <LoadingBar
+        color='#f11946'
+        progress={progress}
+        // onLoaderFinished={() => setProgress(0)}
+        height={4}
+      />
       
       {checkNavbarToLoad()}
 
@@ -114,25 +129,30 @@ function App() {
           <Route path ="/login/student" element = {<LoginStudent/>} />
           <Route path ="/login/teacher" element = {<LoginFaculty/>} />
           <Route path ="/logout" element = {<Logout/>} />
-          <Route path ="/admin" element = { <Protected user="admin" Component={SuperUser}/>} />
+          <Route path ="/admin" element = { <Protected user="admin" setProgress = {setProgress} Component={SuperUser}/>} />
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
-          <Route path ="/contact" element = {<Contact/>} />
+          <Route path ="/contact" element = {<Contact setProgress ={setProgress}/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
           <Route path ="/Courses" element = {<CoursesInfo/>} />
           <Route path ="/videos" element = {<Player/> } />
           <Route path ="/chapter" element = {<Chapters/> } />
           <Route path ="/lectures" element = {<Lectures/> } />
-          <Route path ="/test" element = {<Test/> } />
+          <Route path ="/addtest" element = {<AddTests/> } />
+          <Route path ="/viewtest/admin" element = {<ViewTestSuper /> } />
+          <Route path ="/viewtest/admin/:batchYear" element = {<ViewTestSuperBatch /> } />
+          <Route path ="/viewtest/admin/:batchYear/:batch" element = {<ShowTests /> } />
+          <Route path ="/admin/test" element = {<TestSuper/> } />
+          <Route path ="/student/test" element = {<TestStudent/> } />
 
           {/* ------------------protected routes------------------- */}
 
-          <Route path ="/upload-video" element = {<Protected user="faculty" Component={Upload}/>} />
-          <Route path ="/profile/student" element = {<Protected user="student" Component={Student}/>} />
-          <Route path ="/profile/faculty" element = {<Protected user="faculty" Component={Faculty}/>} />
+          <Route path ="/upload-video" element = {<Protected user="faculty" setProgress = {setProgress} Component={Upload}/>} />
+          <Route path ="/profile/student" element = {<Protected user="student" setProgress = {setProgress} Component={Student}/>} />
+          <Route path ="/profile/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component={Faculty}/>} />
           {/* Faculty */}
-          <Route path ="/watch/faculty" element = {<Protected user="faculty" Component = {ViewFaculty}/>} />
+          <Route path ="/watch/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component = {ViewFaculty}/>} />
           {/* JEE Student */}
-          <Route path ="/watch/student/JEE" element = {<Protected user="student" Component={ViewJEE}/>} />
+          <Route path ="/watch/student/JEE" element = {<Protected user="student" setProgress = {setProgress} Component={ViewJEE}/>} />
           <Route path ="/watch/student/JEE/Physics" element = {<Protected user="student" batch="JEE" Component={Physics}/>} />
           <Route path ="/watch/student/JEE/Chemistry" element = {<Protected user="student" batch="JEE" Component={Chemistry}/>} />
           <Route path ="/watch/student/JEE/Maths" element = {<Protected user="student" batch="JEE" Component={Maths}/>} />
@@ -148,9 +168,9 @@ function App() {
           <Route path ="/watch/student/Foundation/Maths" element = {<Protected user="student" batch="Foundation" Component={Maths}/>} />
           <Route path ="/watch/student/Foundation/Biology" element = {<Protected user="student" batch="Foundation" Component={Biology}/>} />
           
-          <Route path ="/admin/addstudent" element = {<Protected user="admin" Component={AddStudent}/>} />
-          <Route path ="/admin/addfaculty" element = {<Protected user="admin" Component={AddFaculty}/>} />
-          <Route path ="/admin/deleteuser" element = {<Protected user="admin" Component={DeleteUser}/>} />
+          <Route path ="/admin/addstudent" element = {<Protected user="admin" setProgress = {setProgress} Component={AddStudent}/>} />
+          <Route path ="/admin/addfaculty" element = {<Protected user="admin" setProgress = {setProgress} Component={AddFaculty}/>} />
+          <Route path ="/admin/deleteuser" element = {<Protected user="admin" setProgress = {setProgress} Component={DeleteUser}/>} />
 
           {/* Success Redirects */}
           <Route path ="/mailsent" element = {<Mailsent/> } />

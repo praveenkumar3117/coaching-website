@@ -1,11 +1,11 @@
 const Test = require('../models/Test')
 
 exports.createTest = async (req, res) => {
+    
     try {
+        const { chapterName, subject, JEE, NEET, Foundation, batchYear, testUrl, testNum } = req.body
 
-        const { chapterName, subject, JEE, NEET, Foundation, batchYear, tCode, testUrl } = req.body
-
-        let test = await Test.findOne({ chapterName })
+        let test = await Test.findOne({ testUrl })
         if (test) {
             return res.status(404).send({ success: false, message: 'Test already exists' })
         }
@@ -17,14 +17,18 @@ exports.createTest = async (req, res) => {
             NEET,
             Foundation,
             batchYear,
-            tCode,
-            testUrl
+            testUrl, 
+            testNum
         })
 
         if (res.status(201)) {
             res.send({
                 success: true,
                 test
+            })
+        }else{
+            res.send({
+                success:false
             })
         }
 
@@ -38,14 +42,48 @@ exports.createTest = async (req, res) => {
 
 exports.listTests = async (req, res) => {
     try {
-        let batchYear = req.body.batchYear
-        let JEE = req.body.JEE
-        let NEET = req.body.NEET
-        let Foundation = req.body.Foundation
-        let subject = req.body.subject
-        const data = await Test.find({ "JEE": JEE, "NEET":NEET,"Foundation":Foundation ,"subject": subject, "batchYear": batchYear }).populate('chapterName').poplulate('tCode').populate('testUrl')
+        const batchYear = req.body.batchYear
+        const batch = req.body.batch;
+        const data = await Test.findOne({"batchYear": batchYear, [batch]:true }).populate('chapterName').populate('testUrl').populate('subject')
         res.status(201).json(data)
     } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.listTestsSuper = async(req, res)=>{
+    try{
+        const {batchYear, batch} = req.body;
+        const data = await Test.find({batchYear, batch});
+        
+        if(res.status(201)){
+            res.json(data);
+        }else{
+            res.json({success:false});
+        }
+    }catch(error){
+        res.status(500).send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.listTestsTeacher = async(req, res)=>{
+
+    const teacher = req.body.teacher;
+    try{
+        const data = await Test.find({teacher});
+        
+        if(res.status(201)){
+            res.json(data);
+        }else{
+            res.json({success:false});
+        }
+    }catch(error){
         res.status(500).send({
             success: false,
             message: error.message
