@@ -66,6 +66,7 @@ exports.authUser = async (req, res) => {
                 fatherName: user.fatherName,
                 batch:user.batch,
                 pic: user.pic,
+                year:user.year,
                 token: generateToken(user._id),
 
             })

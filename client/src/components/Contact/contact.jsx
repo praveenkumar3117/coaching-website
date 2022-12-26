@@ -4,9 +4,12 @@ import {AiOutlinePhone} from 'react-icons/ai';
 import {MdOutlineEmail} from 'react-icons/md';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-function Contact() {
+function Contact(props) {
 
+
+    const {setProgress} = props;
     const [name, setSenderName] = useState('noname');
     const [senderEmail, setEmail] = useState('');
     const [phone, setPhoneNumber] = useState('');
@@ -14,9 +17,17 @@ function Contact() {
 
     const navigate = useNavigate();
 
+    useEffect(()=>{
+        setProgress(10);
+        const timeout = setTimeout(()=>{
+            setProgress(100);
+        }, 500);
+    }, [])
+
     const sendEmailMessage = async (event)=>{
         // Stop reloading
         event.preventDefault();
+        setProgress(10);
 
         let result = await fetch("http://localhost:5000/api/visitor/message",{
             method:'post',
@@ -26,6 +37,7 @@ function Contact() {
             body:JSON.stringify({name, senderEmail, phone, visitorMessage})
         });
         result = await result.json();
+        setProgress(100);
         console.log(result);
 
         if(result.success){

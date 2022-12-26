@@ -17,8 +17,8 @@ const testSchema = mongoose.Schema(
             required: true,
         },
         batchYear : { type: Number, required: true },
-        tCode: { type: String, required: true, unique: true },
-        testUrl : { type: String, required: true }
+        testUrl : { type: String, required: true, unique:true },
+        testNum: {type:Number, required:true}
     },
     { timestaps: true }
 )

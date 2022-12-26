@@ -22,7 +22,7 @@ function Hero() {
       'title':'Foundation',
       'content':'Courses for NTSE and Olympiads',
       'iconName':GiBrain,
-      'bgColor': 'bg-black'
+      'bgColor': 'bg-white'
     }
 
   ];

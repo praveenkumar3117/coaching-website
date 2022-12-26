@@ -5,7 +5,7 @@ import { FiLogIn } from "react-icons/fi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import { BsFillFilePersonFill, BsFillPersonFill } from "react-icons/bs";
-import {AiOutlinePlayCircle} from 'react-icons/ai'
+import {AiOutlinePlayCircle, AiOutlineEye} from 'react-icons/ai'
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
@@ -135,6 +135,21 @@ const NavbarStudent = () => {
                   <AiOutlinePlayCircle />
                   <span class="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Watch Videos" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+
+
+              {/* Tests */}
+              <li>
+                <Link to={`/student/test`} onClick={()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <AiOutlineEye />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Tests" : ""}
                   </span>
                 </div>
                 </Link>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Chapters = (props) => {
 
     const {subject, chapter, lectures}=props;
-
+    
     const [thisLectures, setLectures] = useState([]);
 
     useEffect(()=>{
@@ -28,7 +28,7 @@ const Chapters = (props) => {
 
   return (
         <Link to='/lectures' state={thisLectures}>
-            <div className='rounded my-2 mb-8 py-8 bg-gray-300 hover:bg-gray-400 text-black active:bg-gray-200 select-none w-2/3 mx-auto'>
+            <div className=' rounded px-8 my-2 mb-8 py-8 bg-gray-300 hover:bg-gray-400 text-black active:bg-gray-200 select-none w-full mx-auto'>
                 Chapter: {chapter}
             </div>
         </Link>

@@ -7,20 +7,40 @@ const Lectures = () => {
 //   List all lectures here
     const location = useLocation();
     const [lectures, setLectures] = useState(location.state);
+    const [loading, setLoading] = useState(true);
 
     
     useEffect(()=>{
-      console.log(lectures)
+      // console.log(lectures)
+      setLoading(true);
       try{
-        lectures.sort((vid1, vid2)=>{
-          if(vid1.chapter>vid2.chapter){
-            return 1;
-          }else{
+        console.log("HELLo")
+        console.log(lectures)
+        // console.log(first)
+        const newLec = lectures.sort((vid1, vid2)=>{
+          console.log(vid1.chapter)
+          if(parseInt(vid1.chapter)<parseInt(vid2.chapter)){
             return -1;
+          }else if(parseInt(vid1.chapter)===parseInt(vid2.chapter)){
+            if(parseInt(vid1.lecture)<parseInt(vid2.lecture)){
+              return -1;
+            }else{
+              return 1;
+
+            }
+          }else{
+            return 1;
           }
         })
+        
+        setLectures(newLec);
+        setLoading(false);
+        console.log(lectures)
+        console.log("HELLo")
       }catch(err){
+        setLoading(false);
         console.log(err);
+        console.log("Hello")
         console.log(lectures)
       }
       
@@ -28,10 +48,14 @@ const Lectures = () => {
 
 
     return (
-      <div className='pt-32 flex flex-col lg:grid lg:grid-cols-3 lg:grid-row-3'>
+      loading?
+          <div className='pb-4 mx-auto pt-32 text-center text-5xl'> Loading Videos... </div>
+          :
+      (
+          <div className='pt-32 flex flex-col lg:grid lg:grid-cols-3 lg:grid-row-3'>
 
         {
-          lectures? 
+          lectures?
           (lectures.map((item, index)=>{
             return (
               <div key={index} className='flex mx-4 justify-center my-4 lg:mx-4 md:mx-4'>
@@ -73,6 +97,8 @@ const Lectures = () => {
 
         
       </div>
+
+      )
   )
 }
 

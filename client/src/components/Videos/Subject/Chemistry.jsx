@@ -7,6 +7,7 @@ const Chemistry = (props) => {
   const {batch} = props;
   const [lectures, setLectures] = useState([]);
   const [chapters, setChapters] = useState(()=>new Set());
+  const [chapterArr, setChapterArr] = useState([]);
 
   useEffect(()=>{
     const fetchVideos = async()=>{
@@ -28,6 +29,14 @@ const Chemistry = (props) => {
             });
 
             setLectures([...lectureArr])
+            setChapterArr([...chapters].sort((a,b)=>{
+              console.log(a)
+              if(parseInt(a)<parseInt(b)){
+                return -1;
+              }else{
+                return 1;
+              }
+            }));
           }
         )
       })
@@ -54,7 +63,7 @@ const Chemistry = (props) => {
   return (
     <main className='pt-32 lg:grid lg:grid-cols-3 lg:grid-row-3'>
     {
-      Array.from(chapters).map((item, index)=>(
+      chapterArr.map((item, index)=>(
         <Chapters key={index} lectures = {lectures} chapter={item} subject={"Chemistry"}/>
       ))
     }
