@@ -3,7 +3,7 @@ const Test = require('../models/Test')
 exports.createTest = async (req, res) => {
     
     try {
-        const { chapterName, subject, JEE, NEET, Foundation, batchYear, testUrl, testNum } = req.body
+        const { chapterName, subject, JEE, NEET, Foundation, batchYear, testUrl, testNum, startTime, endTime } = req.body
 
         let test = await Test.findOne({ testUrl })
         if (test) {
@@ -18,7 +18,9 @@ exports.createTest = async (req, res) => {
             Foundation,
             batchYear,
             testUrl, 
-            testNum
+            testNum,
+            startTime,
+            endTime
         })
 
         if (res.status(201)) {
@@ -44,7 +46,13 @@ exports.listTests = async (req, res) => {
     try {
         const batchYear = req.body.batchYear
         const batch = req.body.batch;
-        const data = await Test.findOne({"batchYear": batchYear, [batch]:true }).populate('chapterName').populate('testUrl').populate('subject')
+
+        const data = await Test.findOne({"batchYear": batchYear, [batch]:true, startTime:{
+            $lt: new Date() // check startTime with current Time
+        }, endTime:{
+            $gt: new Date() // check endTime with current Time
+        }  }).populate('chapterName').populate('testUrl').populate('subject').populate('startTime').populate('endTime').populate('testNum');
+
         res.status(201).json(data)
     } catch (error) {
         res.status(500).send({

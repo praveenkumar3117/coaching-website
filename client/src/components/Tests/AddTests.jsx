@@ -13,7 +13,10 @@ const AddTests = () => {
         "chapterName":null,
         subject:null,
         batchYear:null,
-        "testUrl":null
+        "testUrl":null,
+        startTime:null,
+        endTime:null,
+        testNum:null
     });
 
     useEffect(()=>{
@@ -24,8 +27,12 @@ const AddTests = () => {
             "chapterName":null,
             subject:null,
             batchYear:null,
-            "testUrl":null
+            "testUrl":null,
+            startTime:null,
+            endTime:null,
+            testNum:null
         })
+
     }, [])
 
     const navigate = useNavigate();
@@ -36,6 +43,13 @@ const AddTests = () => {
                 ...existingValues,
                 [e.target.name]: e.target.checked
             }));
+        }else if(e.target.name==="startTime" || e.target.name==="endTime"){
+            const date = new Date(e.target.value);
+            setTestInfo(existingValues =>({
+            ...existingValues,
+            [e.target.name] : date
+            }));
+
         }else{
             setTestInfo(existingValues =>({
             ...existingValues,
@@ -45,7 +59,6 @@ const AddTests = () => {
         }
         console.log(testInfo)
     }
-
 
     const createTest = (e)=>{
         e.preventDefault();
@@ -59,6 +72,11 @@ const AddTests = () => {
             console.log("Chapter not filled");
             return;
         }
+        if(testInfo.startTime===null || testInfo.endTime===null){
+            console.log("time not proper");
+            return;
+        }
+
         fetch("http://localhost:5000/api/test/create", {
             method:'post',
             body:JSON.stringify(testInfo),
@@ -72,6 +90,7 @@ const AddTests = () => {
                         navigate('/mailsent')
                     }else{
                         // mail not sent
+                        console.log(result)
                     }
                 }
             ).catch((err)=>{
@@ -93,7 +112,7 @@ const AddTests = () => {
                         <label for="testlabel" class="form-label inline-block mb-2 text-gray-700"
                         >Enter Google Form URL</label
                         >
-                        <input
+                        <input required
                         onChange={setMyTestInfo}
                         type="text"
                         class="
@@ -105,12 +124,13 @@ const AddTests = () => {
                         />
                     </div>
                 </div>
+
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
                         >Enter Batch Year</label
                         >
-                        <input
+                        <input required
                         onChange={setMyTestInfo}
                         type="number"
                         class="
@@ -122,12 +142,31 @@ const AddTests = () => {
                         />
                     </div>
                 </div>
+
+                <div class="flex justify-center">
+                    <div class="mb-3 xl:w-96">
+                        <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
+                        >Enter Test Number</label
+                        >
+                        <input required
+                        onChange={setMyTestInfo}
+                        type="number"
+                        class="
+                            form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                        "
+                        id="testNum"
+                        name='testNum'
+                        placeholder="Test Number"
+                        />
+                    </div>
+                </div>
+
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
                         >Enter Chapter Name </label
                         >
-                        <input
+                        <input required
                         onChange={setMyTestInfo}
                         type="text"
                         class="
@@ -139,6 +178,7 @@ const AddTests = () => {
                         />
                     </div>
                 </div>
+
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
@@ -153,6 +193,42 @@ const AddTests = () => {
                         id="subject"
                         name='subject'
                         placeholder="Subject"
+                        />
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <div class="mb-3 xl:w-96">
+                        <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
+                        > Enter Start of Test </label
+                        >
+                        <input required
+                        onChange={setMyTestInfo}
+                        type="datetime-local"
+                        class="
+                            form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                        "
+                        id="startTime"
+                        name='startTime'
+                        placeholder="StartTime"
+                        />
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <div class="mb-3 xl:w-96">
+                        <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
+                        > Enter End of Test </label
+                        >
+                        <input required
+                        onChange={setMyTestInfo}
+                        type="datetime-local"
+                        class="
+                            form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                        "
+                        id="endTime"
+                        name='endTime'
+                        placeholder="endTime"
                         />
                     </div>
                 </div>

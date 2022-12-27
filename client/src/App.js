@@ -25,7 +25,7 @@ import {LoginContext} from './components/Contexts/LoginContext'
 import NavbarStudent from './components/Navbar/NavbarStudent';
 import AddStudent from './components/superuser/AddStudent';
 import AddFaculty from './components/superuser/AddFaculty';
-import Mailsent from './components/Redirecting/Mailsent';
+import Success from './components/Redirecting/Success';
 import Upload from './components/Videos/Upload';
 import NavbarFaculty from './components/Navbar/NavbarFaculty';
 import ViewFaculty from './components/Videos/View/ViewFaculty';
@@ -38,7 +38,6 @@ import Physics from './components/Videos/Subject/Physics';
 import Chemistry from './components/Videos/Subject/Chemistry';
 import Maths from './components/Videos/Subject/Maths';
 import Biology from './components/Videos/Subject/Biology';
-import Layout from './components/Layout';
 import Protected from './components/Protected';
 import Player from './components/Videos/Player';
 import Chapters from './components/Videos/Chapters.jsx/Chapters';
@@ -173,7 +172,7 @@ function App() {
           <Route path ="/admin/deleteuser" element = {<Protected user="admin" setProgress = {setProgress} Component={DeleteUser}/>} />
 
           {/* Success Redirects */}
-          <Route path ="/mailsent" element = {<Mailsent/> } />
+          <Route path ="/success/:message" element = {<Success /> } />
 
           
         </Routes>

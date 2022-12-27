@@ -6,7 +6,7 @@ import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import { BsFillFilePersonFill, BsFillPersonFill } from "react-icons/bs";
 import {AiOutlinePlayCircle, AiOutlineEye} from 'react-icons/ai'
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
 
@@ -14,7 +14,7 @@ import { LoginContext } from "../Contexts/LoginContext";
 const NavbarStudent = () => {
 
   // Get info from Login-Context
-  const {userloggedin, setUserloggedin, email} = useContext(LoginContext);
+  const {userloggedin, setUserloggedin} = useContext(LoginContext);
 
   const [open, setOpen] = useState(false);
   const [batch, setBatch] = useState("Fetching...");
@@ -66,21 +66,21 @@ const NavbarStudent = () => {
        {open?
        <div className={`z-40 fixed mr-4 w-64`}>
          <aside
-           class={`relative h-screen ease-in-out duration-1000`}
+           className={`relative h-screen ease-in-out duration-1000`}
            aria-label="Sidebar"
          >
           
-           <div class={`overflow-y-auto h-screen py-4 px-3 bg-gray-50 dark:bg-blue-500 ${ open ? "translate-x-0" : "-translate-x-96"} ease-in duration-300`}>
-             <ul class="space-y-4">
+           <div className={`overflow-y-auto h-screen py-4 px-3 bg-gray-50 dark:bg-blue-500 ${ open ? "translate-x-0" : "-translate-x-96"} ease-in duration-300`}>
+             <ul className="space-y-4">
 
               {/* Home */}
               <li>
                  <Link to='/' onClick={()=>{setOpen(!open)}}>
                  <div
-                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                  >
                    <FaHome />
-                   <span class="flex-1 text-2xl whitespace-nowrap">
+                   <span className="flex-1 text-2xl whitespace-nowrap">
                      {open ? "Home" : ""}
                    </span>
                  </div>
@@ -90,10 +90,10 @@ const NavbarStudent = () => {
               <li>
                 <Link to='/profile/student' onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <BsFillPersonFill />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Profile" : ""}
                   </span>
                 </div>
@@ -104,10 +104,10 @@ const NavbarStudent = () => {
                <li>
                  <Link to='/Courses' onClick={()=>{setOpen(!open)}}>
                  <div
-                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                  >
                    <FaBookReader />
-                   <span class="flex-1 text-2xl whitespace-nowrap">
+                   <span className="flex-1 text-2xl whitespace-nowrap">
                      {open ? "Courses" : ""}
                    </span>
                  </div>
@@ -117,10 +117,10 @@ const NavbarStudent = () => {
                <li>
                  <Link to="/gallery" onClick={()=>{setOpen(!open)}}>
                  <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <IoMdPhotos />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Gallery" : ""}
                   </span>
                 </div>
@@ -130,10 +130,10 @@ const NavbarStudent = () => {
               <li>
                 <Link to={`/watch/student/${batch}`} onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <AiOutlinePlayCircle />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Watch Videos" : ""}
                   </span>
                 </div>
@@ -145,10 +145,10 @@ const NavbarStudent = () => {
               <li>
                 <Link to={`/student/test`} onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <AiOutlineEye />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Tests" : ""}
                   </span>
                 </div>
@@ -162,10 +162,10 @@ const NavbarStudent = () => {
               <li>
                 <Link to="/admission" onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <BsFillFilePersonFill />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Admission" : ""}
                   </span>
                 </div>
@@ -178,10 +178,10 @@ const NavbarStudent = () => {
                 // if not logged in
                 <Link to="/" onClick={handleStudentLogoutBtn}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <FiLogIn />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Logout" : ""}
                   </span>
                 </div>
@@ -190,10 +190,10 @@ const NavbarStudent = () => {
                 // if not logged in already
                 <Link to = "/login" onClick = {()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <FiLogIn />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Login" : ""}
                   </span>
                 </div>
@@ -206,10 +206,10 @@ const NavbarStudent = () => {
               <li>
                 <Link to="/about" onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <HiInformationCircle />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "About Us" : ""}
                   </span>
                 </div>
@@ -219,10 +219,10 @@ const NavbarStudent = () => {
               <li>
                 <Link to="/contact" onClick={()=>{setOpen(!open)}}>
                 <div
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <MdContactPage />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span className="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Contact Us" : ""}
                   </span>
                 </div>
