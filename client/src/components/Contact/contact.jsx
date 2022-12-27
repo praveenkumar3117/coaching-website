@@ -19,10 +19,10 @@ function Contact(props) {
 
     useEffect(()=>{
         setProgress(10);
-        const timeout = setTimeout(()=>{
+        setTimeout(()=>{
             setProgress(100);
         }, 500);
-    }, [])
+    }, [setProgress])
 
     const sendEmailMessage = async (event)=>{
         // Stop reloading
@@ -42,7 +42,7 @@ function Contact(props) {
 
         if(result.success){
             console.log('yayyy');
-            navigate ('/mailsent');
+            navigate ('/success/Mail-Sent-Successfully');
         }
 
     }

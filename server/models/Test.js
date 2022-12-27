@@ -18,7 +18,9 @@ const testSchema = mongoose.Schema(
         },
         batchYear : { type: Number, required: true },
         testUrl : { type: String, required: true, unique:true },
-        testNum: {type:Number, required:true}
+        testNum: {type:Number, required:true},
+        startTime: {type: Date, required:true},
+        endTime: {type: Date, required:true},
     },
     { timestaps: true }
 )
