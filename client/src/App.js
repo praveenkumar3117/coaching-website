@@ -45,9 +45,10 @@ import Lectures from './components/Videos/Subject/Lectures';
 import AddTests from './components/Tests/AddTests';
 import ViewTestSuper from './components/Tests/ViewTestSuper';
 import ViewTestSuperBatch from './components/Tests/ViewTestSuperBatch';
-import ShowTests from './components/Tests/ShowTests';
 import TestStudent from './components/Tests/TestStudent';
 import TestSuper from './components/Tests/TestSuper';
+import ShowTestCards from './components/Tests/ShowTestCards';
+import AddTestDetails from './components/Tests/AddTestDetails';
 
 
 function App() {
@@ -137,11 +138,12 @@ function App() {
           <Route path ="/chapter" element = {<Chapters/> } />
           <Route path ="/lectures" element = {<Lectures/> } />
           <Route path ="/addtest" element = {<AddTests/> } />
-          <Route path ="/viewtest/admin" element = {<ViewTestSuper /> } />
-          <Route path ="/viewtest/admin/:batchYear" element = {<ViewTestSuperBatch /> } />
-          <Route path ="/viewtest/admin/:batchYear/:batch" element = {<ShowTests /> } />
-          <Route path ="/admin/test" element = {<TestSuper/> } />
-          <Route path ="/student/test" element = {<TestStudent/> } />
+          <Route path ="/addanalysis" element = {<AddTestDetails/> } />
+          <Route path ="/viewtest/admin" element = {<Protected setProgress = {setProgress} Component={ViewTestSuper} /> } />
+          <Route path ="/viewtest/admin/:batchYear" element = {<Protected setProgress = {setProgress} Component={ViewTestSuperBatch} /> } />
+          <Route path ="/viewtest/admin/:batchYear/:batch" element = {<Protected setProgress = {setProgress} Component={ShowTestCards} /> } />
+          <Route path ="/admin/test" element = {<TestSuper /> } />
+          <Route path ="/student/test" element = {<TestStudent /> } />
 
           {/* ------------------protected routes------------------- */}
 
