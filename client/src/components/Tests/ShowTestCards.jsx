@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-const ShowTests = () => {
+const ShowTestCards = () => {
 
     const [formUrl, setFormUrl] = useState(false);
     const [testArr, setTestArr] = useState([]);
@@ -37,6 +37,7 @@ const ShowTests = () => {
     
               test.sort((a,b)=>{
                 if(a.batchYear<b.batchYear){
+                  
                   return -1;
                 }else{
                   return 1;
@@ -48,7 +49,7 @@ const ShowTests = () => {
             setError('Something Went Wrong: Error fetching form URL');
           });
     
-    }, []); // the empty array ensures that the effect only runs once
+    }, [batch, batchYear]); // the empty array ensures that the effect only runs once
   
     return (
     <div className='pt-32 lg:grid lg:grid-cols-3 lg:grid-row-3'>
@@ -62,6 +63,12 @@ const ShowTests = () => {
                                 <div className="font-bold text-xl mb-2">Subject: {item.subject}</div>
                                 <p className="text-gray-700 text-xl">
                                     Chapter: {item.chapterName}
+                                </p>
+                                <p className="bg-gray-200 rounded my-2 py-2 text-gray-700 text-sm">
+                                    Start: {new Date(item.startTime).toLocaleString(undefined, {timeZone: 'Asia/Kolkata'})}
+                                </p>
+                                <p className="bg-gray-200 rounded my-2 py-2 text-gray-700 text-sm">
+                                    End: {new Date(item.endTime).toLocaleString(undefined, {timeZone: 'Asia/Kolkata'})}
                                 </p>
                             </div>
                             <div className="px-6 pt-4 pb-2">
@@ -86,4 +93,4 @@ const ShowTests = () => {
   )
 }
 
-export default ShowTests
+export default ShowTestCards;

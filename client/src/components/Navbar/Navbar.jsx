@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaTimes, FaBookReader, FaHome } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
@@ -6,7 +6,7 @@ import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
 import { BsFillFilePersonFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { HiInformationCircle } from 'react-icons/hi'
+import { HiInformationCircle } from 'react-icons/hi';
 import { LoginContext } from "../Contexts/LoginContext";
 
 
