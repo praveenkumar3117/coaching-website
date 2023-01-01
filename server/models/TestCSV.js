@@ -1,44 +1,45 @@
 const mongoose = require("mongoose")
 
-const testSchema = mongoose.Schema(
+const testCSVSchema = mongoose.Schema(
     {
-        Physics: { 
+        url: { type: String, required: true },
+        testNum: { type: Number, required: true },
+        testUrl: { type: String, required: true },
+        batchYear: { type: Number, required: true },
+        Physics: {
             type: Boolean,
             required: true,
         },
-        Chem: { 
+        Chem: {
             type: Boolean,
             required: true,
         },
-        Maths: { 
+        Maths: {
             type: Boolean,
             required: true,
         },
-        Bio: { 
+        Bio: {
             type: Boolean,
             required: true,
         },
-        JEE: { 
+        startTime: { type: Date, required: true },
+        endTime: { type: Date, required: true },
+        JEE: {
             type: Boolean,
             required: true,
         },
-        NEET: { 
+        NEET: {
             type: Boolean,
             required: true,
         },
-        Foundation: { 
+        Foundation: {
             type: Boolean,
             required: true,
         },
-        batchYear : { type: Number, required: true },
-        testUrl : { type: String, required: true, unique:true },
-        testNum: {type:Number, required:true},
-        startTime: {type: Date, required:true},
-        endTime: {type: Date, required:true},
     },
     { timestaps: true }
 )
 
-const Test = mongoose.model("Test", testSchema)
+const TestCSV = mongoose.model("CSV", testCSVSchema)
 
-module.exports = Test
+module.exports = TestCSV

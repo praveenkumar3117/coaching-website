@@ -1,9 +1,9 @@
 const Test = require('../models/Test')
 
 exports.createTest = async (req, res) => {
-    
+
     try {
-        const { chapterName, subject, JEE, NEET, Foundation, batchYear, testUrl, testNum, startTime, endTime } = req.body
+        const { Physics, Chem, Maths, Bio, JEE, NEET, Foundation, batchYear, testUrl, testNum, startTime, endTime } = req.body
 
         let test = await Test.findOne({ testUrl })
         if (test) {
@@ -11,13 +11,15 @@ exports.createTest = async (req, res) => {
         }
 
         test = await Test.create({
-            chapterName,
-            subject,
+            Physics,
+            Chem,
+            Maths,
+            Bio,
             JEE,
             NEET,
             Foundation,
             batchYear,
-            testUrl, 
+            testUrl,
             testNum,
             startTime,
             endTime
@@ -28,9 +30,9 @@ exports.createTest = async (req, res) => {
                 success: true,
                 test
             })
-        }else{
+        } else {
             res.send({
-                success:false
+                success: false
             })
         }
 
@@ -47,11 +49,13 @@ exports.listTests = async (req, res) => {
         const batchYear = req.body.batchYear
         const batch = req.body.batch;
 
-        const data = await Test.findOne({"batchYear": batchYear, [batch]:true, startTime:{
-            $lt: new Date() // check startTime with current Time
-        }, endTime:{
-            $gt: new Date() // check endTime with current Time
-        }  }).populate('chapterName').populate('testUrl').populate('subject').populate('startTime').populate('endTime').populate('testNum');
+        const data = await Test.findOne({
+            "batchYear": batchYear, [batch]: true, startTime: {
+                $lt: new Date() // check startTime with current Time
+            }, endTime: {
+                $gt: new Date() // check endTime with current Time
+            }
+        }).populate('testUrl').populate('Physics').populate('Bio').populate('Chem').populate('Maths').populate('startTime').populate('endTime').populate('testNum');
 
         res.status(201).json(data)
     } catch (error) {
@@ -62,23 +66,23 @@ exports.listTests = async (req, res) => {
     }
 }
 
-exports.listTestsSuper = async(req, res)=>{
-    try{
-        const {batchORsubject} = req.body;
-        let data=null;
+exports.listTestsSuper = async (req, res) => {
+    try {
+        const { batchORsubject } = req.body;
+        let data = null;
 
-        if(batchORsubject==="JEE" ||batchORsubject==="NEET" || batchORsubject==="Foundation" ){
-            data = await Test.find({batchORsubject});
-        }else{
-            data = await Test.find({subject:batchORsubject})
+        if (batchORsubject === "JEE" || batchORsubject === "NEET" || batchORsubject === "Foundation") {
+            data = await Test.find({ batchORsubject });
+        } else {
+            data = await Test.find({ [batchORsubject]: true })
         }
-        
-        if(res.status(201) && batchORsubject!==undefined){
+
+        if (res.status(201) && batchORsubject !== undefined) {
             res.json(data);
-        }else{
-            res.json({success:false});
+        } else {
+            res.json({ success: false });
         }
-    }catch(error){
+    } catch (error) {
         res.status(500).send({
             success: false,
             message: error.message
@@ -86,18 +90,18 @@ exports.listTestsSuper = async(req, res)=>{
     }
 }
 
-exports.listTestsTeacher = async(req, res)=>{
+exports.listTestsTeacher = async (req, res) => {
 
     const teacher = req.body.teacher;
-    try{
-        const data = await Test.find({teacher});
-        
-        if(res.status(201)){
+    try {
+        const data = await Test.find({ teacher });
+
+        if (res.status(201)) {
             res.json(data);
-        }else{
-            res.json({success:false});
+        } else {
+            res.json({ success: false });
         }
-    }catch(error){
+    } catch (error) {
         res.status(500).send({
             success: false,
             message: error.message

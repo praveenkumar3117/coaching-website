@@ -4,13 +4,15 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 // import { IoIosArrowDropdownCircle } from 'react-icons/io';
 
+// IMPORTANT
+// Changes are made in the TEST model -- subject is replaced with the boolean of maths physics chem and bio
+
 const AddTests = () => {
 
     const [testInfo, setTestInfo] = useState({
         JEE:false, 
         NEET:false, 
         Foundation:false,
-        "chapterName":null,
         subject:null,
         batchYear:null,
         "testUrl":null,
@@ -24,7 +26,6 @@ const AddTests = () => {
             JEE:false, 
             NEET:false, 
             Foundation:false,
-            "chapterName":null,
             subject:null,
             batchYear:null,
             "testUrl":null,
@@ -66,10 +67,6 @@ const AddTests = () => {
         
         if(testInfo.testUrl===null){
             console.log("Url not filled");
-            return;
-        }
-        if(testInfo.chapterName===null){
-            console.log("Chapter not filled");
             return;
         }
         if(testInfo.startTime===null || testInfo.endTime===null){
@@ -160,25 +157,6 @@ const AddTests = () => {
                         />
                     </div>
                 </div>
-
-                <div class="flex justify-center">
-                    <div class="mb-3 xl:w-96">
-                        <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        >Enter Chapter Name </label
-                        >
-                        <input required
-                        onChange={setMyTestInfo}
-                        type="text"
-                        class="
-                            form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                        "
-                        id="chapterNum"
-                        name='chapterName'
-                        placeholder="Chapter Name"
-                        />
-                    </div>
-                </div>
-
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
