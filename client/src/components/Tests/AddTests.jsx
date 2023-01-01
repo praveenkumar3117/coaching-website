@@ -87,7 +87,7 @@ const AddTests = () => {
             response.json().then(
                 (result)=>{
                     if(result.success){
-                        navigate('/mailsent')
+                        navigate('/success/Test-Added-Successfully');
                     }else{
                         // mail not sent
                         console.log(result)
@@ -110,7 +110,7 @@ const AddTests = () => {
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="testlabel" class="form-label inline-block mb-2 text-gray-700"
-                        >Enter Google Form URL</label
+                        >Enter Test Form URL</label
                         >
                         <input required
                         onChange={setMyTestInfo}

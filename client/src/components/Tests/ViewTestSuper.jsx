@@ -32,9 +32,11 @@ const ViewSuper = () => {
           </div>
         </a>
 
-        <div className='p-4 m-4 bg-[#FF731D] hover:text-black active:text-white text-xl hover:bg-orange-300 active:bg-[#FF731D] rounded text-white'>
-          Upcoming Exams
-        </div>
+        <Link to={'/upcoming-tests/admin'}>
+          <div className='p-4 m-4 bg-[#FF731D] hover:text-black active:text-white text-xl hover:bg-orange-300 active:bg-[#FF731D] rounded text-white'>
+            Upcoming Exams
+          </div>
+        </Link>
 
       </div>
 

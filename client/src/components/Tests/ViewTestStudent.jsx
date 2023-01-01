@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const TestStudent = () => {
+const ViewTestStudent = () => {
 
   const [error, setError] = useState('');
   const [testObj, setTestObj] = useState();
@@ -76,15 +77,18 @@ const TestStudent = () => {
     <div className='pt-32 lg:pt-24 md:pt-24 flex justify-center items-center select-none'>
       <a href="https://vulture.ezexam.in/performance?months=24" target={'_blank'}>
         <div className='p-4 m-4 bg-[#5F9DF7] text-xl hover:bg-[#1746A2] active:bg-[#5F9DF7] rounded text-white'>
-          Past Tests
+          Past Tests' Performance
         </div>
       </a>
 
-      <div className='p-4 m-4 bg-[#FF731D] hover:text-black active:text-white text-xl hover:bg-orange-300 active:bg-[#FF731D] rounded text-white'>
-        Upcoming Tests
-      </div>
+      <Link to={`/upcoming-tests/student/${batch}`} >
+
+        <div className='p-4 m-4 bg-[#FF731D] hover:text-black active:text-white text-xl hover:bg-orange-300 active:bg-[#FF731D] rounded text-white'>
+          Upcoming Tests
+        </div>
+      </Link>
     </div>
   );
 };
 
-export default TestStudent;
+export default ViewTestStudent;

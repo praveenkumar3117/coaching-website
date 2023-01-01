@@ -35,13 +35,13 @@ const Lectures = () => {
         
         setLectures(newLec);
         setLoading(false);
-        console.log(lectures)
-        console.log("HELLo")
+        // console.log(lectures)
+        // console.log("HELLo")
       }catch(err){
         setLoading(false);
-        console.log(err);
-        console.log("Hello")
-        console.log(lectures)
+        // console.log(err);
+        // console.log("Hello")
+        // console.log(lectures)
       }
       
     }, [])

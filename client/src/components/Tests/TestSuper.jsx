@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const TestSuper = () => {
+const ViewTestSuper = () => {
 
   const location = useLocation();
   let testUrl = location.state;
@@ -32,4 +32,4 @@ const TestSuper = () => {
   );
 };
 
-export default TestSuper;
+export default ViewTestSuper;

@@ -64,10 +64,16 @@ exports.listTests = async (req, res) => {
 
 exports.listTestsSuper = async(req, res)=>{
     try{
-        const {batchYear, batch} = req.body;
-        const data = await Test.find({batchYear, batch});
+        const {batchORsubject} = req.body;
+        let data=null;
+
+        if(batchORsubject==="JEE" ||batchORsubject==="NEET" || batchORsubject==="Foundation" ){
+            data = await Test.find({batchORsubject});
+        }else{
+            data = await Test.find({subject:batchORsubject})
+        }
         
-        if(res.status(201)){
+        if(res.status(201) && batchORsubject!==undefined){
             res.json(data);
         }else{
             res.json({success:false});
