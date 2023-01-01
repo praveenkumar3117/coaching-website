@@ -4,8 +4,8 @@ import { FaTimes, FaBookReader, FaHome } from "react-icons/fa";
 import { FiLogIn, FiUpload } from "react-icons/fi";
 import { IoMdPhotos } from "react-icons/io";
 import { MdContactPage } from "react-icons/md";
-import {AiOutlinePlayCircle} from 'react-icons/ai'
-import { BsFillFilePersonFill, BsFillPersonFill } from "react-icons/bs";
+import {AiOutlinePlayCircle, AiOutlineEye} from 'react-icons/ai'
+import { BsFillFilePersonFill, BsFillPersonFill, BsGraphUp } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
@@ -76,7 +76,7 @@ const NavbarFaculty = () => {
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                  >
                    <FaHome />
-                   <span class="flex-1 text-2xl whitespace-nowrap">
+                   <span class="flex-1 text-xl whitespace-nowrap">
                      {open ? "Home" : ""}
                    </span>
                  </div>
@@ -89,7 +89,7 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <BsFillPersonFill />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Profile" : ""}
                   </span>
                 </div>
@@ -102,7 +102,7 @@ const NavbarFaculty = () => {
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                  >
                    <FaBookReader />
-                   <span class="flex-1 text-2xl whitespace-nowrap">
+                   <span class="flex-1 text-xl whitespace-nowrap">
                      {open ? "Courses" : ""}
                    </span>
                  </div>
@@ -115,12 +115,13 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <IoMdPhotos />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Gallery" : ""}
                   </span>
                 </div>
                 </Link>
               </li>
+
               {/* Watch Video */}
               <li>
                 <Link to="/watch/faculty" onClick={()=>{setOpen(!open)}}>
@@ -128,8 +129,36 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <AiOutlinePlayCircle />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Watch Videos" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+
+              {/* Tests */}
+              <li>
+                <Link to={`/faculty/test`} onClick={()=>{setOpen(!open)}}>
+                <div
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <AiOutlineEye />
+                  <span className="flex-1 text-xl whitespace-nowrap">
+                    {open ? "Tests" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+
+              {/* Tests Analysis */}
+              <li>
+                <Link to={`/faculty/analysis`} onClick={()=>{setOpen(!open)}}>
+                <div
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <BsGraphUp />
+                  <span className="flex-1 text-xl whitespace-nowrap">
+                    {open ? "Test Analysis" : ""}
                   </span>
                 </div>
                 </Link>
@@ -142,12 +171,13 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <BsFillFilePersonFill />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Admission" : ""}
                   </span>
                 </div>
                 </Link>
               </li>
+
               {/* Login - Logout */}
               <li>
                 {/* Check for logged in */}
@@ -158,7 +188,7 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <FiLogIn />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Logout" : ""}
                   </span>
                 </div>
@@ -170,7 +200,7 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <FiLogIn />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Login" : ""}
                   </span>
                 </div>
@@ -179,6 +209,7 @@ const NavbarFaculty = () => {
                 
                 
               </li>
+
               {/* Upload Video Option */}
               <li>
                 <Link to="/upload-video" onClick={()=>{setOpen(!open)}}>
@@ -186,12 +217,13 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <FiUpload />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Upload Video" : ""}
                   </span>
                 </div>
                 </Link>
               </li>
+
               {/* About Us */}
               <li>
                 <Link to="/about" onClick={()=>{setOpen(!open)}}>
@@ -199,12 +231,13 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <HiInformationCircle />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "About Us" : ""}
                   </span>
                 </div>
                 </Link>
               </li>
+
               {/* Contact Us */}
               <li>
                 <Link to="/contact" onClick={()=>{setOpen(!open)}}>
@@ -212,7 +245,7 @@ const NavbarFaculty = () => {
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <MdContactPage />
-                  <span class="flex-1 text-2xl whitespace-nowrap">
+                  <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Contact Us" : ""}
                   </span>
                 </div>
@@ -223,7 +256,7 @@ const NavbarFaculty = () => {
           </div>
         </aside>
       </div>
-      :""}
+      :null}
 
 
      </div>

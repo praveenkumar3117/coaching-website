@@ -47,7 +47,7 @@ function LoginSuperUser() {
             <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
               <form>
                 {/* Email input */}
-                <label htmlFor="warning" className='text-red-400'>{LogInWarning}</label>
+                <label htmlFor="warning" className='text-2xl text-red-400'>{LogInWarning}</label>
                 <div className="mb-6">
                   <input type="email" onChange={(event)=>{setEmail(event.target.value)}} className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleFormControlInputEmail" placeholder="Email address" />
                 </div>

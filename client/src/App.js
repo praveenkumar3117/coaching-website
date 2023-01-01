@@ -45,10 +45,11 @@ import Lectures from './components/Videos/Subject/Lectures';
 import AddTests from './components/Tests/AddTests';
 import ViewTestSuper from './components/Tests/ViewTestSuper';
 import ViewTestSuperBatch from './components/Tests/ViewTestSuperBatch';
-import TestStudent from './components/Tests/TestStudent';
-import TestSuper from './components/Tests/TestSuper';
+import ViewTestStudent from './components/Tests/ViewTestStudent';
 import ShowTestCards from './components/Tests/ShowTestCards';
 import AddTestDetails from './components/Tests/AddTestDetails';
+import ViewTestFaculty from './components/Tests/ViewTestFaculty';
+import ViewTestAnalysis from './components/Tests/ViewTestAnalysis';
 
 
 function App() {
@@ -129,7 +130,6 @@ function App() {
           <Route path ="/login/student" element = {<LoginStudent/>} />
           <Route path ="/login/teacher" element = {<LoginFaculty/>} />
           <Route path ="/logout" element = {<Logout/>} />
-          <Route path ="/admin" element = { <Protected user="admin" setProgress = {setProgress} Component={SuperUser}/>} />
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
           <Route path ="/contact" element = {<Contact setProgress ={setProgress}/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
@@ -137,21 +137,17 @@ function App() {
           <Route path ="/videos" element = {<Player/> } />
           <Route path ="/chapter" element = {<Chapters/> } />
           <Route path ="/lectures" element = {<Lectures/> } />
-          <Route path ="/addtest" element = {<AddTests/> } />
-          <Route path ="/addanalysis" element = {<AddTestDetails/> } />
-          <Route path ="/viewtest/admin" element = {<Protected setProgress = {setProgress} Component={ViewTestSuper} /> } />
-          <Route path ="/viewtest/admin/:batchYear" element = {<Protected setProgress = {setProgress} Component={ViewTestSuperBatch} /> } />
-          <Route path ="/viewtest/admin/:batchYear/:batch" element = {<Protected setProgress = {setProgress} Component={ShowTestCards} /> } />
-          <Route path ="/admin/test" element = {<TestSuper /> } />
-          <Route path ="/student/test" element = {<TestStudent /> } />
+          
 
           {/* ------------------protected routes------------------- */}
 
-          <Route path ="/upload-video" element = {<Protected user="faculty" setProgress = {setProgress} Component={Upload}/>} />
+          {/* /////////////////////Student Routes//////////////////////// */}
           <Route path ="/profile/student" element = {<Protected user="student" setProgress = {setProgress} Component={Student}/>} />
-          <Route path ="/profile/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component={Faculty}/>} />
-          {/* Faculty */}
-          <Route path ="/watch/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component = {ViewFaculty}/>} />
+
+          <Route path ="/student/test" element = {<ViewTestStudent /> } />
+
+          <Route path ="/upcoming-tests/student/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={ShowTestCards} /> } />
+
           {/* JEE Student */}
           <Route path ="/watch/student/JEE" element = {<Protected user="student" setProgress = {setProgress} Component={ViewJEE}/>} />
           <Route path ="/watch/student/JEE/Physics" element = {<Protected user="student" batch="JEE" Component={Physics}/>} />
@@ -169,14 +165,33 @@ function App() {
           <Route path ="/watch/student/Foundation/Maths" element = {<Protected user="student" batch="Foundation" Component={Maths}/>} />
           <Route path ="/watch/student/Foundation/Biology" element = {<Protected user="student" batch="Foundation" Component={Biology}/>} />
           
+          
+          {/* ////////////////////Faculty Routes ////////////////////// */}
+          
+          <Route path ="/upload-video" element = {<Protected user="faculty" setProgress = {setProgress} Component={Upload}/>} />
+          <Route path ="/profile/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component={Faculty}/>} />
+          <Route path ="/watch/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component = {ViewFaculty}/>} />
+          <Route path ="/faculty/analysis" element = {<Protected user="faculty" setProgress={setProgress} Component={ViewTestAnalysis} /> } />
+          <Route path ="/faculty/test" element = {<Protected user="faculty" setProgress={setProgress} Component={ViewTestFaculty} /> } />
+          <Route path ="/upcoming-tests/faculty/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={ShowTestCards} /> } />
+
+          {/* /////////////////////Admin Routes//////////////////// */}
+
           <Route path ="/admin/addstudent" element = {<Protected user="admin" setProgress = {setProgress} Component={AddStudent}/>} />
           <Route path ="/admin/addfaculty" element = {<Protected user="admin" setProgress = {setProgress} Component={AddFaculty}/>} />
           <Route path ="/admin/deleteuser" element = {<Protected user="admin" setProgress = {setProgress} Component={DeleteUser}/>} />
+          <Route path ="/addtest" element = {<Protected user="admin" setProgress={setProgress} Component ={AddTests}/> } />
+          <Route path ="/addanalysis" element = {<Protected user="admin" setProgress = {setProgress} Component={AddTestDetails}/> } />
+          <Route path ="/viewtest/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuper} /> } />
+          <Route path ="/upcoming-tests/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuperBatch} /> } />
+          <Route path ="/upcoming-tests/admin/:batchORsubject" element = {<Protected user="admin" setProgress = {setProgress} Component={ShowTestCards} /> } />
 
-          {/* Success Redirects */}
+          <Route path ="/admin" element = { <Protected user="admin" setProgress = {setProgress} Component={SuperUser}/>} />
+
+
+          {/* //////////////////////Success Redirects////////////////////////// */}
           <Route path ="/success/:message" element = {<Success /> } />
 
-          
         </Routes>
         <Footer/>
         </LoginContext.Provider>

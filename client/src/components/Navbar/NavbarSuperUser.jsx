@@ -3,7 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 import { AiOutlineEye } from "react-icons/ai";
 import { FaTimes, FaHome } from "react-icons/fa";
-import { FiLogIn } from "react-icons/fi";
+import { FiLogIn, FiUpload } from "react-icons/fi";
 import {BiUserCircle} from 'react-icons/bi'
 import { Link } from "react-router-dom";
 import { LoginContext } from "../Contexts/LoginContext";
@@ -164,7 +164,7 @@ const NavbarSuperUser = () => {
                 <div
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
-                  <AiOutlineEye />
+                  <FiUpload />
                   <span class="flex-1 text-2xl whitespace-nowrap">
                     {open ? "Add analysis" : ""}
                   </span>

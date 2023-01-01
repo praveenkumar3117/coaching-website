@@ -6,10 +6,6 @@ import { GiCaduceus, GiBrain } from 'react-icons/gi';
 const ViewTestSuperBatch = () => {
 
 
-  const params = useParams();
-  const {batchYear} = params;
-  console.log(batchYear);
-
   return (
     
     <div className='flex flex-row justify-center items-center pt-32'>
@@ -22,7 +18,7 @@ const ViewTestSuperBatch = () => {
                 
                 <FcBusinesswoman className={`mb-3 w-20 h-20 relative bottom-10 rounded-full shadow-lg bg-red-300`}/>
                 <div className="flex mt-4 space-x-3 md:mt-6">
-                    <Link to={`/viewtest/admin/${batchYear}/JEE`} className="inline-flex items-center py-2 px-4 text-2xl font-medium text-center text-white bg-orange-500 rounded-full hover:bg-orange-300 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:bg-orange-500 dark:hover:bg-orange-700 dark:focus:ring-white-800 font-lato">JEE</Link>
+                    <Link to={`/upcoming-tests/admin/JEE`} className="inline-flex items-center py-2 px-4 text-2xl font-medium text-center text-white bg-orange-500 rounded-full hover:bg-orange-300 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:bg-orange-500 dark:hover:bg-orange-700 dark:focus:ring-white-800 font-lato">JEE</Link>
                 </div>
                 </div>
             </div>
@@ -36,7 +32,7 @@ const ViewTestSuperBatch = () => {
             
             <GiCaduceus className={`mb-3 w-20 h-20 relative bottom-10 rounded-full shadow-lg bg-white`}/>
             <div className="flex mt-4 space-x-3 md:mt-6">
-                <Link to={`/viewtest/admin/${batchYear}/NEET`} className="inline-flex items-center py-2 px-4 text-2xl font-medium text-center text-white bg-orange-500 rounded-full hover:bg-orange-300 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:bg-orange-500 dark:hover:bg-orange-700 dark:focus:ring-white-800 font-lato">NEET</Link>
+                <Link to={`/upcoming-tests/admin/NEET`} className="inline-flex items-center py-2 px-4 text-2xl font-medium text-center text-white bg-orange-500 rounded-full hover:bg-orange-300 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:bg-orange-500 dark:hover:bg-orange-700 dark:focus:ring-white-800 font-lato">NEET</Link>
             </div>
             </div>
         </div>
@@ -50,7 +46,7 @@ const ViewTestSuperBatch = () => {
             
             <GiBrain className={`mb-3 w-20 h-20 relative bottom-10 rounded-full shadow-lg bg-white`}/>
             <div className="flex mt-4 space-x-3 md:mt-6">
-                <Link to={`/viewtest/admin/${batchYear}/Foundation`} className="inline-flex items-center py-2 px-4 text-2xl font-medium text-center text-white bg-orange-500 rounded-full hover:bg-orange-300 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:bg-orange-500 dark:hover:bg-orange-700 dark:focus:ring-white-800 font-lato">Foundation</Link>
+                <Link to={`/upcoming-tests/admin/Foundation`} className="inline-flex items-center py-2 px-4 text-2xl font-medium text-center text-white bg-orange-500 rounded-full hover:bg-orange-300 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:bg-orange-500 dark:hover:bg-orange-700 dark:focus:ring-white-800 font-lato">Foundation</Link>
             </div>
             </div>
         </div>

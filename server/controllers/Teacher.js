@@ -55,6 +55,7 @@ exports.authTeacher = async (req, res) => {
                 name: teach.name,
                 email: teach.email,
                 enRoll: teach.enRoll,
+                subject:teach.subject,
                 fatherName: teach.fatherName,
                 pic: teach.pic,
                 token: generateToken(teach._id),

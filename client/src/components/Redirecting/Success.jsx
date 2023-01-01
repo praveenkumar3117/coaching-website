@@ -8,8 +8,8 @@ const Mailsent = () => {
   
   return (
 
-    <div className='pt-32 lg:pt-24'>
-        <h1>{message}</h1>
+    <div className='pt-32 lg:pt-24 '>
+        <h1 className='text-4xl'>{message}</h1>
     </div>
   )
 }

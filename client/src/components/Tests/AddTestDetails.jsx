@@ -39,9 +39,6 @@ const AddTestDetails = () => {
 
     const navigate = useNavigate();
     
-    const setMyCSV = (e)=> {
-        setFile(e.target.files[0]);
-    }
     
     const setMyTestInfo = (e)=>{
         if(e.target.value ==="on" && (e.target.name ==="JEE" || e.target.name ==="NEET" || e.target.name ==="Foundation")){
