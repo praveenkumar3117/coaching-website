@@ -90,7 +90,6 @@ const AddTestDetails = () => {
     }
 
 
-
   return (
     <div className='pt-32'>
         <form onSubmit={createTest} method='post' className='border border-black bg-[#FFF7E9] rounded w-fit px-8 py-8 mb-8 select-none mx-auto'>
@@ -99,8 +98,7 @@ const AddTestDetails = () => {
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="testlabel" class="form-label inline-block mb-2 text-gray-700"
-                        >Please upload files</label
-                        >
+                        >Please upload files</label>
                         <input required
                         onChange={setMyTestInfo}
                         type="file"
@@ -118,8 +116,7 @@ const AddTestDetails = () => {
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        >Enter Batch Year</label
-                        >
+                        >Enter Batch Year</label>
                         <input required
                         onChange={setMyTestInfo}
                         type="number"
@@ -136,8 +133,7 @@ const AddTestDetails = () => {
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        >Enter Test Number</label
-                        >
+                        >Enter Test Number</label>
                         <input required
                         onChange={setMyTestInfo}
                         type="number"
@@ -154,8 +150,7 @@ const AddTestDetails = () => {
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        >Enter Chapter Name </label
-                        >
+                        >Enter Chapter Name </label>
                         <input required
                         onChange={setMyTestInfo}
                         type="text"
@@ -172,8 +167,7 @@ const AddTestDetails = () => {
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        > Enter Subject </label
-                        >
+                        > Enter Subject </label>
                         <input
                         onChange={setMyTestInfo}
                         type="text"
@@ -190,8 +184,7 @@ const AddTestDetails = () => {
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        > Enter Start of Test </label
-                        >
+                        > Enter Start of Test </label>
                         <input required
                         onChange={setMyTestInfo}
                         type="datetime-local"
@@ -208,8 +201,7 @@ const AddTestDetails = () => {
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        > Enter End of Test </label
-                        >
+                        > Enter End of Test </label >
                         <input required
                         onChange={setMyTestInfo}
                         type="datetime-local"
@@ -226,9 +218,7 @@ const AddTestDetails = () => {
                 <div className='w-2/3 my-4 flex justify-center flex-col md:flex-row lg:flex-row'>
                     {/* Batch menu button */} 
                     <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        > Select Batches </label
-                    >
-
+                        > Select Batches </label>
                     <div className='mx-2 px-2'>  
                         <label className='mx-2' htmlFor="JEE">JEE</label>
                         <input type="checkbox" onChange={setMyTestInfo} name="JEE" id="JEE" />
