@@ -50,7 +50,8 @@ import ShowTestCards from './components/Tests/ShowTestCards';
 import AddTestDetails from './components/Tests/AddTestDetails';
 import ViewTestFaculty from './components/Tests/ViewTestFaculty';
 import ViewTestAnalysis from './components/Tests/ViewTestAnalysis';
-import CSVUpload from './components/Tests/CSVUpload';
+import ShowAnalysisCard from './components/Tests/ShowAnalysisCard';
+import AnalysisForm from './components/Tests/AnalysisForm';
 
 
 function App() {
@@ -182,15 +183,17 @@ function App() {
           <Route path ="/admin/addfaculty" element = {<Protected user="admin" setProgress = {setProgress} Component={AddFaculty}/>} />
           <Route path ="/admin/deleteuser" element = {<Protected user="admin" setProgress = {setProgress} Component={DeleteUser}/>} />
           <Route path ="/addtest" element = {<Protected user="admin" setProgress={setProgress} Component ={AddTests}/> } />
-          <Route path ="/addanalysis" element = {<Protected user="admin" setProgress = {setProgress} Component={CSVUpload}/> } />
+          <Route path ="/addanalysis" element = {<Protected user="admin" setProgress = {setProgress} Component={AddTestDetails}/> } />
           <Route path ="/viewtest/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuper} /> } />
           <Route path ="/upcoming-tests/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuperBatch} /> } />
           <Route path ="/upcoming-tests/admin/:batchORsubject" element = {<Protected user="admin" setProgress = {setProgress} Component={ShowTestCards} /> } />
+          <Route path ="/test-analysis-form" element = { <Protected user="admin" setProgress = {setProgress} Component={AnalysisForm}/>} />
+          <Route path ="/viewanalysis" element = { <Protected user="admin" setProgress = {setProgress} Component={ShowAnalysisCard}/>} />
 
           <Route path ="/admin" element = { <Protected user="admin" setProgress = {setProgress} Component={SuperUser}/>} />
 
 
-          {/* //////////////////////Success Redirects////////////////////////// */}
+          {/* ////////////////////// Success Redirects ////////////////////////// */}
           <Route path ="/success/:message" element = {<Success /> } />
 
         </Routes>

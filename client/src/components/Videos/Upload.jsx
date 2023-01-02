@@ -81,9 +81,11 @@ const Upload = ({setProgress}) => {
       console.log(snapshot)
       getDownloadURL(snapshot.ref).then((URL) => {
         setUrl(URL);
+
         // send data to the database
         sendDataToDB(URL)
         console.log(URL)  
+        
         setProgress(100);
       })
     }).catch((er)=>{

@@ -5,23 +5,28 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { storage } from '../../firebase'
+import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
+import { v4 as uuidv4 } from 'uuid';
 
 const AddTestDetails = () => {
     
-    
-    const [file, setFile]=useState(null);
+    const [CSV, setCSV] = useState(null);
 
     const [testInfo, setTestInfo] = useState({
         JEE:false, 
         NEET:false, 
         Foundation:false,
-        "chapterName":null,
-        subject:null,
+        Physics:false,
+        Chem:false,
+        Maths:false,
+        Bio:false,
         batchYear:null,
-        "testUrl":null,
+        url:null,
         startTime:null,
         endTime:null,
-        testNum:null
+        testNum:null,
+        testUrl:null
     });
 
     useEffect(()=>{
@@ -29,22 +34,31 @@ const AddTestDetails = () => {
             JEE:false, 
             NEET:false, 
             Foundation:false,
-            chapterName:null,
-            subject:null,
+            Physics:false,
+            Chem:false,
+            Maths:false,
+            Bio:false,
             batchYear:null,
-            csvFile:null,
+            url:null,
             startTime:null,
             endTime:null,
-            testNum:null
+            testNum:null,
+            testUrl:null
         })
 
     }, [])
 
+    // Function that fills the CSV file in an object
+    const fillCSV = (e)=>{
+        setCSV(e.target.files[0]);
+    }
+
+
     const navigate = useNavigate();
     
-    
+    // Set Test Information from the form
     const setMyTestInfo = (e)=>{
-        if(e.target.value ==="on" && (e.target.name ==="JEE" || e.target.name ==="NEET" || e.target.name ==="Foundation")){
+        if(e.target.value ==="on" && (e.target.type === "checkbox")){
             setTestInfo(existingValues=>({
                 ...existingValues,
                 [e.target.name]: e.target.checked
@@ -52,14 +66,14 @@ const AddTestDetails = () => {
         }else if(e.target.name==="startTime" || e.target.name==="endTime"){
             const date = new Date(e.target.value);
             setTestInfo(existingValues =>({
-            ...existingValues,
-            [e.target.name] : date
+                ...existingValues,
+                [e.target.name] : date
             }));
-
-        }else if(e.target.name==="csvFile"){
+            
+        }else if(e.target.name==="CSV"){
             setTestInfo(existingValues =>({
-            ...existingValues,
-            [e.target.name] : e.target.files[0]
+                ...existingValues,
+                [e.target.name] : e.target.files[0]
             }));
         }else{
             setTestInfo(existingValues =>({
@@ -68,23 +82,75 @@ const AddTestDetails = () => {
             }));
 
         }
-        console.log(testInfo)
     }
 
-    const createTest = (e)=>{
+    const createTest = async(e)=>{
         e.preventDefault();
-        console.log(testInfo)
         
         if(testInfo.testUrl===null){
-            console.log("Url not filled");
+            console.log("URL not filled");
             return;
         }
         if(testInfo.chapterName===null){
             console.log("Chapter not filled");
             return;
         }
+
         if(testInfo.startTime===null || testInfo.endTime===null){
             console.log("time not proper");
+            return;
+        }
+
+        if (CSV === null) {
+            console.log("CSV not present")
+            return;
+        }
+
+        const CSVref = ref(storage,`CSV/${uuidv4()+CSV.name}`)
+
+        await uploadBytes(CSVref,CSV).then( 
+            (snap)=>{
+                getDownloadURL(snap.ref).then((URL)=>{
+
+                    // Fill the url in the testInfo object
+                    setTestInfo(existingValues =>({
+                    ...existingValues,
+                    url : URL
+                    }));
+
+                    // Send the data to MongoDB
+
+                    sendDATA(URL);
+                })
+        })
+    }
+
+    const sendDATA = (URL)=>{
+        
+        let data = {...testInfo}
+        data.url = URL;
+
+        try{
+
+            fetch("http://localhost:5000/api/test/postCSV", {
+                method:'post',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(data)
+            }).then((response)=>{
+                response.json().then(data=>{
+                    console.log(data);
+                    if(data.success){
+                        navigate('/success/CSV-Added-Successfully');
+                    }else{
+                        alert(data.message);
+                    }
+                })
+            })
+
+        }catch(err){
+            alert(err);
             return;
         }
     }
@@ -100,15 +166,32 @@ const AddTestDetails = () => {
                         <label for="testlabel" class="form-label inline-block mb-2 text-gray-700"
                         >Please upload files</label>
                         <input required
-                        onChange={setMyTestInfo}
+                        onChange={fillCSV}
                         type="file"
                         accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                         class="
                             form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                         "
-                        id="url"
-                        name='csvFile'
+                        id="CSV"
+                        name='CSV'
                         placeholder="csv File"
+                        />
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <div class="mb-3 xl:w-96">
+                        <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
+                        >Enter Test URL (Test Link from ezexam) </label>
+                        <input required
+                        onChange={setMyTestInfo}
+                        type="text"
+                        class="
+                            form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                        "
+                        id="testUrl"
+                        name='testUrl'
+                        placeholder="Test URL"
                         />
                     </div>
                 </div>
@@ -147,24 +230,7 @@ const AddTestDetails = () => {
                     </div>
                 </div>
 
-                <div class="flex justify-center">
-                    <div class="mb-3 xl:w-96">
-                        <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                        >Enter Chapter Name </label>
-                        <input required
-                        onChange={setMyTestInfo}
-                        type="text"
-                        class="
-                            form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                        "
-                        id="chapterNum"
-                        name='chapterName'
-                        placeholder="Chapter Name"
-                        />
-                    </div>
-                </div>
-
-                <div class="flex justify-center">
+                {/* <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
                         > Enter Subject </label>
@@ -179,6 +245,31 @@ const AddTestDetails = () => {
                         placeholder="Subject"
                         />
                     </div>
+                </div> */}
+
+                <div className='w-2/3 my-4 flex justify-center flex-col md:flex-row lg:flex-row'>
+                    {/* Batch menu button */} 
+                    <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
+                        > Select Subjects </label>
+                        <div className='mx-2 px-2'>  
+                            <label className='mx-2' htmlFor="Physics">Physics</label>
+                            <input type="checkbox" onChange={setMyTestInfo} name="Physics" id="Physics" />
+                        </div>
+
+                        <div className='mx-2 px-2'>
+                            <label htmlFor="Chem" className='mx-2'>Chem</label>
+                            <input type="checkbox" onChange={setMyTestInfo} name="Chem" id="Chem" />
+                        </div>
+
+                        <div className='mx-2 px-2'>
+                            <label htmlFor="Maths" className='mx-2'>Maths</label>
+                            <input type="checkbox" onChange={setMyTestInfo} name="Maths" id="Maths" />
+                        </div>
+
+                        <div className='mx-2 px-2'>
+                            <label htmlFor="Bio" className='mx-2'>Bio</label>
+                            <input type="checkbox" onChange={setMyTestInfo} name="Bio" id="Bio" />
+                        </div>
                 </div>
 
                 <div class="flex justify-center">
@@ -233,8 +324,6 @@ const AddTestDetails = () => {
                         <label htmlFor="Foundation" className='mx-2'>Foundation</label>
                         <input type="checkbox" onChange={setMyTestInfo} name="Foundation" id="Foundation" />
                     </div>
-
-                    
                 </div>
 
                 <div className='w-2/3 my-4 flex justify-center'>
