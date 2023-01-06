@@ -3,32 +3,25 @@ const mongoose = require("mongoose")
 const testSchema = mongoose.Schema(
     {
         Physics: { 
-            type: Boolean,
-            required: true,
+            type: Boolean
         },
         Chem: { 
-            type: Boolean,
-            required: true,
+            type: Boolean
         },
         Maths: { 
-            type: Boolean,
-            required: true,
+            type: Boolean
         },
         Bio: { 
-            type: Boolean,
-            required: true,
+            type: Boolean
         },
         JEE: { 
-            type: Boolean,
-            required: true,
+            type: Boolean
         },
         NEET: { 
-            type: Boolean,
-            required: true,
+            type: Boolean
         },
         Foundation: { 
-            type: Boolean,
-            required: true,
+            type: Boolean
         },
         batchYear : { type: Number, required: true },
         testUrl : { type: String, required: true, unique:true },

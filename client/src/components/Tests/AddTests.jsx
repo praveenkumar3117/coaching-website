@@ -13,7 +13,10 @@ const AddTests = () => {
         JEE:false, 
         NEET:false, 
         Foundation:false,
-        subject:null,
+        Physics:false,
+        Chem:false,
+        Maths:false,
+        Bio:false,
         batchYear:null,
         "testUrl":null,
         startTime:null,
@@ -26,7 +29,10 @@ const AddTests = () => {
             JEE:false, 
             NEET:false, 
             Foundation:false,
-            subject:null,
+            Physics:false,
+            Chem:false,
+            Maths:false,
+            Bio:false,
             batchYear:null,
             "testUrl":null,
             startTime:null,
@@ -39,7 +45,7 @@ const AddTests = () => {
     const navigate = useNavigate();
     
     const setMyTestInfo = (e)=>{
-        if(e.target.value ==="on" && (e.target.name ==="JEE" || e.target.name ==="NEET" || e.target.name ==="Foundation")){
+        if(e.target.value ==="on" && (e.target.type === "checkbox")){
             setTestInfo(existingValues=>({
                 ...existingValues,
                 [e.target.name]: e.target.checked
@@ -157,7 +163,7 @@ const AddTests = () => {
                         />
                     </div>
                 </div>
-                <div class="flex justify-center">
+                {/* <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                         <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
                         > Enter Subject </label
@@ -173,6 +179,31 @@ const AddTests = () => {
                         placeholder="Subject"
                         />
                     </div>
+                </div> */}
+
+                    <div className='w-2/3 my-4 flex justify-center flex-col md:flex-row lg:flex-row'>
+                    {/* Subject menu button */} 
+                    <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
+                        > Select Subjects </label>
+                        <div className='mx-2 px-2'>  
+                            <label className='mx-2' htmlFor="Physics">Physics</label>
+                            <input type="checkbox" onChange={setMyTestInfo} name="Physics" id="Physics" />
+                        </div>
+
+                        <div className='mx-2 px-2'>
+                            <label htmlFor="Chem" className='mx-2'>Chem</label>
+                            <input type="checkbox" onChange={setMyTestInfo} name="Chem" id="Chem" />
+                        </div>
+
+                        <div className='mx-2 px-2'>
+                            <label htmlFor="Maths" className='mx-2'>Maths</label>
+                            <input type="checkbox" onChange={setMyTestInfo} name="Maths" id="Maths" />
+                        </div>
+
+                        <div className='mx-2 px-2'>
+                            <label htmlFor="Bio" className='mx-2'>Bio</label>
+                            <input type="checkbox" onChange={setMyTestInfo} name="Bio" id="Bio" />
+                        </div>
                 </div>
 
                 <div class="flex justify-center">

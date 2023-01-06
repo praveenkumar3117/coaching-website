@@ -9,7 +9,6 @@ import {IoIosArrowDropdownCircle} from 'react-icons/io'
 // Naming convention in the video storage
 // videotitle_uuid
 
-
 const Upload = ({setProgress}) => {
 
   const [video, setVideo] = useState(null)
