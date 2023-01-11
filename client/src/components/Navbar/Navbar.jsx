@@ -20,22 +20,27 @@ const Navbar = () => {
 
 
   return (
-     <div className="shadow-md w-full fixed top-0 left-0 z-20">
-       <div className="md:flex items-center justify-between bg-gray-900 py-4 md:px-10">
+     <div className="shadow-md w-full fixed top-0 left-0 z-20 mb-8">
+       <div className="md:flex items-center justify-between bg-gray-900 py-2 md:px-10">
          <div
-           className="w-full font-medium text-4xl md:text-4xl select-none flex items-center text-white font-inter font-signature"
+           className="w-full font-medium text-4xl md:text-4xl select-none flex flex-row items-center text-white font-inter font-signature"
          >
+
            <button
              className="border ml-4 border-black"
              onClick={() => {
                setOpen(!open);
-             }}
+              }}
            > 
              {open ? <FaTimes /> : <GiHamburgerMenu />}
             </button>
-            <div className="w-full text-center">
+
+            <img src="../images/logo.jpeg" className="mx-4 w-12 h-12" />
+
+            <div className="w-full text-left">
             <Link to="/"> Vulture Institute</Link>
             </div>
+
          </div>
        </div>
 

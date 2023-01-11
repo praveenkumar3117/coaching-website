@@ -33,7 +33,7 @@ const NavbarSuperUser = () => {
 
   return (
      <div className="shadow-md w-full fixed top-0 left-0 z-20">
-       <div className="md:flex items-center justify-between bg-gray-900 py-4 md:px-10">
+       <div className="md:flex items-center justify-between bg-gray-900 py-2 md:px-10">
          <div
            className="w-full font-medium text-4xl md:text-4xl select-none flex items-center text-white font-inter font-signature"
          >
@@ -45,7 +45,10 @@ const NavbarSuperUser = () => {
            > 
              {open ? <FaTimes /> : <GiHamburgerMenu />}
             </button>
-            <div className="w-full text-center">
+
+            <img src="../images/logo.jpeg" className="mx-4 w-12 h-12" />
+
+            <div className="w-full text-left">
             <Link to="/"> Vulture Institute</Link>
             </div>
          </div>
@@ -182,6 +185,21 @@ const NavbarSuperUser = () => {
                   <BsDownload />
                   <span class="flex-1 text-xl whitespace-nowrap">
                     {open ? "Download Analysis" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li>
+
+
+              {/* Add Images */}
+              <li>
+                <Link to="/addimages">
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <FiUpload />
+                  <span class="flex-1 text-xl whitespace-nowrap">
+                    {open ? "Add Slider Images" : ""}
                   </span>
                 </div>
                 </Link>

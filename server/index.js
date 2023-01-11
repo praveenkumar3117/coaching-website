@@ -8,6 +8,7 @@ const teachRoutes = require('./routes/TeachRoutes')
 const fetchVideos = require('./routes/FetchVideos')
 const authRoutes= require('./routes/authRoutes')
 const testRoutes = require('./routes/TestRoutes')
+const imageRoutes = require('./routes/imageRoutes');
 const app = express()
 
 
@@ -33,5 +34,7 @@ app.use('/api/fetchVideos',fetchVideos)
 app.use('/api/auth', authRoutes);
 
 app.use('/api/test',testRoutes)
+
+app.use('/api/images',imageRoutes)
 
 app.listen(PORT, console.log(`running`, PORT))
