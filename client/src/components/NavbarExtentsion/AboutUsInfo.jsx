@@ -8,13 +8,6 @@ import { BsFillPenFill } from 'react-icons/bs';
 
 const AboutUsInfo = () => {
 
-    // const [change, detectChange]=useState(0);
-    // useEffect(()=>{
-    //     window.onblur = (e)=>{
-    //         console.log(e);
-            
-    //     }
-    // }, [])
 
     return (
         <section className="text-gray-400 bg-gray-100 body-font pt-16">
