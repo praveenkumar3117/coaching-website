@@ -53,6 +53,7 @@ import ViewTestAnalysis from './components/Tests/ViewTestAnalysis';
 import ShowAnalysisCard from './components/Tests/ShowAnalysisCard';
 import AnalysisForm from './components/Tests/AnalysisForm';
 import AddSliderImages from './components/AddImages/AddSliderImages';
+import AddTeacherImages from './components/AddImages/AddTeacherImages';
 
 
 function App() {
@@ -193,6 +194,7 @@ function App() {
 
           <Route path ="/admin" element = { <Protected user="admin" setProgress = {setProgress} Component={SuperUser}/>} />
           <Route path ="/addimages" element = {<Protected Component = {AddSliderImages} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/addteacherimages" element = {<Protected Component = {AddTeacherImages} user="admin" setProgress={setProgress}/> } />
 
 
           {/* ////////////////////// Success Redirects ////////////////////////// */}
