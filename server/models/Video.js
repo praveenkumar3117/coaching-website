@@ -8,20 +8,16 @@ const videoSchema = mongoose.Schema(
             type:String,
             required:true
         },
-        email:{
-            type : String,
-            required: true
-        },
+        // email:{
+        //     type : String,
+        //     required: true
+        // },
         Date : {type: Date},
         JEE: { 
             type: Boolean,
             required: true,
         },
         NEET: { 
-            type: Boolean,
-            required: true,
-        },
-        Foundation: { 
             type: Boolean,
             required: true,
         },
@@ -32,6 +28,11 @@ const videoSchema = mongoose.Schema(
         chapter: {
             type: Number,
             //required: true
+        },
+        category: {
+            type: Number,
+            enum: [1,2,3,4,5],
+            required: true,
         },
         lecture: {
             type: String,

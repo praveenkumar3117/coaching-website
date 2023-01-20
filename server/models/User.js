@@ -5,17 +5,22 @@ const userSchema = mongoose.Schema(
     {
         name: { type: String, required: true },
         email: { type: String, unique: true, required: true },
-        DOB : {type: Date, required: true},
-        fatherName: {type: String, required: true},
+        DOB: { type: Date, required: true },
+        fatherName: { type: String, required: true },
         password: { type: String, required: true },
         phone: { type: Number, required: true },
         enRoll: { type: String, required: true },
-        batch: { 
+        batch: {
             type: String,
-            enum: ['JEE', 'NEET', 'Foundation'],
+            enum: ['JEE', 'NEET'],
             required: true,
         },
         year: { type: Number, required: true },
+        category: {
+            type: Number,
+            enum: [1,2,3,4,5],
+            required: true,
+        },
         pic: {
             type: "String",
             default:
