@@ -27,10 +27,12 @@ exports.AddTeacherImage = async(req, res)=>{
     try{
         const url = req.body.url;
         const tName = req.body.tName;
+        const exp = req.body.exp;
 
         const result = await TeacherImages.create({
             url:url,
-            tName:tName
+            tName:tName,
+            exp: exp
         })
         
         res.status(201).json(result);

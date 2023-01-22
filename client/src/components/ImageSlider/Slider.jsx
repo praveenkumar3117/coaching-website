@@ -32,7 +32,7 @@ const Image = () => {
 	const zoomInProperties = {
 		indicators: false,
 		scale: 1.2,
-		duration: 1000,
+		duration: 500,
 		transitionDuration: 500,
 		infinite: true,
 		prevArrow:(
@@ -45,13 +45,12 @@ const Image = () => {
 	};
 
   return (
-     <>
-     <div className="pt-20 lg:pt-20 md:pt-24">
+     <div className="pt-28 lg:pt-20">
 			<Zoom {...zoomInProperties}>
 				{images.map((img, index) => (
-					<div key={index} className="flex justify-center w-full mx-auto">
+					<div key={index} className="flex justify-center w-screen mx-auto">
 						<img
-							className="object-scale-down shadow-xl"
+							className="w-10/12 shadow-xl"
 							src={img.url}
                             alt='images'
 						/>
@@ -59,7 +58,6 @@ const Image = () => {
 				))}
 			</Zoom>
 		</div>
-     </>
   )
 }
 

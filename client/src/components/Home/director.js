@@ -15,12 +15,14 @@ function Director() {
           }
       }).then((response)=>{
           response.json().then((data)=>{
+
             if(data.length===0){
               setImages(null);
               setError("Something went wrong loading the teacher images");
               return;
             }
             setImages(data);
+            console.log(data)
           })
       })
     }
@@ -70,15 +72,18 @@ function Director() {
                       <h1 className="border-b-2 border-orange-500 w-2/3 py-2 mx-auto text-4xl md:text-6xl font-medium title-font mb-4 text-black">Our Teachers</h1>
                   </div>
 
-                  <div className="flex flex-col lg:grid-cols-3  lg:mx-4 lg:grid gap-4 justify-center items-center">
+                  <div className="flex flex-col lg:grid-cols-3 lg:mx-4 lg:grid gap-4 justify-center items-center">
 
                     {
                       images.map((image, index)=>(
-                        <div className="lg:w-1/2 lg:mb-0 mb-6 mx-auto p-4">
+                        <div className="lg:w-4/5 lg:mb-0 mb-6 mx-auto p-4">
 
                           <div className="h-full text-center ">
-                            <img alt="testimonial" className="md:w-96 sm:w-72 sm:h-72 md:h-96 mb-8 object-cover object-top hover:-translate-y-3 ease-in duration-300 p-1 mx-auto inline-block border-2 border-gray-200 bg-gray-300" src={image.url} />
-                            <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">{image.tName}</h2>
+                            <img alt="testimonial" className="md:w-96 w-full sm:w-72 sm:h-72 md:h-96 mb-8 object-cover object-top hover:-translate-y-3 ease-in duration-300 p-1 mx-auto inline-block border-2 border-gray-200 bg-gray-300" src={image.url} />
+                            <div className='flex flex-col'>
+                              <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">{image.tName}</h2>
+                              <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">Exp: {image.exp} years</h2>
+                            </div>
                             <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-2 mb-4" />
                           </div>
 

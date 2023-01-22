@@ -10,12 +10,16 @@ const AddTeacherImages = () => {
 
     const [image, setImage]=useState(null);
     const [name, setName] = useState(null);
+    const [exp, setExp] = useState(null);
 
     const setFile = (e)=>{
         setImage(e.target.files[0]);
     }
     const setTeacherName =(e)=>{
         setName(e.target.value)
+    }
+    const setTeacherExp =(e)=>{
+        setExp(e.target.value)
     }
     
     const navigate = useNavigate();
@@ -36,13 +40,14 @@ const AddTeacherImages = () => {
                 // uploading to database
                 fetch('http://localhost:5000/api/images/add-teacher-images', {
                     method:'post',
-                    body:JSON.stringify({url:URL, tName:name}),
+                    body:JSON.stringify({url:URL, tName:name, exp: exp}),
                     headers:{
                         'Content-Type':'application/json'
                     }
                 }).then((response)=>{
                     response.json().then((data)=>{
                         navigate('/success/Teacher-Added-Successfully')
+                        console.log(data)
                     })
                 })
             })
@@ -85,6 +90,23 @@ const AddTeacherImages = () => {
                         id="name"
                         name='name'
                         placeholder="Teacher's Name"
+                        />
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <div class="mb-3 xl:w-96">
+                        <label for="batchlabel" class="form-label text-3xl text-bold mb-4 inline-block text-gray-700"
+                        >Teacher Experience(in years)</label>
+                        <input required
+                        onChange={setTeacherExp}
+                        type="number"
+                        class="
+                            form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                        "
+                        id="exp"
+                        name='exp'
+                        placeholder="Teacher's Exp"
                         />
                     </div>
                 </div>
