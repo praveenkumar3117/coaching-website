@@ -198,10 +198,10 @@ function App() {
 
 
           {/* ////////////////////// Success Redirects ////////////////////////// */}
-          <Route path ="/success/:message" element = {<Success /> } />
+          <Route path ="/success/:message" element = {<Success/> } />
 
         </Routes>
-        <Footer/>
+          <Footer/>
         </LoginContext.Provider>
       </BrowserRouter>
     </div>
