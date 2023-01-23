@@ -3,7 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 import { AiOutlineEye } from "react-icons/ai";
 import { FaTimes, FaHome } from "react-icons/fa";
-import { FiLogIn, FiUpload } from "react-icons/fi";
+import { FiLogIn, FiUpload, FiImage } from "react-icons/fi";
 import {BiUserCircle} from 'react-icons/bi'
 import {BsDownload} from 'react-icons/bs'
 import { Link } from "react-router-dom";
@@ -46,7 +46,7 @@ const NavbarSuperUser = () => {
              {open ? <FaTimes /> : <GiHamburgerMenu />}
             </button>
 
-            <img src="../images/logo.jpeg" className="mx-4 w-12 h-12" />
+            <img alt="Logo" src="../images/logo.jpeg" className="mx-4 w-12 h-12" />
 
             <div className="w-full text-left">
             <Link to="/"> Vulture Institute</Link>
@@ -191,19 +191,20 @@ const NavbarSuperUser = () => {
               </li>
 
 
-              {/* Add Images */}
+              {/*Image Options*/}
               <li>
                 <Link to="/addimages">
                 <div
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
-                  <FiUpload />
+                  <FiImage />
                   <span class="flex-1 text-xl whitespace-nowrap">
-                    {open ? "Add Slider Images" : ""}
+                    {open ? "Add/Remove Images" : ""}
                   </span>
                 </div>
                 </Link>
               </li>
+
 
             </ul>
           </div>

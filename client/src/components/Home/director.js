@@ -22,7 +22,6 @@ function Director() {
               return;
             }
             setImages(data);
-            console.log(data)
           })
       })
     }
