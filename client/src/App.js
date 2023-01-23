@@ -52,8 +52,11 @@ import ViewTestFaculty from './components/Tests/ViewTestFaculty';
 import ViewTestAnalysis from './components/Tests/ViewTestAnalysis';
 import ShowAnalysisCard from './components/Tests/ShowAnalysisCard';
 import AnalysisForm from './components/Tests/AnalysisForm';
-import AddSliderImages from './components/AddImages/AddSliderImages';
-import AddTeacherImages from './components/AddImages/AddTeacherImages';
+import AddSliderImages from './components/AddRemoveImages/AddSliderImages';
+import AddTeacherImages from './components/AddRemoveImages/AddTeacherImages';
+import ImageOptions from './components/AddRemoveImages/ImageOptions';
+import RemoveSliderImages from './components/AddRemoveImages/RemoveSliderImages';
+import RemoveTeacherImages from './components/AddRemoveImages/RemoveTeacherImages';
 
 
 function App() {
@@ -95,7 +98,9 @@ function App() {
 
   useEffect(()=>{
     checkNavbarToLoad();
+    // eslint-disable-next-line
   }, []);
+
 
   const loginContextparams = {
     email, 
@@ -193,8 +198,11 @@ function App() {
           <Route path ="/viewanalysis" element = { <Protected user="admin" setProgress = {setProgress} Component={ShowAnalysisCard}/>} />
 
           <Route path ="/admin" element = { <Protected user="admin" setProgress = {setProgress} Component={SuperUser}/>} />
-          <Route path ="/addimages" element = {<Protected Component = {AddSliderImages} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/addimages" element = {<Protected Component = {ImageOptions} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/addsliderimages" element = {<Protected Component = {AddSliderImages} user="admin" setProgress={setProgress}/> } />
           <Route path ="/addteacherimages" element = {<Protected Component = {AddTeacherImages} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/removesliderimages" element = {<Protected Component = {RemoveSliderImages} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/removeteacherimages" element = {<Protected Component = {RemoveTeacherImages} user="admin" setProgress={setProgress}/> } />
 
 
           {/* ////////////////////// Success Redirects ////////////////////////// */}

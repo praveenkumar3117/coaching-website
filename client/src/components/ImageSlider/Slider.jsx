@@ -19,20 +19,17 @@ const Image = () => {
 			}).then((response)=>{
 				response.json().then((data)=>{
 					setImages([...data]);
-					console.log(data)
-					console.log(images)
 				})
 			})
 		}
 
 		fetchImages();
-
 	}, [])
 
 	const zoomInProperties = {
 		indicators: false,
 		scale: 1.2,
-		duration: 500,
+		duration: 5000,
 		transitionDuration: 500,
 		infinite: true,
 		prevArrow:(
