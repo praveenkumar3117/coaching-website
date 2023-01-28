@@ -9,6 +9,7 @@ const fetchVideos = require('./routes/FetchVideos')
 const authRoutes= require('./routes/authRoutes')
 const testRoutes = require('./routes/TestRoutes')
 const imageRoutes = require('./routes/imageRoutes');
+const User2Routes = require('./routes/User2')
 const app = express()
 
 
@@ -24,6 +25,8 @@ const PORT = 5000
 app.use('/api/SuperUser',SuperUserRoutes)
 
 app.use('/api/User',UserRoutes)
+
+app.use('api/User2',User2Routes)
 
 app.use('/api/Teach',teachRoutes)
 
