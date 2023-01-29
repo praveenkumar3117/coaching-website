@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const courseSchema = mongoose.Schema(
     {
         title: { type: String, required: true },
-        user2Array : [String],
+        user2Array : [String], // External Students -- > Login 
         Date : {type: Date},
         JEE: { 
             type: Boolean,
@@ -13,15 +13,10 @@ const courseSchema = mongoose.Schema(
             type: Boolean,
             required: true,
         },
-        category: {
+        category: {   // Internal Students -- > login SuperUser
             type: Number,
             enum: [1,2,3,4,5],
             required: true,
-        },
-        pic: {
-            type: "String",
-            default:
-                "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
         },
     },
     { timestaps: true }
