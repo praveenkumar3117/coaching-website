@@ -57,6 +57,8 @@ import AddTeacherImages from './components/AddRemoveImages/AddTeacherImages';
 import ImageOptions from './components/AddRemoveImages/ImageOptions';
 import RemoveSliderImages from './components/AddRemoveImages/RemoveSliderImages';
 import RemoveTeacherImages from './components/AddRemoveImages/RemoveTeacherImages';
+import AddCourse from './components/Videos/AddCourse';
+import ViewCourses from './components/Videos/View/ViewCourses';
 
 
 function App() {
@@ -158,7 +160,7 @@ function App() {
           <Route path ="/upcoming-tests/student/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={ShowTestCards} /> } />
 
           {/* JEE Student */}
-          <Route path ="/watch/student/JEE" element = {<Protected user="student" setProgress = {setProgress} Component={ViewJEE}/>} />
+          <Route path ="/watch/student/JEE" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewJEE}/>} />
           <Route path ="/watch/student/JEE/Physics" element = {<Protected user="student" batch="JEE" Component={Physics}/>} />
           <Route path ="/watch/student/JEE/Chemistry" element = {<Protected user="student" batch="JEE" Component={Chemistry}/>} />
           <Route path ="/watch/student/JEE/Maths" element = {<Protected user="student" batch="JEE" Component={Maths}/>} />
@@ -191,6 +193,8 @@ function App() {
           <Route path ="/admin/deleteuser" element = {<Protected user="admin" setProgress = {setProgress} Component={DeleteUser}/>} />
           <Route path ="/addtest" element = {<Protected user="admin" setProgress={setProgress} Component ={AddTests}/> } />
           <Route path ="/addanalysis" element = {<Protected user="admin" setProgress = {setProgress} Component={AddTestDetails}/> } />
+          <Route path ="/addcourses" element = {<Protected user="admin" setProgress = {setProgress} Component={AddCourse}/> } />
+          <Route path ="/viewcourses" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewCourses}/> } />
           <Route path ="/viewtest/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuper} /> } />
           <Route path ="/upcoming-tests/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuperBatch} /> } />
           <Route path ="/upcoming-tests/admin/:batchORsubject" element = {<Protected user="admin" setProgress = {setProgress} Component={ShowTestCards} /> } />
