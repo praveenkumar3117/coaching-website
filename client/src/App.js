@@ -57,6 +57,12 @@ import AddTeacherImages from './components/AddRemoveImages/AddTeacherImages';
 import ImageOptions from './components/AddRemoveImages/ImageOptions';
 import RemoveSliderImages from './components/AddRemoveImages/RemoveSliderImages';
 import RemoveTeacherImages from './components/AddRemoveImages/RemoveTeacherImages';
+// import AddCourse from './components/Videos/AddCourse';
+import ViewCourses from './components/Videos/View/ViewCourses';
+import ShowCoursesFaculty from './components/Courses/ShowCoursesFaculty';
+import AddCourse from './components/Courses/AddCourse';
+import ShowCoursesCategory from './components/Courses/ShowCoursesCategory';
+import ShowCoursesUser2 from './components/Courses/ShowCoursesUser2';
 
 
 function App() {
@@ -142,10 +148,16 @@ function App() {
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
           <Route path ="/contact" element = {<Contact setProgress ={setProgress}/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
-          <Route path ="/Courses" element = {<CoursesInfo/>} />
+          {/* <Route path ="/Courses" element = {<CoursesInfo/>} /> */}
           <Route path ="/videos" element = {<Player/> } />
           <Route path ="/chapter" element = {<Chapters/> } />
           <Route path ="/lectures" element = {<Lectures/> } />
+          <Route path ="/category/courses" element = {<ShowCoursesCategory/> } />
+          <Route path ="/user2/courses" element = {<ShowCoursesUser2/> } />
+          <Route path ="/faculty/courses" element = {<ShowCoursesFaculty/> } />
+          <Route path ="/addcourse" element = {<AddCourse/> } />
+          <Route path ="/courses/jee" element = {<ViewJEE/> } />
+          <Route path ="/courses/neet" element = {<ViewNEET/> } />
           
 
           {/* ------------------protected routes------------------- */}
@@ -159,21 +171,14 @@ function App() {
 
           {/* JEE Student */}
           <Route path ="/watch/student/JEE" element = {<Protected user="student" setProgress = {setProgress} Component={ViewJEE}/>} />
-          <Route path ="/watch/student/JEE/Physics" element = {<Protected user="student" batch="JEE" Component={Physics}/>} />
-          <Route path ="/watch/student/JEE/Chemistry" element = {<Protected user="student" batch="JEE" Component={Chemistry}/>} />
-          <Route path ="/watch/student/JEE/Maths" element = {<Protected user="student" batch="JEE" Component={Maths}/>} />
+          <Route path ="/watch/student/JEE/Physics" element = {<Protected setProgress={setProgress} user="student" batch="JEE" Component={Physics}/>} />
+          <Route path ="/watch/student/JEE/Chemistry" element = {<Protected setProgress={setProgress} user="student" batch="JEE" Component={Chemistry}/>} />
+          <Route path ="/watch/student/JEE/Maths" element = {<Protected setProgress={setProgress} user="student" batch="JEE" Component={Maths}/>} />
           {/* NEET Student */}
-          <Route path ="/watch/student/NEET" element = {<Protected user="student" Component={ViewNEET}/>} />
-          <Route path ="/watch/student/NEET/Physics" element = {<Protected user="student" batch="NEET" Component={Physics}/>} />
-          <Route path ="/watch/student/NEET/Chemistry" element = {<Protected user="student" batch="NEET" Component={Chemistry}/>} />
-          <Route path ="/watch/student/NEET/Biology" element = {<Protected user="student" batch="NEET" Component={Biology}/>} />
-          {/* Foundation Student */}
-          <Route path ="/watch/student/Foundation" element = {<Protected user="student" Component={ViewFoundation}/>} />
-          <Route path ="/watch/student/Foundation/Physics" element = {<Protected user="student" batch="Foundation" Component={Physics}/>} />
-          <Route path ="/watch/student/Foundation/Chemistry" element = {<Protected user="student" batch="Foundation" Component={Chemistry}/>} />
-          <Route path ="/watch/student/Foundation/Maths" element = {<Protected user="student" batch="Foundation" Component={Maths}/>} />
-          <Route path ="/watch/student/Foundation/Biology" element = {<Protected user="student" batch="Foundation" Component={Biology}/>} />
-          
+          <Route path ="/watch/student/NEET" element = {<Protected setProgress={setProgress} user="student" Component={ViewNEET}/>} />
+          <Route path ="/watch/student/NEET/Physics" element = {<Protected setProgress={setProgress} user="student" batch="NEET" Component={Physics}/>} />
+          <Route path ="/watch/student/NEET/Chemistry" element = {<Protected setProgress={setProgress} user="student" batch="NEET" Component={Chemistry}/>} />
+          <Route path ="/watch/student/NEET/Biology" element = {<Protected setProgress={setProgress} user="student" batch="NEET" Component={Biology}/>} />
           
           {/* ////////////////////Faculty Routes ////////////////////// */}
           
@@ -191,6 +196,8 @@ function App() {
           <Route path ="/admin/deleteuser" element = {<Protected user="admin" setProgress = {setProgress} Component={DeleteUser}/>} />
           <Route path ="/addtest" element = {<Protected user="admin" setProgress={setProgress} Component ={AddTests}/> } />
           <Route path ="/addanalysis" element = {<Protected user="admin" setProgress = {setProgress} Component={AddTestDetails}/> } />
+          <Route path ="/addcourses" element = {<Protected user="admin" setProgress = {setProgress} Component={AddCourse}/> } />
+          <Route path ="/viewcourses" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewCourses}/> } />
           <Route path ="/viewtest/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuper} /> } />
           <Route path ="/upcoming-tests/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuperBatch} /> } />
           <Route path ="/upcoming-tests/admin/:batchORsubject" element = {<Protected user="admin" setProgress = {setProgress} Component={ShowTestCards} /> } />

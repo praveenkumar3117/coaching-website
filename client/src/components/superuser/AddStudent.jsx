@@ -14,6 +14,7 @@ const AddStudent = () => {
   const [confirmeduserpassword, setConfirmedUserPassword] = useState('');
   const [enRoll, setEnrollNum] = useState('');
   const [phone, setPhoneNumber] = useState(0);
+  const [category, setCategory] = useState(0);
   const [year, setYear] = useState(0);
   const [DOB, setDOB] = useState(new Date());
   const [warning, setWarning]=useState("");
@@ -36,6 +37,7 @@ const AddStudent = () => {
       const user = JSON.parse(localStorage.getItem("data"));
       const Token = user.result.token;
       console.log(Token); // token fetch successful
+      console.log(category)
 
     // check if the password and confirmed password are same of not
     if(password===confirmeduserpassword && password.length >= 5){
@@ -48,7 +50,7 @@ const AddStudent = () => {
             'Content-Type':'application/json',
             'authorization':'Bearer '+Token
           },
-          body:JSON.stringify({name, email, password, phone, enRoll, batch, year, role, fatherName, DOB})
+          body:JSON.stringify({name, email, password, phone, enRoll, batch, year, role, fatherName, DOB, category})
 
         });
 
@@ -56,8 +58,7 @@ const AddStudent = () => {
         if(result.success){
           navigate('/');
         }else{
-          setWarning("User Already Exists");
-          // console.log('user already exists');
+          setWarning(result.message);
         }
     }
   }
@@ -66,7 +67,7 @@ const AddStudent = () => {
   return (
     <form onSubmit={AddStudent}>
       <div className="bg-grey-lighter min-h-screen flex flex-col ">
-          <div className="container max-w-sm mx-auto flex-1 my-24 flex flex-col items-center justify-center px-2">
+          <div className="container w-full lg:w-2/3 mx-auto flex-1 my-24 flex flex-col items-center justify-center px-2">
             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
               <h1 className="mb-8 text-3xl text-center">Sign up</h1>
 
@@ -76,12 +77,44 @@ const AddStudent = () => {
               <select id="user" onChange={(event)=>{setBatch(event.target.value)}}
               class="block border border-grey-light w-full p-3 rounded mb-4" >
 
-                  {/* <option className="h-24" value="User"> {opti} </option> */}
                   {batches.map((sBatch, index)=>{
                     return <option className='h-80' value = {sBatch} key={index}>{sBatch}</option>
                   })}
 
               </select>
+
+              {/* for Category */}
+              <div className='w-full my-4 flex justify-center flex-col md:flex-row lg:flex-row'>
+                  {/* category button */} 
+                  <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
+                      > Select Category </label>
+                      <div className='mx-2 px-2'>  
+                      <label className='mx-2' htmlFor="1">1</label>
+                      <input type="radio" onChange={(e)=>{setCategory(1)}} name="category" id="1" value={'1'} />
+                      </div>
+
+                      <div className='mx-2 px-2'>
+                      <label htmlFor="NEET" className='mx-2'>2</label>
+                      <input type="radio" onChange={(e)=>{setCategory(2)}} name="category" id="2" value={'2'}/>
+                      </div>
+
+                      <div className='mx-2 px-2'>
+                      <label htmlFor="NEET" className='mx-2'>2</label>
+                      <input type="radio" onChange={(e)=>{setCategory(3)}} name="category" id="3" value={'3'}/>
+                      </div>
+
+                      <div className='mx-2 px-2'>
+                      <label htmlFor="NEET" className='mx-2'>4</label>
+                      <input type="radio" onChange={(e)=>{setCategory(4)}} name="category" id="4" value={'4'}/>
+                      </div>
+
+                      <div className='mx-2 px-2'>
+                      <label htmlFor="NEET" className='mx-2'>5</label>
+                      <input type="radio" onChange={(e)=>{setCategory(5)}} name="category" id="5" value={'5'}/>
+                      </div>
+              </div>
+
+
 
               {/* for Username  */}
               <input required type="text" onChange={(event)=>{setUserName(event.target.value)}} className="block border border-grey-light w-full p-3 rounded mb-4" name="fullname" placeholder="Full Name" />

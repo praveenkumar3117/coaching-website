@@ -49,12 +49,14 @@ exports.FetchVideosFaculty = async (req, res) => {
     }
 }
 
+// for normal coaching user
 exports.fetchVideo = async (req, res) => {
     try {
         const batch = req.body.batch
         const subject = req.body.subject
         const category = req.body.category
-        const data = await Video.find({ [batch]: true, "subject": subject, "category": category }).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const courseName = req.body.courseName
+        const data = await Video.find({"courseName": courseName, [batch]: true, "subject": subject, "category": category }).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -64,6 +66,7 @@ exports.fetchVideo = async (req, res) => {
     }
 }
 
+// for user2
 exports.fetchVideoWithCourseName = async (req, res) => {
     try {
         const courseName = req.body.courseName

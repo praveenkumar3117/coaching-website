@@ -16,7 +16,7 @@ const courseSchema = mongoose.Schema(
         category: {   // Internal Students -- > login SuperUser
             type: Number,
             enum: [1,2,3,4,5],
-            required: true,
+            // required: true,
         },
     },
     { timestaps: true }

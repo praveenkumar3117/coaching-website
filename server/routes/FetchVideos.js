@@ -4,7 +4,7 @@ const { fetchVideo,FetchVideosFaculty,fetchVideoWithCourseName } = require('../c
 const router = express.Router()
 
 router.route('/faculty').post(FetchVideosFaculty)
-router.route('/view-video').post(fetchVideo)
+router.route('/view-video').postv(fetchVideo)
 router.route('/course-video').post(fetchVideoWithCourseName)
 
 module.exports = router

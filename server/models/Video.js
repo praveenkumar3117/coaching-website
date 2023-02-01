@@ -26,8 +26,7 @@ const videoSchema = mongoose.Schema(
         },
         category: {
             type: Number,
-            enum: [1,2,3,4,5],
-            required: true,
+            enum: [1,2,3,4,5]
         },
         lecture: {
             type: String,

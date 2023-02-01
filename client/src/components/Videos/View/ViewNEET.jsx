@@ -21,7 +21,7 @@ const ViewNEET = () => {
   
 
   return (
-    <div className='my-32 flex flex-col md:flex-row lg:flex-row px-2 justify-center items-center'>
+    <div className='pt-24 flex flex-col md:flex-row lg:flex-row px-2 justify-center items-center'>
 
       {
         array.map((item)=>(

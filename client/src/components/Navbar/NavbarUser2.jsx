@@ -11,7 +11,7 @@ import { HiInformationCircle } from 'react-icons/hi'
 import { LoginContext } from "../Contexts/LoginContext";
 
 
-const NavbarStudent = () => {
+const NavbarUser2 = () => {
 
   // Get info from Login-Context
   const {userloggedin, setUserloggedin} = useContext(LoginContext);
@@ -30,10 +30,11 @@ const NavbarStudent = () => {
 
   const handleStudentLogoutBtn = async () =>{
     setOpen(!open);
-    if(userloggedin === 1){
-      setUserloggedin(-1);
-      localStorage.removeItem("data");
-    }
+    localStorage.removeItem('data');
+    // if(userloggedin === 1){
+    //   setUserloggedin(-1);
+    //   localStorage.removeItem("data");
+    // }
   }
 
 
@@ -129,9 +130,10 @@ const NavbarStudent = () => {
                 </div>
                 </Link>
               </li>
+
               {/* Courses */}
               <li>
-                <Link to={`/category/courses`} onClick={()=>{setOpen(!open)}}>
+                <Link to={`/user2/courses`} onClick={()=>{setOpen(!open)}}>
                 <div
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
@@ -244,4 +246,4 @@ const NavbarStudent = () => {
   );
 };
 
-export default NavbarStudent;
+export default NavbarUser2;
