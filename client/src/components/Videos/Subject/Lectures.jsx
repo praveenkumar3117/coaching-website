@@ -8,6 +8,7 @@ const Lectures = () => {
     const location = useLocation();
     const [lectures, setLectures] = useState(location.state);
     const [loading, setLoading] = useState(true);
+    
 
     
     useEffect(()=>{

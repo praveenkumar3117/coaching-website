@@ -5,7 +5,7 @@ const RegistrationMailer = require('../middleware/RegistrationMail');
 exports.registerUser = async (req, res) => {
     try {
 
-        const { name, email, password, phone, enRoll, batch, year, pic, fatherName, DOB } = req.body
+        const { name, email, password, phone, enRoll, batch, year, pic, fatherName, DOB, category } = req.body
 
         let user = await User.findOne({ email })
         if (user) {
@@ -22,7 +22,8 @@ exports.registerUser = async (req, res) => {
             year,
             pic,
             DOB,
-            fatherName
+            fatherName,
+            category
         })
 
         if(res.status(201)){
@@ -67,6 +68,7 @@ exports.authUser = async (req, res) => {
                 batch:user.batch,
                 pic: user.pic,
                 year:user.year,
+                category:user.category,
                 token: generateToken(user._id),
 
             })
