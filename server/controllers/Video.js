@@ -33,9 +33,11 @@ exports.AddVideo = async (req, res) => {
 
 exports.FetchVideosFaculty = async (req, res) => {
     try {
-        const email = req.body.email
-        if (email) {
-            const data = await Video.find({ "email": email }).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const email = req.body.email;
+        const courseName = req.body.courseName;
+        const subject = req.body.subject;
+        if (tCode) {
+            const data = await Video.find({ "email": email, courseName:courseName, subject: subject }).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
             console.log(data);
             res.status(200).json(data)
         } else {

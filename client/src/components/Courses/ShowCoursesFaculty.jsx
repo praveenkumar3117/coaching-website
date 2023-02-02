@@ -8,7 +8,6 @@ import shortid from 'shortid'
 const ShowCourses = () => {
     
         const [courses, setCourses] = useState([]);
-        // const [courseLectures]
 
         const fetchCourses = async()=>{
             let result = await fetch("http://localhost:5000/api/Courses/fetch-course",
@@ -31,7 +30,7 @@ const ShowCourses = () => {
 
         {
             courses.map((item, index)=>(
-                <Link key={shortid.generate()} to={item.JEE?'/courses/jee':'/courses/neet'} state={{courseCategory:item.category, user2Arr:item.user2Array}}>
+                <Link key={shortid.generate()} to={item.JEE?'/faculty/courses/jee':'/faculty/courses/neet'} state={{courseName: item.courseName, type:"faculty"}}>
                     {/* Course Card */}
                     <div key={index} className="max-w-sm w-full m-4 p-4 hover:bg-blue-400 active:bg-[#5F9DF7] rounded overflow-hidden shadow-lg bg-[#5F9DF7]">
                         <div className = "px-6 py-4">
