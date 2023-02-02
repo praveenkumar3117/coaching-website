@@ -121,10 +121,27 @@ const Navbar = () => {
                   </span>
                 </div>
                 </Link>
-                {/* } */}
                 
                 
               </li> 
+
+              {/* Register - Logout */}
+              <li>
+                {/* // if not logged in already */}
+                <Link to = "/register" onClick = {()=>{setOpen(!open)}}>
+                <div
+                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
+                >
+                  <FiLogIn />
+                  <span class="flex-1 text-2xl whitespace-nowrap">
+                    {open ? "Register" : ""}
+                  </span>
+                </div>
+                </Link>
+              </li> 
+
+
+
               {/* About Us */}
               <li>
                 <Link to="/about" onClick={()=>{setOpen(!open)}}>

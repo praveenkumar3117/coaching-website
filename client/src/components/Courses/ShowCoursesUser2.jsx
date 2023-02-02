@@ -33,7 +33,7 @@ const ShowCoursesUser2 = () => {
 
         {
             courses.map((item, index)=>(
-                <Link key={shortid.generate()} to={item.JEE?'/courses/jee':'/courses/neet'} state={{courseCategory:item.category, user2Arr:item.user2Array, courseID: item._id}}>
+                <Link key={shortid.generate()} to={item.JEE?'/courses/jee':'/courses/neet'} state={{courseCategory:item.category, user2Arr:item.user2Array, courseID: item._id, type:"user2"}}>
                     {/* Course Card */}
                     <div key={index} className="max-w-sm w-full m-4 p-4 hover:bg-blue-400 active:bg-[#5F9DF7] rounded overflow-hidden shadow-lg bg-[#5F9DF7]">
                         <div className = "px-6 py-4">
@@ -63,17 +63,6 @@ const ShowCoursesUser2 = () => {
             ))
         }
         
-
-        {/* Add Course Card Always Visible */}
-
-        <Link to="/addcourse">
-            {/* Add Course Card */}
-            <div className="max-w-sm m-4 p-4 hover:bg-blue-400 active:bg-[#5F9DF7] rounded overflow-hidden shadow-lg bg-[#5F9DF7]">
-                <div className = "px-6 py-4 mx-auto flex justify-center items-center">
-                    <AiOutlinePlus className='text-9xl'/>
-                </div>
-            </div>
-        </Link>
 
     </div>
   )

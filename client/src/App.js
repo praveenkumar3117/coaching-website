@@ -63,6 +63,10 @@ import ShowCoursesFaculty from './components/Courses/ShowCoursesFaculty';
 import AddCourse from './components/Courses/AddCourse';
 import ShowCoursesCategory from './components/Courses/ShowCoursesCategory';
 import ShowCoursesUser2 from './components/Courses/ShowCoursesUser2';
+import LoginUser2 from './components/Login/LoginUser2';
+import AskUser from './components/Login/AskUser';
+import RegisterUser2 from './components/Register/RegisterUser2';
+import NavbarUser2 from './components/Navbar/NavbarUser2';
 
 
 function App() {
@@ -81,7 +85,10 @@ function App() {
       setUserloggedin(1);
     }else if(data?.userloggedin===2){
       setUserloggedin(2);
+    }else if(userloggedin===3){
+      return <NavbarUser2/> 
     }
+    console.log(data.userloggedin)
   }, [data?.userloggedin])
   
   const checkNavbarToLoad = ()=>{
@@ -93,6 +100,8 @@ function App() {
         return <NavbarStudent/>;
       }else if(userloggedin === 2){ // 2 for faculty
         return <NavbarFaculty/>;
+      }else if(userloggedin===3){
+        return <NavbarUser2/> 
       }else{
         return <Navbar/>;
       }
@@ -142,7 +151,10 @@ function App() {
           </div>
           }/>
           <Route path ="/login" element = {<LoginCheck/>} />
+          <Route path ="/register" element = {<RegisterUser2/>} />
+          <Route path ="/login/usertype" element = {<AskUser/>} />
           <Route path ="/login/student" element = {<LoginStudent/>} />
+          <Route path ="/login/user2" element = {<LoginUser2/>} />
           <Route path ="/login/teacher" element = {<LoginFaculty/>} />
           <Route path ="/logout" element = {<Logout/>} />
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
@@ -156,8 +168,10 @@ function App() {
           <Route path ="/user2/courses" element = {<ShowCoursesUser2/> } />
           <Route path ="/faculty/courses" element = {<ShowCoursesFaculty/> } />
           <Route path ="/addcourse" element = {<AddCourse/> } />
-          <Route path ="/courses/jee" element = {<ViewJEE/> } />
-          <Route path ="/courses/neet" element = {<ViewNEET/> } />
+          <Route path ="/courses/jee" element = {<ViewJEE user="student"/> } />
+          <Route path ="/courses/neet" element = {<ViewNEET user="student"/> } />
+          <Route path ="/faculty/courses/neet" element = {<ViewNEET user="faculty"/> } />
+          <Route path ="/faculty/courses/jee" element = {<ViewJEE user="faculty"/> } />
           
 
           {/* ------------------protected routes------------------- */}
@@ -184,7 +198,17 @@ function App() {
           
           <Route path ="/upload-video" element = {<Protected user="faculty" setProgress = {setProgress} Component={Upload}/>} />
           <Route path ="/profile/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component={Faculty}/>} />
-          <Route path ="/watch/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component = {ViewFaculty}/>} />
+          
+          {/* JEE Routes */}
+          <Route path ="/watch/faculty/JEE/Physics" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Physics}/>} />
+          <Route path ="/watch/faculty/JEE/Chemistry" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Chemistry}/>} />
+          <Route path ="/watch/faculty/JEE/Maths" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Maths}/>} />
+
+          {/* NEET Routes */}
+          <Route path ="/watch/faculty/NEET/Physics" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Physics}/>} />
+          <Route path ="/watch/faculty/NEET/Chemistry" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Chemistry}/>} />
+          <Route path ="/watch/faculty/NEET/Biology" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Biology}/>} />
+          
           <Route path ="/faculty/analysis" element = {<Protected user="faculty" setProgress={setProgress} Component={ViewTestAnalysis} /> } />
           <Route path ="/faculty/test" element = {<Protected user="faculty" setProgress={setProgress} Component={ViewTestFaculty} /> } />
           <Route path ="/upcoming-tests/faculty/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={ShowTestCards} /> } />

@@ -17,7 +17,7 @@ const LoginCheck = () => {
               <div className="p-6 space-y-10">
                 <h2 className="tracking-widest text-2xl lg:text-4xl title-font font-medium text-black mb-1">Are you a Student ?</h2>
                 <div className="flex items-center flex-wrap justify-center">
-                  <Link to='/login/student' className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
+                  <Link to='/login/usertype' className="hover:cursor-pointer hover:text-white hover:bg-blue-900 duration-300 rounded-md p-2 text-blue-900 inline-flex items-center md:mb-2 lg:mb-0 text-2xl">Login
                     <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M12 5l7 7-7 7"></path>

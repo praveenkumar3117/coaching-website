@@ -127,20 +127,20 @@ const NavbarFaculty = () => {
 
               {/* Watch Video */}
               <li>
-                <Link to="/watch/faculty" onClick={()=>{setOpen(!open)}}>
+                <Link to="/faculty/courses" onClick={()=>{setOpen(!open)}}>
                 <div
                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                 >
                   <AiOutlinePlayCircle />
                   <span class="flex-1 text-xl whitespace-nowrap">
-                    {open ? "Watch Videos" : ""}
+                    {open ? "Courses" : ""}
                   </span>
                 </div>
                 </Link>
               </li>
 
               {/* Tests */}
-              <li>
+              {/* <li>
                 <Link to={`/faculty/test`} onClick={()=>{setOpen(!open)}}>
                 <div
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
@@ -151,10 +151,10 @@ const NavbarFaculty = () => {
                   </span>
                 </div>
                 </Link>
-              </li>
+              </li> */}
 
               {/* Tests Analysis */}
-              <li>
+              {/* <li>
                 <Link to={`/faculty/analysis`} onClick={()=>{setOpen(!open)}}>
                 <div
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
@@ -165,7 +165,7 @@ const NavbarFaculty = () => {
                   </span>
                 </div>
                 </Link>
-              </li>
+              </li> */}
 
               {/* Admission */}
               <li>

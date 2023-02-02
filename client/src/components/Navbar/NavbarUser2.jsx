@@ -179,7 +179,7 @@ const NavbarUser2 = () => {
               {/* Login - Logout */}
               <li>
                 {/* Check for logged in */}
-                {userloggedin === 1 ? 
+                {userloggedin === 3 ? 
                 // if not logged in
                 <Link to="/" onClick={handleStudentLogoutBtn}>
                 <div
@@ -238,7 +238,7 @@ const NavbarUser2 = () => {
           </div>
         </aside>
       </div>
-      :""}
+      :null}
 
 
      </div>

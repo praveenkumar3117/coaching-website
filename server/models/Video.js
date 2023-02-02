@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const videoSchema = mongoose.Schema(
     {
         title: { type: String, required: true },
-        teacher:{
+        email:{
             type:String,
             required:true
         },

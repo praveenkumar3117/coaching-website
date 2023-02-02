@@ -23,7 +23,15 @@ exports.registerUser = async (req, res) => {
 
         if (res.status(201)) {
             // Sending Mail
-            res.json(user)
+            res.send({
+                success:true,
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                year: user.year,
+                pic: user.pic,
+                dob: user.DOB
+            })
         }
 
     } catch (error) {
