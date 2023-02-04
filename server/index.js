@@ -11,6 +11,7 @@ const testRoutes = require('./routes/TestRoutes')
 const imageRoutes = require('./routes/imageRoutes');
 const User2Routes = require('./routes/User2')
 const Courses = require('./routes/Courses')
+const payment = require('./routes/Payment')
 const app = express()
 
 
@@ -18,7 +19,6 @@ app.use(express.json())
 app.use(cors())
 require("dotenv").config()
 connectDB()
-
 
 const PORT = 5000
 
@@ -42,5 +42,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/test',testRoutes)
 
 app.use('/api/images',imageRoutes)
+
+app.use('/api/payment',payment)
+
 
 app.listen(PORT, console.log(`running`, PORT))

@@ -2,13 +2,14 @@ const Course = require('../models/Course');
 
 exports.AddCourse = async (req, res) => {
     try {
-        const { title, JEE, NEET, category, Date } = req.body;
+        const { title, JEE, NEET, category, Date,Fees } = req.body;
         let course = await Course.create({
             title,
             Date,
             JEE,
             NEET,
             category,
+            Fees
         })
         res.status(201).json(course)
     } catch (error) {

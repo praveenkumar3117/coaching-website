@@ -5,6 +5,7 @@ const courseSchema = mongoose.Schema(
         title: { type: String, required: true },
         user2Array : [String], // External Students -- > Login 
         Date : {type: Date},
+        Fees :  { type: Number, required: true },
         JEE: { 
             type: Boolean,
             required: true,

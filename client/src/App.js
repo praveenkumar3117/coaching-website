@@ -67,6 +67,8 @@ import LoginUser2 from './components/Login/LoginUser2';
 import AskUser from './components/Login/AskUser';
 import RegisterUser2 from './components/Register/RegisterUser2';
 import NavbarUser2 from './components/Navbar/NavbarUser2';
+import Payment from './components/payment/payment';
+import PaymentSuccess from './components/payment/PaymentSuccess';
 
 
 function App() {
@@ -88,7 +90,7 @@ function App() {
     }else if(userloggedin===3){
       return <NavbarUser2/> 
     }
-    console.log(data.userloggedin)
+    console.log(data?.userloggedin)
   }, [data?.userloggedin])
   
   const checkNavbarToLoad = ()=>{
@@ -130,6 +132,7 @@ function App() {
   return (
     
     <div>
+      <Payment/> 
       <div className="App bg-gray-100 font-lato">
       <BrowserRouter>
       <LoginContext.Provider value = {loginContextparams}>
@@ -144,6 +147,7 @@ function App() {
       {checkNavbarToLoad()}
 
         <Routes>
+          <Route path="/paymentsuccess" element={<PaymentSuccess/>}></Route>
           {/* ---------------------------public routes ---------------------------*/}
           <Route path = "/" element={
           <div>
