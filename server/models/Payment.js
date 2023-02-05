@@ -13,6 +13,7 @@ const paymentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // email -- user
 });
 
 const Payment = mongoose.model("Payment", paymentSchema);
