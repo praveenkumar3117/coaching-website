@@ -11,7 +11,7 @@ const Physics = () => {
   const [chapters, setChapters] = useState(()=>new Set());
   const [chapterArr, setChapterArr] = useState([]);
   const location = useLocation();
-  console.log(location.state)
+  // console.log(location.state)
   const {type, courseName, courseCategory} = location.state;
 
   useEffect(()=>{
@@ -122,13 +122,67 @@ const Physics = () => {
       }catch(err){}
       
     }
+    
+    const fetchVideosUser2 = async()=>{
+      try{
+          
+        const subject = "Physics";
+        const batch = JSON.parse(localStorage.getItem('data')).result.batch;
+        const category = location.state.courseCategory;
+
+        fetch(`http://localhost:5000/api/fetchVideos/course-video`, {
+          method:'post',
+          body:JSON.stringify({courseName}),
+          headers:{
+            'Content-Type':'application/json'
+          }
+        }).then((response)=>{
+          response.json().then(
+            (lectureArr)=>{
+              console.log(lectureArr)
+
+              lectureArr.forEach(element => {
+                if(!chapters.has(element.chapter)){
+                  setChapters(prev => new Set(prev).add(element.chapter));
+                  chapters.add(element.chapter);
+                  console.log(chapters)
+                }
+              });
+
+              setLectures([...lectureArr])
+              setChapterArr([...chapters].sort((a,b)=>{
+                if(parseInt(a)<parseInt(b)){
+                  return -1;
+                }else{
+                  return 1;
+                }
+              }));
+
+            }
+          )
+        })
+        .catch((err)=>{
+          console.log("Error is ",err)
+        })
+
+        if(lectures.length===0){
+          setLectures([{
+            subject:"Physics",
+            batch:batch,
+            title:"No Videos Uploaded",
+            pic:"../../../images/user.png"
+          }]);
+        }
+      }catch(err){}
+      
+    }
 
     if(type==="faculty"){
       fetchVideosFaculty();
     }else if(type==="category"){
       fetchVideos();
     }else if(type==="user2"){
-
+      fetchVideosUser2();
     }
 
     console.log(lectures)

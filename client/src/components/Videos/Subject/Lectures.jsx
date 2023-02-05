@@ -9,14 +9,12 @@ const Lectures = () => {
     const [lectures, setLectures] = useState(location.state);
     const [loading, setLoading] = useState(true);
     
-
-    
     useEffect(()=>{
       // console.log(lectures)
       setLoading(true);
       try{
         console.log("HELLo")
-        console.log(lectures)
+        console.log("Lectures= " ,lectures)
         // console.log(first)
         const newLec = lectures.sort((vid1, vid2)=>{
           console.log(vid1.chapter)
