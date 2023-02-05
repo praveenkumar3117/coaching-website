@@ -49,10 +49,10 @@ exports.FetchCourseWithCategory = async (req, res) => {
 exports.FetchCourseWithUser2 = async (req, res) => {
     try {
         const email = req.body.email
-        const data = await Course.find()
+        const data = await Course.find({})
         const result = []
         data.forEach(item => {
-            if (item.user2Array.find(email)) {
+            if (item.user2Array.includes(email)) {
                 result.push(item)
             }
         })

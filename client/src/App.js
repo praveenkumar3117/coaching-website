@@ -88,7 +88,7 @@ function App() {
     }else if(data?.userloggedin===2){
       setUserloggedin(2);
     }else if(userloggedin===3){
-      return <NavbarUser2/> 
+      setUserloggedin(3)
     }
     console.log(data?.userloggedin)
   }, [data?.userloggedin])
@@ -102,7 +102,7 @@ function App() {
         return <NavbarStudent/>;
       }else if(userloggedin === 2){ // 2 for faculty
         return <NavbarFaculty/>;
-      }else if(userloggedin===3){
+      }else if(userloggedin===3){ // 3 for user2
         return <NavbarUser2/> 
       }else{
         return <Navbar/>;
@@ -132,7 +132,6 @@ function App() {
   return (
     
     <div>
-      <Payment/> 
       <div className="App bg-gray-100 font-lato">
       <BrowserRouter>
       <LoginContext.Provider value = {loginContextparams}>
@@ -176,6 +175,7 @@ function App() {
           <Route path ="/courses/neet" element = {<ViewNEET user="student"/> } />
           <Route path ="/faculty/courses/neet" element = {<ViewNEET user="faculty"/> } />
           <Route path ="/faculty/courses/jee" element = {<ViewJEE user="faculty"/> } />
+          <Route path ="/buycourses" element = {<Payment/> } />
           
 
           {/* ------------------protected routes------------------- */}
@@ -200,7 +200,7 @@ function App() {
           
           {/* ////////////////////Faculty Routes ////////////////////// */}
           
-          <Route path ="/upload-video" element = {<Protected user="faculty" setProgress = {setProgress} Component={Upload}/>} />
+          <Route path ="/upload-video/:subject/:courseName/:courseCategory" element = {<Protected user="faculty" setProgress = {setProgress} Component={Upload}/>} />
           <Route path ="/profile/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component={Faculty}/>} />
           
           {/* JEE Routes */}

@@ -10,13 +10,22 @@ const AddCourse = () => {
             Date: new Date(),
             JEE: false,
             NEET: false,
-            category:null
+            category:null,
+            Fees:0
         })
         const setMyCourseInfo = (e)=>{
-            setCourseInfo(existingValues =>({
-                ...existingValues,
-                [e.target.name] : e.target.value
-                }));
+            if(e.target.name==="Fees"){
+                setCourseInfo(existingValues =>({
+                    ...existingValues,
+                    [e.target.name] : parseInt(e.target.value)
+                    }));
+            }else{
+                setCourseInfo(existingValues =>({
+                    ...existingValues,
+                    [e.target.name] : e.target.value
+                    }));
+
+            }
         }
 
         const setBatch = (e)=>{
@@ -84,6 +93,23 @@ const AddCourse = () => {
                             id="title"
                             name='title'
                             placeholder="Course Name"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <div class="mb-3 xl:w-96">
+                            <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
+                            >Enter Course Fees</label>
+                            <input required
+                            onChange={setMyCourseInfo}
+                            type="number"
+                            class="
+                                form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                            "
+                            id="Fees"
+                            name='Fees'
+                            placeholder="Course Fees"
                             />
                         </div>
                     </div>
