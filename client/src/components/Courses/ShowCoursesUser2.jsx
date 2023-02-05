@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import shortid from 'shortid'
 
 const ShowCoursesUser2 = () => {
-    
+
         const [courses, setCourses] = useState([]);
         
         const fetchCourses = async()=>{
@@ -22,8 +22,10 @@ const ShowCoursesUser2 = () => {
             })
 
             result = await result.json()
+            console.log(result)
             setCourses([...result])
         }
+
         useEffect(()=>{
             fetchCourses()
         }, [])

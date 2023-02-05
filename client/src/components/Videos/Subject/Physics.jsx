@@ -12,7 +12,7 @@ const Physics = () => {
   const [chapterArr, setChapterArr] = useState([]);
   const location = useLocation();
   console.log(location.state)
-  const {type, courseName} = location.state;
+  const {type, courseName, courseCategory} = location.state;
 
   useEffect(()=>{
     const fetchVideosFaculty = async()=>{
@@ -31,6 +31,7 @@ const Physics = () => {
         }).then((response)=>{
           response.json().then(
             (lectureArr)=>{
+              console.log(lectureArr)
 
               lectureArr.forEach(element => {
                 if(!chapters.has(element.chapter)){
@@ -84,6 +85,7 @@ const Physics = () => {
         }).then((response)=>{
           response.json().then(
             (lectureArr)=>{
+              console.log(lectureArr)
 
               lectureArr.forEach(element => {
                 if(!chapters.has(element.chapter)){
@@ -147,7 +149,7 @@ const Physics = () => {
     {type==="faculty"?
     (
 
-      <Link to="/upload-video">
+      <Link to={`/upload-video/Physics/${courseName}/${courseCategory}`}>
         {/* Add Video Card */}
         <div className="max-w-sm m-4 p-4 hover:bg-blue-400 active:bg-[#5F9DF7] rounded overflow-hidden shadow-lg bg-[#5F9DF7]">
             <div className = "px-6 py-4 mx-auto flex justify-center items-center">

@@ -30,7 +30,7 @@ const ShowCourses = () => {
 
         {
             courses.map((item, index)=>(
-                <Link key={shortid.generate()} to={item.JEE?'/faculty/courses/jee':'/faculty/courses/neet'} state={{courseName: item.courseName, type:"faculty"}}>
+                <Link key={shortid.generate()} to={item.JEE?'/faculty/courses/jee':'/faculty/courses/neet'} state={{courseName: item.title, type:"faculty", courseCategory: item.category}}>
                     {/* Course Card */}
                     <div key={index} className="max-w-sm w-full m-4 p-4 hover:bg-blue-400 active:bg-[#5F9DF7] rounded overflow-hidden shadow-lg bg-[#5F9DF7]">
                         <div className = "px-6 py-4">

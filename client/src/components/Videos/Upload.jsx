@@ -3,7 +3,7 @@ import { storage } from '../../firebase'
 import { useState,useEffect } from 'react'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {IoIosArrowDropdownCircle} from 'react-icons/io'
 
 // Naming convention in the video storage
@@ -15,8 +15,14 @@ const Upload = ({setProgress}) => {
   const [uploadDate, setUploadDate]=useState(new Date())
   const [show, setShow ] = useState(false);
 
+  const params = useParams();
+  const {subject, courseName, courseCategory} = params;
+
+  const [teacherEmail, setTeacherEmail] = useState(JSON.parse(localStorage.getItem('data')).result.email)
+
   // Setting today's date and closing the subject dropdown
   useEffect(()=>{
+    setTeacherEmail(JSON.parse(localStorage.getItem('data')).result.email);
     setUploadDate(new Date());
     setShow(false);
   }, []);
@@ -25,31 +31,22 @@ const Upload = ({setProgress}) => {
   const [showWarning, setWarning] = useState(false);
   const [fileName, setFileName ] = useState('None');
   const navigate = useNavigate();
-  const [subject, setSubject] = useState("Subject");
 
   const [videoInfo, setVideoInfo]=useState(
     {title: "",
     subject:subject,
-    teacher:"",
-    chapterNum:0, 
+    chapter:0,
+    category:-1, 
     lecture:0,
     JEE:false, 
-    NEET:false, 
-    Foundation:false,
-    date: uploadDate,
-    email: ""
+    NEET:false,
+    Date: uploadDate,
+    email: teacherEmail,
+    courseName: courseName,
+    vidurl: null,
+    category: courseCategory
   });
 
-  const setMySubject = (e)=>{
-    console.log(e)
-    console.log(videoInfo.subject)
-    setSubject(e)
-    setVideoInfo(existingValues=>({
-      ...existingValues,
-      subject:e
-    }))
-    setShow(!show);
-  }
 
 
   // This function sends the video data to mongodb and stores the information of that video in the database
@@ -66,12 +63,6 @@ const Upload = ({setProgress}) => {
       return;
     }
     
-    if(videoInfo.subject==="Subject"){
-      setProgress(0);
-      setWarning(true);
-      console.log("Not uploaded")
-      return;
-    }
 
     const videoRef = ref(storage, `videos/${video.name + uuidv4()}`)
     // set progress for loading bar
@@ -109,12 +100,12 @@ const Upload = ({setProgress}) => {
   // Handling Storing information of the video
   const setMyVideoInfo = (e)=>{
 
-    if(e.target.value ==="on" && (e.target.name ==="JEE" || e.target.name ==="NEET" || e.target.name ==="Foundation")){
+    if(e.target.value ==="on" && (e.target.name ==="JEE" || e.target.name ==="NEET")){
       setVideoInfo(existingValues=>({
         ...existingValues,
         [e.target.name]: e.target.checked
       }));
-    }else if(e?.target?.name==="chapterNum"){
+    }else if(e?.target?.name==="chapter"){
       setVideoInfo(existingValues=>({
         ...existingValues,
         [e.target.name]: parseInt(e.target.value)
@@ -184,16 +175,9 @@ const Upload = ({setProgress}) => {
             </div>
 
             <div className='mx-auto my-2 lg:my-0 w-2/3'>
-              <div className='bg-blue-300 p-4 rounded w-full'>
-                <button type='button' onClick={()=>{setShow(!show)}} className="w-full flex flex-row justify-center items-center">{subject}<IoIosArrowDropdownCircle/></button>
-              </div>
-              <div className={show?`absolute flex flex-col bg-gray-300 `:`hidden`}>
 
-                <button type='button' onClick={()=>{setMySubject("Physics")}} className='p-2 border border-black'>Physics</button>
-                <button type='button' onClick={()=>{setMySubject("Chemistry")}} className='p-2 border border-black'>Chemistry</button>
-                <button type='button' onClick={()=>{setMySubject("Maths")}} className='p-2 border border-black'>Maths</button>
-                <button type='button' onClick={()=>{setMySubject("Biology")}} className='p-2 border border-black'>Biology</button>
-              </div>
+                <button disabled type='button' className='p-4 rounded bg-blue-300 w-full'>Physics</button>
+              
             </div>
 
             <div className='mx-4 lg:flex lg:flex-row '>
@@ -205,12 +189,12 @@ const Upload = ({setProgress}) => {
 
           <div className='flex flex-col md:flex-row lg:flex-row p-2 mx-2'>
             <div className='m-2'>
-              <label htmlFor="teacher" className='mt-4 mx-2'>Teacher's Code</label>
-              <input required type="text" onChange={setMyVideoInfo} name="teacher" id="teacher" placeholder="Teacher's Code" className="p-4 rounded border border-black"/>
+              <label htmlFor="teacher" className='mt-4 mx-2'>Teacher's Email</label>
+              <input disabled required type="text" name="email" id="email" placeholder={teacherEmail} className="p-4 rounded border border-black"/>
             </div>
             <div className='m-2'>
               <label htmlFor="Chapter Number" className='mt-4 mx-2'>Chapter Number</label>
-              <input required type="number" onChange={setMyVideoInfo} name="chapterNum" id="chapterNum" placeholder="Chapter Number" className="p-4 rounded border border-black"/>
+              <input required type="number" onChange={setMyVideoInfo} name="chapter" id="chapter" placeholder="Chapter Number" className="p-4 rounded border border-black"/>
             </div>
           </div>
 
@@ -225,11 +209,6 @@ const Upload = ({setProgress}) => {
             <div className='mx-2 px-2'>
               <label htmlFor="NEET" className='mx-2'>NEET</label>
               <input type="checkbox" onChange={setMyVideoInfo} name="NEET" id="NEET" />
-            </div>
-
-            <div className='mx-2 px-2'>
-              <label htmlFor="Foundation" className='mx-2'>Foundation</label>
-              <input type="checkbox" onChange={setMyVideoInfo} name="Foundation" id="Foundation" />
             </div>
 
             

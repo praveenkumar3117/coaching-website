@@ -28,7 +28,7 @@ const LoginUser2 = () => {
   
       if(result.success){
         setLogInWarning(""); // no login warning
-        setUserloggedin(1); // student loggedin 
+        setUserloggedin(3); // user2 loggedin 
         navigate('/'); // navigate to home page after successful login
         localStorage.setItem("data", JSON.stringify({result, ...{userloggedin: 3, loggedin:true}})); // save data in localstorage
       }else{

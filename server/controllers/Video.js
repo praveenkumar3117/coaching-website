@@ -36,8 +36,8 @@ exports.FetchVideosFaculty = async (req, res) => {
         const email = req.body.email;
         const courseName = req.body.courseName;
         const subject = req.body.subject;
-        if (tCode) {
-            const data = await Video.find({ "email": email, courseName:courseName, subject: subject }).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        if (email&&courseName&&subject) {
+            const data = await Video.find({ "email": email, courseName:courseName, subject: subject }).populate('title').populate('vidurl').populate('chapter').populate('lecture').populate('pic')
             console.log(data);
             res.status(200).json(data)
         } else {
