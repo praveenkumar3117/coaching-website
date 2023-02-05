@@ -190,14 +190,14 @@ function App() {
 
           {/* JEE Student */}
           <Route path ="/watch/student/JEE" element = {<Protected user="student" setProgress = {setProgress} Component={ViewJEE}/>} />
-          <Route path ="/watch/student/JEE/Physics" element = {<Protected setProgress={setProgress} user="student" batch="JEE" Component={Physics}/>} />
-          <Route path ="/watch/student/JEE/Chemistry" element = {<Protected setProgress={setProgress} user="student" batch="JEE" Component={Chemistry}/>} />
-          <Route path ="/watch/student/JEE/Maths" element = {<Protected setProgress={setProgress} user="student" batch="JEE" Component={Maths}/>} />
+          <Route path ="/watch/student/JEE/Physics" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={Physics}/>} />
+          <Route path ="/watch/student/JEE/Chemistry" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={Chemistry}/>} />
+          <Route path ="/watch/student/JEE/Maths" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={Maths}/>} />
           {/* NEET Student */}
-          <Route path ="/watch/student/NEET" element = {<Protected setProgress={setProgress} user="student" Component={ViewNEET}/>} />
-          <Route path ="/watch/student/NEET/Physics" element = {<Protected setProgress={setProgress} user="student" batch="NEET" Component={Physics}/>} />
-          <Route path ="/watch/student/NEET/Chemistry" element = {<Protected setProgress={setProgress} user="student" batch="NEET" Component={Chemistry}/>} />
-          <Route path ="/watch/student/NEET/Biology" element = {<Protected setProgress={setProgress} user="student" batch="NEET" Component={Biology}/>} />
+          <Route path ="/watch/student/NEET" element = {<Protected setProgress={setProgress} user="student" type="user2" Component={ViewNEET}/>} />
+          <Route path ="/watch/student/NEET/Physics" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={Physics}/>} />
+          <Route path ="/watch/student/NEET/Chemistry" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={Chemistry}/>} />
+          <Route path ="/watch/student/NEET/Biology" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={Biology}/>} />
           
           {/* ////////////////////Faculty Routes ////////////////////// */}
           

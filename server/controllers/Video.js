@@ -72,7 +72,7 @@ exports.fetchVideo = async (req, res) => {
 exports.fetchVideoWithCourseName = async (req, res) => {
     try {
         const courseName = req.body.courseName
-        const data = await Video.find({ 'courseName': courseName }).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+        const data = await Video.find({ 'courseName': courseName }).populate('title').populate('vidurl').populate('chapter').populate('lecture').populate('pic')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({

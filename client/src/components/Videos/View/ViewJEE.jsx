@@ -23,6 +23,7 @@ const ViewJEE = (props) => {
 
     const location = useLocation()
     console.log(location.state)
+    console.log(`/watch/${user}/JEE/`);
   
 
   return (
