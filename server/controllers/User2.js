@@ -20,7 +20,7 @@ exports.registerUser = async (req, res) => {
             pic,
             DOB,
         })
-
+        const token = await generateToken(user._id)
         if (res.status(201)) {
             // Sending Mail
             res.send({
@@ -30,7 +30,8 @@ exports.registerUser = async (req, res) => {
                 email: user.email,
                 year: user.year,
                 pic: user.pic,
-                dob: user.DOB
+                dob: user.DOB,
+                token: token,
             })
         }
 
@@ -54,7 +55,6 @@ exports.authUser = async (req, res) => {
                 email: user.email,
                 pic: user.pic,
                 token: generateToken(user._id),
-
             })
         }
         else {

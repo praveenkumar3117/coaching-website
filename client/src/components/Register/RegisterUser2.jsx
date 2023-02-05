@@ -55,6 +55,7 @@ const RegisterUser2 = () => {
 
         result = await result.json();
         if(result.success){
+          localStorage.setItem("data", JSON.stringify({result, ...{userloggedin: 2, loggedin:true}})); // save data in localstorage
           navigate('/');
         }else{
           setWarning(result.message);

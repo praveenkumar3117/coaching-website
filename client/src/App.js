@@ -81,13 +81,14 @@ function App() {
   const [userloggedin, setUserloggedin] = useState(-1);
   
   useEffect(()=>{
+    console.log(data)
     if(data?.userloggedin===0){ 
       setUserloggedin(0);
     }else if(data?.userloggedin===1){
       setUserloggedin(1);
     }else if(data?.userloggedin===2){
       setUserloggedin(2);
-    }else if(userloggedin===3){
+    }else if(data?.userloggedin===3){
       setUserloggedin(3)
     }
     console.log(data?.userloggedin)
