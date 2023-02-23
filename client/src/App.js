@@ -175,7 +175,7 @@ function App() {
           <Route path ="/courses/neet" element = {<ViewNEET user="student"/> } />
           <Route path ="/faculty/courses/neet" element = {<ViewNEET user="faculty"/> } />
           <Route path ="/faculty/courses/jee" element = {<ViewJEE user="faculty"/> } />
-          <Route path ="/buycourses" element = {<Payment/> } />
+          <Route path ="/buy-courses" element = {<Payment/> } />
           
 
           {/* ------------------protected routes------------------- */}
