@@ -21,7 +21,7 @@ exports.checkout = async (req, res) => {
             order,
         });
     } catch (error) {
-        res.send(500).send(error.message)
+        res.status(500).send(error.message)
     }
 }
 
@@ -56,7 +56,7 @@ exports.paymentVerification = async (req, res) => {
             });
         }
     } catch (error) {
-        res.send(500).send(error.message)
+        res.status(500).send(error.message)
     }
 }
 
