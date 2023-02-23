@@ -64,3 +64,22 @@ exports.FetchCourseWithUser2 = async (req, res) => {
         })
     }
 }
+
+exports.FetchCourseNotInUser2 = async (req, res) => {
+    try {
+        const email = req.body.email
+        const data = await Course.find({})
+        const result = []
+        data.forEach(item => {
+            if (!(item.user2Array.includes(email))) {
+                result.push(item)
+            }
+        })
+        res.status(201).json(result)
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
