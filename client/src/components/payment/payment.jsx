@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import axios from 'axios'
+import shortid from 'shortid'
 
 const Payment = () => {
+    const [courses, setCourses] = useState([])
 
     const checkoutHandler = async (amount) => {
 
@@ -37,10 +39,41 @@ const Payment = () => {
         razor.open()
     }
 
+
+    const fetchCourses = async () => {
+        const email = JSON.parse(localStorage.getItem('data')).result.email;
+        return fetch('http://localhost:5000/api/Courses/fetch-course-not-in-user2', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email})
+        }).then(
+            (response)=>
+
+            response.json().then((data)=>{
+                setCourses(data)
+                console.log(courses)
+            })
+        )
+    }
+
+    useEffect(() => {
+
+        fetchCourses();
+    
+    }, [])
+
     
     return (
-        <div>
-            <Card amount={5000} checkoutHandler={checkoutHandler} />
+        <div className='pt-24 grid lg:grid lg:grid-cols-3 lg:grid-row-3 flex-col justify-center items-center'>
+            {
+                courses.map((item, index) => (
+                    <Card key={shortid.generate()} amount={item.Fees} checkoutHandler={checkoutHandler} />
+
+                ))
+            }
+
         </div>
     )
 }

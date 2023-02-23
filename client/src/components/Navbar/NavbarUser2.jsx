@@ -105,15 +105,15 @@ const NavbarUser2 = () => {
                 </Link>
               </li>
 
-              {/* Courses */}
+              {/* Buy Courses */}
                <li>
-                 <Link to='/Courses' onClick={()=>{setOpen(!open)}}>
+                 <Link to='/buy-courses' onClick={()=>{setOpen(!open)}}>
                  <div
                    className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 h-10"
                  >
                    <FaBookReader />
                    <span className="flex-1 text-2xl whitespace-nowrap">
-                     {open ? "Courses" : ""}
+                     {open ? "Buy Courses" : ""}
                    </span>
                  </div>
                  </Link>
@@ -132,7 +132,7 @@ const NavbarUser2 = () => {
                 </Link>
               </li>
 
-              {/* Courses */}
+              {/* Purchased Courses */}
               <li>
                 <Link to={`/user2/courses`} onClick={()=>{setOpen(!open)}}>
                 <div
@@ -140,7 +140,7 @@ const NavbarUser2 = () => {
                 >
                   <AiOutlinePlayCircle />
                   <span className="flex-1 text-2xl whitespace-nowrap">
-                    {open ? "Courses" : ""}
+                    {open ? "Your Courses" : ""}
                   </span>
                 </div>
                 </Link>
