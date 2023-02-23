@@ -164,7 +164,6 @@ function App() {
           <Route path ="/login/admin" element = {<LoginSuperUser/>} />
           <Route path ="/contact" element = {<Contact setProgress ={setProgress}/>} />
           <Route path ="/about" element = {<AboutUsInfo/>} />
-          {/* <Route path ="/Courses" element = {<CoursesInfo/>} /> */}
           <Route path ="/videos" element = {<Player/> } />
           <Route path ="/chapter" element = {<Chapters/> } />
           <Route path ="/lectures" element = {<Lectures/> } />
