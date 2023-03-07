@@ -14,6 +14,8 @@ const Payment = () => {
             amount
         })
 
+        console.log(order)
+
         const options = {
             key: key, 
             amount: order.amount, 
@@ -23,6 +25,11 @@ const Payment = () => {
             image: "https://drive.google.com/file/d/1GMudk9jWfEYGBZ19klA6qwFvDNA4w_2d/view?usp=share_link",
             order_id: order.id,
             callback_url: "http://localhost:5000/api/payment/paymentVerification",
+            handler: function (response){
+                alert(response.razorpay_payment_id);
+                alert(response.razorpay_order_id);
+                alert(response.razorpay_signature)
+            },
             prefill: {
                 name: "Gaurav Kumar",
                 email: "gaurav.kumar@example.com",

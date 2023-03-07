@@ -134,6 +134,7 @@ function App() {
     
     <div>
       <div className="App bg-gray-100 font-lato">
+      <Payment/>
       <BrowserRouter>
       <LoginContext.Provider value = {loginContextparams}>
       
@@ -242,7 +243,6 @@ function App() {
 
           {/* ////////////////////// Success Redirects ////////////////////////// */}
           <Route path ="/success/:message" element = {<Success/> } />
-
         </Routes>
           <Footer/>
         </LoginContext.Provider>

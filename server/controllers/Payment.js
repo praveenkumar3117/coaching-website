@@ -3,8 +3,8 @@ const crypto = require('crypto')
 const Payment = require('../models/Payment')
 
 const instance = new Razorpay({
-    key_id: "rzp_test_JF6x9X3JSZYaJG",
-    key_secret: "rD42VmvSlyq7gruoZzfoFC2Z"
+    key_id: "rzp_test_mQT2hOwfgh1POz",
+    key_secret: "knSoRjBjP7kvytO2hxPqwosk"
 });
 
 
@@ -15,7 +15,7 @@ exports.checkout = async (req, res) => {
             currency: "INR",
         };
         const order = await instance.orders.create(options);
-
+        console.log(order)
         res.status(200).json({
             success: true,
             order,
@@ -29,7 +29,7 @@ exports.paymentVerification = async (req, res) => {
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
             req.body;
-
+        console.log(req.body);
         const body = razorpay_order_id + "|" + razorpay_payment_id;
 
         const expectedSignature = crypto
@@ -52,7 +52,7 @@ exports.paymentVerification = async (req, res) => {
             );
         } else {
             res.status(400).json({
-                success: false,
+                razorpay_signature:razorpay_signature,
             });
         }
     } catch (error) {
@@ -61,5 +61,5 @@ exports.paymentVerification = async (req, res) => {
 }
 
 exports.getKey = (req, res) => {
-    res.status(200).json({ key: "rzp_test_JF6x9X3JSZYaJG" })
+    res.status(200).json({ key: "rzp_test_mQT2hOwfgh1POz" })
 }
