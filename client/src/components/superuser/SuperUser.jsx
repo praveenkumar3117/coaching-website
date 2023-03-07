@@ -22,7 +22,7 @@ const SuperUser = () => {
                     </div>
                 </div>
 
-                <div className="p-4 md:w-1/2 lg:w-1/4 sm:w-1/2 w-full">
+                <div onClick={()=>{navigate('/admin/removestudent')}} className="p-4 md:w-1/2 lg:w-1/4 sm:w-1/2 w-full">
                     <div className="h-24 hover:scale-100 hover:bg-green-400 duration-300 border-2 border-gray-800 px-4 py-6 rounded-lg flex justify-center align-middle items-center space-x-4">
                         <FiUserX className="title-font font-medium text-6xl text-black" />
                         <p className="text-2xl select-none text-black leading-relaxed">Remove Student</p>
@@ -36,7 +36,7 @@ const SuperUser = () => {
                     </div>
                 </div>
 
-                <div className="p-4 md:w-1/2 lg:w-1/4 sm:w-1/2 w-full">
+                <div onClick={()=>{navigate('/admin/removefaculty')}} className="p-4 md:w-1/2 lg:w-1/4 sm:w-1/2 w-full">
                     <div className="h-24 hover:scale-100 hover:bg-yellow-400 duration-300 border-2 border-gray-800 px-4 py-6 rounded-lg flex justify-center align-middle items-center space-x-4">
                         <FiUserX className="title-font font-medium text-6xl text-black" />
                         <p className="text-2xl select-none text-black leading-relaxed">Remove Faculty</p>

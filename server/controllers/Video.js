@@ -3,9 +3,9 @@ const Video = require('../models/Video');
 exports.AddVideo = async (req, res) => {
     try {
 
-        const { title, email, subject, teacher, chapterNum, JEE, NEET, category, Date, vidurl, lecture, courseName } = req.body;
+        const { title, email, subject, teacher, chapter, JEE, NEET, category, Date, vidurl, lecture, courseName } = req.body;
         console.log(req.body);
-        const chapter = chapterNum;
+        // const chapter = chapterNum;
         let video = await Video.create({
             title,
             subject,

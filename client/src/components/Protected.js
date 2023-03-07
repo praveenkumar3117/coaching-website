@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Protected = (props) => {
   
-  const {Component, user, batch, setProgress, type} = props;
+  const {Component, user, batch, setProgress, type, redirect1, redirect2} = props;
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -62,7 +62,8 @@ const Protected = (props) => {
   return (
     
     <div>
-      <Component setProgress={setProgress} batch={batch}/>    
+      {Component}
+      {/* <Component setProgress={setProgress} batch={batch} redirect1={redirect1} redirect2={redirect2}/>     */}
     </div>
   )
 }

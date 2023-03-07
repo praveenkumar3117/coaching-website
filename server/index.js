@@ -12,6 +12,7 @@ const imageRoutes = require('./routes/imageRoutes');
 const User2Routes = require('./routes/User2')
 const Courses = require('./routes/Courses')
 const payment = require('./routes/Payment')
+const searchRoutes = require('./routes/searchRoutes')
 const app = express()
 
 
@@ -44,6 +45,8 @@ app.use('/api/test',testRoutes)
 app.use('/api/images',imageRoutes)
 
 app.use('/api/payment',payment)
+
+app.use('/api/search',searchRoutes)
 
 
 app.listen(PORT, console.log(`running`, PORT))

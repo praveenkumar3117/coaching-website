@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {AiOutlineSearch} from 'react-icons/ai'
 
-const DeleteUser = () => {
+const DeleteFaculty = () => {
   const [User, setUser] = useState([])
   const [error, setError] = useState('')
 
@@ -12,7 +12,7 @@ const DeleteUser = () => {
 
     try {
       console.log(searchQuery)
-      const response = await fetch('http://localhost:5000/api/search/users', {
+      const response = await fetch('http://localhost:5000/api/search/teachers', {
         method: 'post',
         body: JSON.stringify({key:searchQuery}),
         headers: {
@@ -51,7 +51,6 @@ const DeleteUser = () => {
     }
   }
 
-
   useEffect(()=>{
     searchUser();
   }, [])
@@ -72,7 +71,7 @@ const DeleteUser = () => {
       {
         User.length > 0 ? User.map((user) => {
           return (
-            <div class="m-4 p-4">
+            <div class="m-4 p-2">
 
                 <div class="max-w-xs">
                     <div class="bg-white shadow-xl rounded-lg py-3">
@@ -82,7 +81,7 @@ const DeleteUser = () => {
                         <div class="p-2">
                             <h3 class="text-center text-xl text-gray-900 font-medium leading-8">{user.name}</h3>
                             <div class="text-center text-gray-400 text-xs font-semibold">
-                                <p>Student</p>
+                                <p>Faculty</p>
                             </div>
                             <table class="text-xs my-3">
                                 <tbody>
@@ -95,16 +94,8 @@ const DeleteUser = () => {
                                     <td class="px-2 py-2">{user.phone}</td>
                                 </tr>
                                 <tr>
-                                    <td class="px-2 py-2 text-gray-500 font-semibold">Batch</td>
-                                    <td class="px-2 py-2">{user.batch}</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-2 py-2 text-gray-500 font-semibold">Category</td>
-                                    <td class="px-2 py-2">{user.category}</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-2 py-2 text-gray-500 font-semibold">Enrollment ID</td>
-                                    <td class="px-2 py-2">{user.enRoll}</td>
+                                    <td class="px-2 py-2 text-gray-500 font-semibold">Subject</td>
+                                    <td class="px-2 py-2">{user.subject}</td>
                                 </tr>
                             </tbody></table>
 
@@ -129,4 +120,4 @@ const DeleteUser = () => {
   )
 }
 
-export default DeleteUser
+export default DeleteFaculty

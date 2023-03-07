@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {AiOutlineSearch} from 'react-icons/ai'
 
-const DeleteUser = () => {
+const DeleteUser2 = () => {
   const [User, setUser] = useState([])
   const [error, setError] = useState('')
 
@@ -12,7 +12,7 @@ const DeleteUser = () => {
 
     try {
       console.log(searchQuery)
-      const response = await fetch('http://localhost:5000/api/search/users', {
+      const response = await fetch('http://localhost:5000/api/search/users2', {
         method: 'post',
         body: JSON.stringify({key:searchQuery}),
         headers: {
@@ -51,7 +51,6 @@ const DeleteUser = () => {
     }
   }
 
-
   useEffect(()=>{
     searchUser();
   }, [])
@@ -72,7 +71,7 @@ const DeleteUser = () => {
       {
         User.length > 0 ? User.map((user) => {
           return (
-            <div class="m-4 p-4">
+            <div class="m-4 p-2">
 
                 <div class="max-w-xs">
                     <div class="bg-white shadow-xl rounded-lg py-3">
@@ -129,4 +128,4 @@ const DeleteUser = () => {
   )
 }
 
-export default DeleteUser
+export default DeleteUser2

@@ -69,6 +69,8 @@ import RegisterUser2 from './components/Register/RegisterUser2';
 import NavbarUser2 from './components/Navbar/NavbarUser2';
 import Payment from './components/payment/payment';
 import PaymentSuccess from './components/payment/PaymentSuccess';
+import DeleteUser2 from './components/superuser/DeleteUser2';
+import DeleteFaculty from './components/superuser/DeleteFaculty';
 
 
 function App() {
@@ -157,7 +159,7 @@ function App() {
           }/>
           <Route path ="/login" element = {<LoginCheck/>} />
           <Route path ="/register" element = {<RegisterUser2/>} />
-          <Route path ="/login/usertype" element = {<AskUser/>} />
+          <Route path ="/login/usertype" element = {<AskUser redirect1={"/login/student"} redirect2 = {"/login/user2"}/>} />
           <Route path ="/login/student" element = {<LoginStudent/>} />
           <Route path ="/login/user2" element = {<LoginUser2/>} />
           <Route path ="/login/teacher" element = {<LoginFaculty/>} />
@@ -182,64 +184,70 @@ function App() {
           {/* ------------------protected routes------------------- */}
 
           {/* /////////////////////Student Routes//////////////////////// */}
-          <Route path ="/profile/student" element = {<Protected user="student" setProgress = {setProgress} Component={Student}/>} />
+          <Route path ="/profile/student" element = {<Protected user="student" setProgress = {setProgress} Component={<Student setProgress = {setProgress}/>}/>} />
 
           <Route path ="/student/test" element = {<ViewTestStudent /> } />
 
-          <Route path ="/upcoming-tests/student/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={ShowTestCards} /> } />
+          <Route path ="/upcoming-tests/student/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={<ShowTestCards  setProgress = {setProgress}/>} /> } />
 
           {/* JEE Student */}
-          <Route path ="/watch/student/JEE" element = {<Protected user="student" setProgress = {setProgress} Component={ViewJEE}/>} />
-          <Route path ="/watch/student/JEE/Physics" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={Physics}/>} />
-          <Route path ="/watch/student/JEE/Chemistry" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={Chemistry}/>} />
-          <Route path ="/watch/student/JEE/Maths" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={Maths}/>} />
+          <Route path ="/watch/student/JEE" element = {<Protected user="student" setProgress = {setProgress} Component={<ViewJEE setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/student/JEE/Physics" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={<Physics setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/student/JEE/Chemistry" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={<Chemistry setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/student/JEE/Maths" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={<Maths setProgress = {setProgress}/>}/>} />
           {/* NEET Student */}
-          <Route path ="/watch/student/NEET" element = {<Protected setProgress={setProgress} user="student" type="user2" Component={ViewNEET}/>} />
-          <Route path ="/watch/student/NEET/Physics" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={Physics}/>} />
-          <Route path ="/watch/student/NEET/Chemistry" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={Chemistry}/>} />
-          <Route path ="/watch/student/NEET/Biology" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={Biology}/>} />
+          <Route path ="/watch/student/NEET" element = {<Protected setProgress={setProgress} user="student" type="user2" Component={<ViewNEET setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/student/NEET/Physics" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={<Physics setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/student/NEET/Chemistry" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={<Chemistry setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/student/NEET/Biology" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={<Biology setProgress = {setProgress}/>}/>} />
           
           {/* ////////////////////Faculty Routes ////////////////////// */}
           
-          <Route path ="/upload-video/:subject/:courseName/:courseCategory" element = {<Protected user="faculty" setProgress = {setProgress} Component={Upload}/>} />
-          <Route path ="/profile/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component={Faculty}/>} />
+          <Route path ="/upload-video/:subject/:courseName/:courseCategory" element = {<Protected user="faculty" setProgress = {setProgress} Component={<Upload setProgress = {setProgress}/>}/>} />
+          <Route path ="/profile/faculty" element = {<Protected user="faculty" setProgress = {setProgress} Component={<Faculty setProgress = {setProgress}/>}/>} />
           
           {/* JEE Routes */}
-          <Route path ="/watch/faculty/JEE/Physics" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Physics}/>} />
-          <Route path ="/watch/faculty/JEE/Chemistry" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Chemistry}/>} />
-          <Route path ="/watch/faculty/JEE/Maths" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Maths}/>} />
+          <Route path ="/watch/faculty/JEE/Physics" element = {<Protected user="faculty" setProgress = {setProgress} Component = {<Physics setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/faculty/JEE/Chemistry" element = {<Protected user="faculty" setProgress = {setProgress} Component = {<Chemistry setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/faculty/JEE/Maths" element = {<Protected user="faculty" setProgress = {setProgress} Component = {<Maths setProgress = {setProgress}/>}/>} />
 
           {/* NEET Routes */}
-          <Route path ="/watch/faculty/NEET/Physics" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Physics}/>} />
-          <Route path ="/watch/faculty/NEET/Chemistry" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Chemistry}/>} />
-          <Route path ="/watch/faculty/NEET/Biology" element = {<Protected user="faculty" setProgress = {setProgress} Component = {Biology}/>} />
+          <Route path ="/watch/faculty/NEET/Physics" element = {<Protected user="faculty" setProgress = {setProgress} Component = {<Physics setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/faculty/NEET/Chemistry" element = {<Protected user="faculty" setProgress = {setProgress} Component = {<Chemistry setProgress = {setProgress}/>}/>} />
+          <Route path ="/watch/faculty/NEET/Biology" element = {<Protected user="faculty" setProgress = {setProgress} Component = {<Biology setProgress = {setProgress}/>}/>} />
           
-          <Route path ="/faculty/analysis" element = {<Protected user="faculty" setProgress={setProgress} Component={ViewTestAnalysis} /> } />
-          <Route path ="/faculty/test" element = {<Protected user="faculty" setProgress={setProgress} Component={ViewTestFaculty} /> } />
-          <Route path ="/upcoming-tests/faculty/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={ShowTestCards} /> } />
+          <Route path ="/faculty/analysis" element = {<Protected user="faculty" setProgress={setProgress} Component={<ViewTestAnalysis setProgress = {setProgress}/>} /> } />
+          <Route path ="/faculty/test" element = {<Protected user="faculty" setProgress={setProgress} Component={<ViewTestFaculty setProgress = {setProgress}/>} /> } />
+          <Route path ="/upcoming-tests/faculty/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={<ShowTestCards setProgress = {setProgress}/>} /> } />
 
           {/* /////////////////////Admin Routes//////////////////// */}
 
-          <Route path ="/admin/addstudent" element = {<Protected user="admin" setProgress = {setProgress} Component={AddStudent}/>} />
-          <Route path ="/admin/addfaculty" element = {<Protected user="admin" setProgress = {setProgress} Component={AddFaculty}/>} />
-          <Route path ="/admin/deleteuser" element = {<Protected user="admin" setProgress = {setProgress} Component={DeleteUser}/>} />
-          <Route path ="/addtest" element = {<Protected user="admin" setProgress={setProgress} Component ={AddTests}/> } />
-          <Route path ="/addanalysis" element = {<Protected user="admin" setProgress = {setProgress} Component={AddTestDetails}/> } />
-          <Route path ="/addcourses" element = {<Protected user="admin" setProgress = {setProgress} Component={AddCourse}/> } />
-          <Route path ="/viewcourses" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewCourses}/> } />
-          <Route path ="/viewtest/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuper} /> } />
-          <Route path ="/upcoming-tests/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={ViewTestSuperBatch} /> } />
-          <Route path ="/upcoming-tests/admin/:batchORsubject" element = {<Protected user="admin" setProgress = {setProgress} Component={ShowTestCards} /> } />
-          <Route path ="/test-analysis-form" element = { <Protected user="admin" setProgress = {setProgress} Component={AnalysisForm}/>} />
-          <Route path ="/viewanalysis" element = { <Protected user="admin" setProgress = {setProgress} Component={ShowAnalysisCard}/>} />
+          <Route path ="/admin/addstudent" element = {<Protected user="admin" setProgress = {setProgress} Component={<AddStudent setProgress = {setProgress}/>}/>} />
+          <Route path ="/admin/addfaculty" element = {<Protected user="admin" setProgress = {setProgress} Component={<AddFaculty setProgress = {setProgress}/>}/>} />
+          <Route path ="/admin/deleteuser" element = {<Protected user="admin" setProgress = {setProgress} Component={<DeleteUser setProgress = {setProgress}/>}/>} />
+          <Route path ="/addtest" element = {<Protected user="admin" setProgress={setProgress} Component ={<AddTests setProgress = {setProgress}/>}/> } />
+          <Route path ="/addanalysis" element = {<Protected user="admin" setProgress = {setProgress} Component={<AddTestDetails setProgress = {setProgress}/>}/> } />
+          <Route path ="/addcourses" element = {<Protected user="admin" setProgress = {setProgress} Component={<AddCourse setProgress = {setProgress}/>}/> } />
+          <Route path ="/viewcourses" element = {<Protected user="admin" setProgress = {setProgress} Component={<ViewCourses setProgress = {setProgress}/>}/> } />
+          <Route path ="/viewtest/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={<ViewTestSuper setProgress = {setProgress}/>} /> } />
+          <Route path ="/upcoming-tests/admin" element = {<Protected user="admin" setProgress = {setProgress} Component={<ViewTestSuperBatch setProgress = {setProgress}/>} /> } />
+          <Route path ="/upcoming-tests/admin/:batchORsubject" element = {<Protected user="admin" setProgress = {setProgress} Component={<ShowTestCards setProgress = {setProgress}/>} /> } />
+          <Route path ="/test-analysis-form" element = { <Protected user="admin" setProgress = {setProgress} Component={<AnalysisForm setProgress = {setProgress}/>}/>} />
+          <Route path ="/viewanalysis" element = { <Protected user="admin" setProgress = {setProgress} Component={<ShowAnalysisCard setProgress = {setProgress}/>}/>} />
 
-          <Route path ="/admin" element = { <Protected user="admin" setProgress = {setProgress} Component={SuperUser}/>} />
-          <Route path ="/addimages" element = {<Protected Component = {ImageOptions} user="admin" setProgress={setProgress}/> } />
-          <Route path ="/addsliderimages" element = {<Protected Component = {AddSliderImages} user="admin" setProgress={setProgress}/> } />
-          <Route path ="/addteacherimages" element = {<Protected Component = {AddTeacherImages} user="admin" setProgress={setProgress}/> } />
-          <Route path ="/removesliderimages" element = {<Protected Component = {RemoveSliderImages} user="admin" setProgress={setProgress}/> } />
-          <Route path ="/removeteacherimages" element = {<Protected Component = {RemoveTeacherImages} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/admin" element = { <Protected user="admin" setProgress = {setProgress} Component={<SuperUser setProgress = {setProgress}/>}/>} />
+          <Route path ="/addimages" element = {<Protected Component = {<ImageOptions setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/addsliderimages" element = {<Protected Component = {<AddSliderImages setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/addteacherimages" element = {<Protected Component = {<AddTeacherImages setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/removesliderimages" element = {<Protected Component = {<RemoveSliderImages setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
+          <Route path ="/removeteacherimages" element = {<Protected Component = {<RemoveTeacherImages setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
+          
+          
+          <Route path ="/admin/removestudent" element = {<Protected Component = {<AskUser redirect1={"/admin/removeuser"} redirect2={"/admin/removeuser2"} setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
+          <Route path="/admin/removeuser" element = {<Protected Component = {<DeleteUser setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
+          <Route path="/admin/removeuser2" element = {<Protected Component = {<DeleteUser2 setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
 
+          <Route path ="/admin/removefaculty" element = {<Protected Component = {<DeleteFaculty setProgress = {setProgress}/>} user="admin" setProgress={setProgress}/> } />
 
           {/* ////////////////////// Success Redirects ////////////////////////// */}
           <Route path ="/success/:message" element = {<Success/> } />
