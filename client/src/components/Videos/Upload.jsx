@@ -47,8 +47,6 @@ const Upload = ({setProgress}) => {
     category: courseCategory
   });
 
-
-
   // This function sends the video data to mongodb and stores the information of that video in the database
   // This function uploads video to Firebase
   const uploadVideo = async (e) => {
@@ -85,7 +83,7 @@ const Upload = ({setProgress}) => {
 
     console.log(url);
 
-    navigate('/');
+    navigate(-1);
 
   }
 

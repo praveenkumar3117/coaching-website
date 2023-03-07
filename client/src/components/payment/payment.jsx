@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import axios from 'axios'
 import shortid from 'shortid'
+import {AiOutlineSearch} from 'react-icons/ai'
 
 const Payment = () => {
     const [courses, setCourses] = useState([])
+    const [searchQuery, setSearchQuery] = useState('');
+    const [error, setError] = useState('')
+    const [allCourses, setAllCourses] = useState([]);
 
     const checkoutHandler = async (amount) => {
 
@@ -61,9 +65,48 @@ const Payment = () => {
             response.json().then((data)=>{
                 setCourses(data)
                 console.log(courses)
+                setAllCourses(data);
             })
         )
     }
+
+    const searchCourse = async(e)=>{
+
+        e?.preventDefault();
+        
+        const email = JSON.parse(localStorage.getItem('data')).result.email;
+
+        let newCourses = [];
+
+        if(allCourses?.length>0){
+            allCourses.forEach((item)=>{
+                if(item.title.toLowerCase().includes(searchQuery.toLowerCase())){
+                    newCourses.push(item)
+                }
+            })
+        }else{
+            setError('No Course to Show')
+            return;
+        }
+        
+        let searchCourses = [];
+            
+        if(newCourses.length>0){
+
+            newCourses.forEach(element => {
+                if(!element.user2Array.includes(email)){
+                    searchCourses.push(element);
+                }
+            });
+            setCourses(searchCourses)
+        }else{
+            setCourses([]);
+            setError('No Course Found')
+        }
+        
+
+        
+    } 
 
     useEffect(() => {
 
@@ -73,13 +116,38 @@ const Payment = () => {
 
     
     return (
-        <div className='pt-24 grid lg:grid lg:grid-cols-3 lg:grid-row-3 flex-col justify-center items-center'>
-            {
-                courses.map((item, index) => (
-                    <Card key={shortid.generate()} amount={item.Fees} checkoutHandler={checkoutHandler} />
 
-                ))
-            }
+
+        <div>
+            <form onSubmit={searchCourse} className='bg-gray-200 w-full mx-auto rounded py-2'>
+                <div className='flex flex-col lg:flex-row justify-between items-center p-2'>
+                    <label className='text-2xl text-black dark:text-white font-inter' htmlFor="search">Search Course by Name</label>
+                    <input onChange={(e)=>{setSearchQuery(e.target.value)}} className='p-2 m-2 rounded w-1/2 mx-auto border border-orange-black shadow-md' type="text" name="searchQuery" id="searchQuery" />
+                    <button className='p-2 bg-blue-300 mx-auto rounded shadow-lg active:shadow-none' type="submit"><AiOutlineSearch className='text-2xl'/></button>
+                </div>
+
+            </form>
+
+            <div>
+
+                {
+                    courses?.length>0 
+                    ?
+                    // mapping over all the courses and making a grid of the cards
+                    <div className='grid lg:grid lg:grid-cols-3 lg:grid-row-3 flex-col justify-center items-center'>
+                    {
+                        courses.map((item, index) => (
+                            <Card key={shortid.generate()} amount={item.Fees} checkoutHandler={checkoutHandler} courseName={item.title} />
+                            ))
+                    }
+                    </div>
+                    :
+                    // in case of any error
+                    <div className='mx-auto bg-gray-200 w-full p-2 '>
+                        {error}
+                    </div>
+                }
+            </div>
 
         </div>
     )

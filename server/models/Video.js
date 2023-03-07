@@ -22,14 +22,14 @@ const videoSchema = mongoose.Schema(
         },
         chapter: {
             type: Number,
-            //required: true
+            required: true
         },
         category: {
             type: Number,
             enum: [1,2,3,4,5]
         },
         lecture: {
-            type: String,
+            type: Number,
             required: true
         },
         pic: {
