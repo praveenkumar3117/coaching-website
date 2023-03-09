@@ -75,7 +75,7 @@ const Maths = () => {
 
         fetch(`http://localhost:5000/api/fetchVideos/view-video`, {
           method:'post',
-          body:JSON.stringify({subject, batch, category}),
+          body:JSON.stringify({subject, batch, category, courseName}),
           headers:{
             'Content-Type':'application/json'
           }
@@ -128,7 +128,7 @@ const Maths = () => {
 
         fetch(`http://localhost:5000/api/fetchVideos/course-video`, {
           method:'post',
-          body:JSON.stringify({courseName}),
+          body:JSON.stringify({courseName, subject}),
           headers:{
             'Content-Type':'application/json'
           }
@@ -187,7 +187,7 @@ const Maths = () => {
     <main className='py-32 flex flex-col lg:grid-cols-3 lg:grid-rows-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
     {
       chapterArr.map((item, index)=>(
-        <Chapters key={index} lectures = {lectures} chapter={item} subject="Physics"/>
+        <Chapters key={index} lectures = {lectures} user={type} chapter={item} subject="Physics"/>
       ))
     }
 

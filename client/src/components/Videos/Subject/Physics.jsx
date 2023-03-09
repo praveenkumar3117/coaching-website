@@ -11,10 +11,10 @@ const Physics = () => {
   const [chapters, setChapters] = useState(()=>new Set());
   const [chapterArr, setChapterArr] = useState([]);
   const location = useLocation();
-  // console.log(location.state)
   const {type, courseName, courseCategory} = location.state;
 
   useEffect(()=>{
+    console.log(type)
     const fetchVideosFaculty = async()=>{
       try{
           
@@ -31,16 +31,14 @@ const Physics = () => {
         }).then((response)=>{
           response.json().then(
             (lectureArr)=>{
-              console.log(lectureArr)
 
               lectureArr.forEach(element => {
                 if(!chapters.has(element.chapter)){
                   setChapters(prev => new Set(prev).add(element.chapter));
                   chapters.add(element.chapter);
-                  console.log(chapters)
                 }
               });
-
+              // setLectures(lectureArr)
               setLectures([...lectureArr])
               setChapterArr([...chapters].sort((a,b)=>{
                 if(parseInt(a)<parseInt(b)){
@@ -49,6 +47,7 @@ const Physics = () => {
                   return 1;
                 }
               }));
+
 
             }
           )
@@ -74,11 +73,12 @@ const Physics = () => {
           
         const subject = "Physics";
         const batch = JSON.parse(localStorage.getItem('data')).result.batch;
+        console.log(courseName)
         const category = location.state.courseCategory;
 
         fetch(`http://localhost:5000/api/fetchVideos/view-video`, {
           method:'post',
-          body:JSON.stringify({subject, batch, category}),
+          body:JSON.stringify({subject, batch, category, courseName}),
           headers:{
             'Content-Type':'application/json'
           }
@@ -128,11 +128,9 @@ const Physics = () => {
           
         const subject = "Physics";
         const batch = JSON.parse(localStorage.getItem('data')).result.batch;
-        const category = location.state.courseCategory;
-
         fetch(`http://localhost:5000/api/fetchVideos/course-video`, {
           method:'post',
-          body:JSON.stringify({courseName}),
+          body:JSON.stringify({subject, courseName}),
           headers:{
             'Content-Type':'application/json'
           }
@@ -185,17 +183,15 @@ const Physics = () => {
       fetchVideosUser2();
     }
 
-    console.log(lectures)
-
     //eslint-disable-next-line
   }, [type, courseName, location.state.courseCategory]);
 
 
   return (
-    <main className='pt-32 lg:grid lg:grid-cols-3 lg:grid-row-3'>
+    <main className='lg:grid lg:grid-cols-3 lg:grid-row-3'>
     {
       chapterArr.map((item, index) =>(
-          <Chapters key={index} lectures = {lectures} chapter={item} subject={"Physics"}/>
+          <Chapters key={index} lectures = {lectures} user={type} chapter={item} subject={"Physics"}/>
       ))  
     }
 

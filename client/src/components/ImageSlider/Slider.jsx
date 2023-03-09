@@ -42,7 +42,7 @@ const Image = () => {
 	};
 
   return (
-     <div className="pt-28 -z-20 lg:pt-20">
+     <div className="-z-20 ">
 			<Zoom {...zoomInProperties}>
 				{images.map((img, index) => (
 					<div key={index} className="flex -z-20 justify-center w-screen mx-auto">

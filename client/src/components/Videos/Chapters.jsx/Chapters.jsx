@@ -5,30 +5,26 @@ import { Link } from 'react-router-dom';
 
 const Chapters = (props) => {
 
-    const {subject, chapter, lectures}=props;
+    const {subject, chapter, lectures, user}=props;
     
     const [thisLectures, setLectures] = useState([]);
 
     useEffect(()=>{
-        console.log("Lectures are", lectures)
         // take all lectures that have this chapter number in them.
         lectures.forEach(element => {
             if(element.chapter==chapter){
-                setLectures(prev => prev.concat(element))
-                console.log(element)
-                console.log(thisLectures)
+                thisLectures.push(element)
+                setLectures(thisLectures)
+                console.log("thisLectures is", thisLectures)
 
             }
         });
-        console.log("This lectures is ",thisLectures)
-
-
     }, [])
 
 
   return (
-        <Link to='/lectures' state={thisLectures}>
-            <div className=' rounded px-8 my-2 mb-8 py-8 bg-gray-300 hover:bg-gray-400 text-black active:bg-gray-200 select-none w-full mx-auto'>
+        <Link to='/lectures' state={{thisLectures, user}}>
+            <div className='rounded px-8 mb-8 m-4 py-8 border border-red-300 bg-gray-300 hover:bg-gray-400 text-black active:bg-gray-200 select-none w-1/2'>
                 Chapter: {chapter}
             </div>
         </Link>

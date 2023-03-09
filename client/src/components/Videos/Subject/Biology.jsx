@@ -77,7 +77,7 @@ const Biology = (props) => {
 
         fetch(`http://localhost:5000/api/fetchVideos/view-video`, {
           method:'post',
-          body:JSON.stringify({subject, batch, category}),
+          body:JSON.stringify({subject, batch, category, courseName}),
           headers:{
             'Content-Type':'application/json'
           }
@@ -130,7 +130,7 @@ const Biology = (props) => {
 
         fetch(`http://localhost:5000/api/fetchVideos/course-video`, {
           method:'post',
-          body:JSON.stringify({courseName}),
+          body:JSON.stringify({courseName, subject}),
           headers:{
             'Content-Type':'application/json'
           }
@@ -188,7 +188,7 @@ const Biology = (props) => {
     <main className='py-32 flex flex-col lg:grid-cols-3 lg:grid-rows-3 lg:mx-4 lg:grid gap-4 justify-center items-center'>
     {
       chapterArr.map((item, index)=>(
-        <Lectures key={index} chapter={item.chapter} lecture = {item.lecture} link={item.vidurl} subject="Physics" title={item.title} pic={item.pic} batch = {batch}/>
+        <Lectures key={index} chapter={item.chapter} user={type} lecture = {item.lecture} link={item.vidurl} subject="Physics" title={item.title} pic={item.pic} batch = {batch}/>
       ))
     }
 

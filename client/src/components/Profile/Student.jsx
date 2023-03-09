@@ -52,12 +52,14 @@ const Student = () => {
             <p>
                 Email: {userinfo.email}
             </p>
-            <p>
-                Father's Name: {userinfo.fatherName}
-            </p>
-            <p>
-                Enrollment Number: {userinfo.enRoll}
-            </p>
+                {
+                    userinfo.enRoll ?
+                    <p>
+                    Enrollment Number: {userinfo.enRoll}
+                    </p>
+                    :
+                    null
+                }
             <br />
 
         </div>
