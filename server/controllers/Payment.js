@@ -1,6 +1,7 @@
 const Razorpay = require('razorpay')
 const crypto = require('crypto')
 const Payment = require('../models/Payment')
+const Course = require('../models/Course')
 
 const instance = new Razorpay({
     key_id: "rzp_test_mQT2hOwfgh1POz",
@@ -27,17 +28,20 @@ exports.checkout = async (req, res) => {
 
 exports.paymentVerification = async (req, res) => {
     try {
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-            req.body;
-        console.log(req.body);
-        const body = razorpay_order_id + "|" + razorpay_payment_id;
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, User2, courseName } = req.body;
+        const body = (razorpay_order_id + "|" + razorpay_payment_id);
 
         const expectedSignature = crypto
-            .createHmac("sha256", "rD42VmvSlyq7gruoZzfoFC2Z")
+            .createHmac("sha256", "knSoRjBjP7kvytO2hxPqwosk")
             .update(body.toString())
             .digest("hex");
-
-        const isAuthentic = expectedSignature === razorpay_signature;
+    
+        const value = await Payment.find({ 'razorpay_order_id' : razorpay_order_id })
+        if(!value)
+        {
+            return res.status(400).json({msg:"Same rzpID"})
+        }
+        const isAuthentic = (expectedSignature === razorpay_signature);
 
         if (isAuthentic) {
 
@@ -46,17 +50,25 @@ exports.paymentVerification = async (req, res) => {
                 razorpay_payment_id,
                 razorpay_signature,
             });
+            
+            const courseItem = await Course.find({ 'title': courseName })
+            console.log(courseItem)
+            courseItem[0].user2Array.push(User2)
+            await courseItem[0].save()
 
-            res.redirect(
-                `http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}`
-            );
+            // res.redirect(
+            //     `http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}`
+            // );
+            res.status(200).json( expectedSignature,razorpay_order_id, razorpay_payment_id, razorpay_signature, User2, courseName,
+                isAuthentic)
         } else {
             res.status(400).json({
-                razorpay_signature:razorpay_signature,
+               razorpay_signature, expectedSignature
             });
         }
     } catch (error) {
         res.status(500).send(error.message)
+        console.log(error.message)
     }
 }
 
