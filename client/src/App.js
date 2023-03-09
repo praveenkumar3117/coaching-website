@@ -136,14 +136,12 @@ function App() {
     
     <div>
       <div className="App bg-gray-100 font-lato">
-      <Payment/>
       <BrowserRouter>
       <LoginContext.Provider value = {loginContextparams}>
       
       <LoadingBar
         color='#f11946'
         progress={progress}
-        // onLoaderFinished={() => setProgress(0)}
         height={4}
       />
       
@@ -188,13 +186,14 @@ function App() {
 
           <Route path ="/student/test" element = {<ViewTestStudent /> } />
 
-          <Route path ="/upcoming-tests/student/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={<ShowTestCards  setProgress = {setProgress}/>} /> } />
+          <Route path ="/upcoming-tests/student/:batchORsubject" element = {<Protected user="student" setProgress = {setProgress} Component={<ShowTestCards setProgress = {setProgress}/>} /> } />
 
           {/* JEE Student */}
           <Route path ="/watch/student/JEE" element = {<Protected user="student" setProgress = {setProgress} Component={<ViewJEE setProgress = {setProgress}/>}/>} />
           <Route path ="/watch/student/JEE/Physics" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={<Physics setProgress = {setProgress}/>}/>} />
           <Route path ="/watch/student/JEE/Chemistry" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={<Chemistry setProgress = {setProgress}/>}/>} />
           <Route path ="/watch/student/JEE/Maths" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="JEE" Component={<Maths setProgress = {setProgress}/>}/>} />
+
           {/* NEET Student */}
           <Route path ="/watch/student/NEET" element = {<Protected setProgress={setProgress} user="student" type="user2" Component={<ViewNEET setProgress = {setProgress}/>}/>} />
           <Route path ="/watch/student/NEET/Physics" element = {<Protected setProgress={setProgress} user="student" type="user2" batch="NEET" Component={<Physics setProgress = {setProgress}/>}/>} />

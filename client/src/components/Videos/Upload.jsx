@@ -83,7 +83,7 @@ const Upload = ({setProgress}) => {
 
     console.log(url);
 
-    navigate(-1);
+    navigate(-1, );
 
   }
 
@@ -174,7 +174,7 @@ const Upload = ({setProgress}) => {
 
             <div className='mx-auto my-2 lg:my-0 w-2/3'>
 
-                <button disabled type='button' className='p-4 rounded bg-blue-300 w-full'>Physics</button>
+                <button disabled type='button' className='p-4 rounded bg-blue-300 w-full'>{subject}</button>
               
             </div>
 

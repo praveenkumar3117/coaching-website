@@ -33,7 +33,7 @@ const NavbarFaculty = () => {
 
 
   return (
-     <div className="shadow-md w-full sticky top-0 left-0 z-20">
+     <div className="shadow-md w-full sticky top-0 left-0 z-20 mb-4">
        <div className="md:flex items-center justify-between bg-gray-900 py-2 md:px-10">
          <div
            className="w-full font-medium text-4xl md:text-4xl select-none flex items-center text-white font-inter font-signature"

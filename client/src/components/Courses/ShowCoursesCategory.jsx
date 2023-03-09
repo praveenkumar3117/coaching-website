@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import {AiOutlinePlus} from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import shortid from 'shortid'
 
@@ -35,7 +34,7 @@ const ShowCoursesCategory = () => {
 
         {
             courses.map((item, index)=>(
-                <Link key={shortid.generate()} to={item.JEE?'/courses/jee':'/courses/neet'} state={{courseCategory:item.category, user2Arr:item.user2Array, type:"category"}}>
+                <Link key={shortid.generate()} to={item.JEE?'/courses/jee':'/courses/neet'} state={{courseCategory:item.category, user2Arr:item.user2Array, type:"category", courseName:item.title}}>
                     {/* Course Card */}
                     <div key={index} className="max-w-sm w-full m-4 p-4 hover:bg-blue-400 active:bg-[#5F9DF7] rounded overflow-hidden shadow-lg bg-[#5F9DF7]">
                         <div className = "px-6 py-4">

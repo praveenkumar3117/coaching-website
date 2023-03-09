@@ -76,7 +76,7 @@ const Chemistry = () => {
 
         fetch(`http://localhost:5000/api/fetchVideos/view-video`, {
           method:'post',
-          body:JSON.stringify({subject, batch, category}),
+          body:JSON.stringify({subject, batch, category, courseName}),
           headers:{
             'Content-Type':'application/json'
           }
@@ -129,7 +129,7 @@ const Chemistry = () => {
 
         fetch(`http://localhost:5000/api/fetchVideos/course-video`, {
           method:'post',
-          body:JSON.stringify({courseName}),
+          body:JSON.stringify({courseName, subject}),
           headers:{
             'Content-Type':'application/json'
           }
@@ -188,7 +188,7 @@ const Chemistry = () => {
     <main className='pt-32 lg:grid lg:grid-cols-3 lg:grid-row-3'>
     {
       chapterArr.map((item, index)=>(
-        <Chapters key={index} lectures = {lectures} chapter={item} subject={"Chemistry"}/>
+        <Chapters key={index} lectures = {lectures} user={type} chapter={item} subject={"Chemistry"}/>
       ))
     }
 

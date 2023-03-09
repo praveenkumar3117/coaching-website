@@ -5,6 +5,7 @@ import shortid from 'shortid'
 import { AiOutlineSearch } from 'react-icons/ai'
 
 const Payment = () => {
+    
     const [courses, setCourses] = useState([])
     const [searchQuery, setSearchQuery] = useState('');
     const [error, setError] = useState('')

@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Protected = (props) => {
   
-  const {Component, user, batch, setProgress, type, redirect1, redirect2} = props;
+  const {Component, user, batch, setProgress} = props;
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // if the type is not user2, then it will automatically be normal user
+  const {type} = location?.state?.type ? location.state.type : {type:undefined};
+
 
   useEffect(()=>{
     try{
@@ -57,6 +62,7 @@ const Protected = (props) => {
     navigate('/login');
   }
 
+    //eslint-disable-next-line
   }, [])
 
   return (

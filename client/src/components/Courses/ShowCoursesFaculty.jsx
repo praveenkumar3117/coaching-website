@@ -26,7 +26,7 @@ const ShowCourses = () => {
         }, [])
     
     return (
-    <div className='select-none pt-32 lg:grid lg:grid-cols-3 lg:grid-row-3 flex flex-col justify-center items-center'>
+    <div className='select-none lg:grid lg:grid-cols-3 lg:grid-row-3 flex flex-col justify-center items-center'>
 
         {
             courses.map((item, index)=>(

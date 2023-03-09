@@ -58,7 +58,9 @@ exports.fetchVideo = async (req, res) => {
         const subject = req.body.subject
         const category = req.body.category
         const courseName = req.body.courseName
-        const data = await Video.find({"courseName": courseName, [batch]: true, "subject": subject, "category": category }).populate('title').populate('vidurl').populate('teacher').populate('chapter').populate('lecture').populate('pic')
+
+        const data = await Video.find({"courseName": courseName, [batch]: true, "subject": subject, "category": category }).populate('title').populate('vidurl').populate('email').populate('chapter').populate('lecture').populate('pic')
+        
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
@@ -72,7 +74,22 @@ exports.fetchVideo = async (req, res) => {
 exports.fetchVideoWithCourseName = async (req, res) => {
     try {
         const courseName = req.body.courseName
-        const data = await Video.find({ 'courseName': courseName }).populate('title').populate('vidurl').populate('chapter').populate('lecture').populate('pic')
+        const subject = req.body.subject;
+        const data = await Video.find({'subject':subject,  'courseName': courseName }).populate('title').populate('vidurl').populate('chapter').populate('lecture').populate('pic')
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.removeVideoByURL = async (req, res) => {
+    try {
+        const vidurl = req.body.vidurl;
+        console.log(req.body)
+        const data = await Video.findOneAndDelete({ "vidurl": vidurl })
         res.status(200).json(data)
     } catch (error) {
         res.status(500).send({
