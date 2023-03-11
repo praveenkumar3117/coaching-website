@@ -1,57 +1,63 @@
 import React from 'react'
 import { useState , useEffect} from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { deleteObject, ref } from 'firebase/storage';
 import { storage } from '../../../firebase';
 
 
-function DeleteVideo(url){
-
-  const ans = window.confirm("Are you sure you want to delete this video?");
-
-  if(ans){
-    if(url){
-      let videoRef = ref(storage, url);
-      deleteObject(videoRef).then(()=>{
-        console.log("deleted")
-      }).catch((err)=>{
-        console.log(err)
-      })
-
-      // once this is done, delete the video from the database
-      fetch(`http://localhost:5000/api/fetchVideos/delete-video`, {
-        method:'post',
-        body:JSON.stringify({vidurl:url}),
-        headers:{
-          'Content-Type':'application/json'
-        }
-      }).then((response)=>{
-        response.json().then(
-          (res)=>{
-            console.log(res)
-            console.log("Deleted");
-            window.location.reload(true)
-          }
-        )
-      }).catch((err)=>{
-        console.log("Error is ", err);
-      })
-    }
-
-  }else{
-    return;
-  }
-
-}
 
 const Lectures = () => {
   
 //   List all lectures here
     const location = useLocation();
-    console.log("Location.state is ", location.state)
+    const navigate = useNavigate();
+    // console.log("Location.state is ", location.state)
     const [lectures, setLectures] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+
+
+    function DeleteVideo(url){
+
+      const ans = window.confirm("Are you sure you want to delete this video?");
+
+      if(ans){
+        if(url){
+          console.log("YES INSIDE HERE")
+
+          let videoRef = ref(storage, url);
+          deleteObject(videoRef).then(()=>{
+            console.log("deleted")
+          }).catch((err)=>{
+            console.log(err)
+          })
+
+          // once this is done, delete the video from the database
+          fetch(`http://localhost:5000/api/fetchVideos/delete-video`, {
+            method:'post',
+            body:JSON.stringify({vidurl:url}),
+            headers:{
+              'Content-Type':'application/json'
+            }
+          }).then((response)=>{
+            response.json().then(
+              (res)=>{
+                console.log(res)
+                console.log("Deleted");
+                navigate(-1)
+                // window.location.reload(true)
+              }
+            )
+          }).catch((err)=>{
+            console.log("Error is ", err);
+          })
+        }
+
+      }else{
+        return;
+      }
+
+    }
     
     useEffect(()=>{
       if(location.state===undefined || location.state===null){

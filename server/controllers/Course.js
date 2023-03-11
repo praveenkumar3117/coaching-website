@@ -51,6 +51,7 @@ exports.FetchCourseWithUser2 = async (req, res) => {
         const email = req.body.email
         const data = await Course.find({})
         const result = []
+        console.log(data)
         data.forEach(item => {
             if (item.user2Array.includes(email)) {
                 result.push(item)
