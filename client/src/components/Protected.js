@@ -6,9 +6,16 @@ const Protected = (props) => {
   const {Component, user, batch, setProgress} = props;
   const navigate = useNavigate();
   const location = useLocation();
+  let type = undefined;
 
   // if the type is not user2, then it will automatically be normal user
-  const {type} = location?.state?.type ? location.state.type : {type:undefined};
+  if(location?.state?.type){
+    console.log(location.state.type)
+    console.log(user)
+    type = location.state.type;
+  }
+  // const {type} = location?.state?.type ? location.state.type : {type:undefined};
+  console.log(type)
 
 
   useEffect(()=>{

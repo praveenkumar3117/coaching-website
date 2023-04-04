@@ -75,3 +75,4 @@ exports.paymentVerification = async (req, res) => {
 exports.getKey = (req, res) => {
     res.status(200).json({ key: "rzp_test_mQT2hOwfgh1POz" })
 }
+

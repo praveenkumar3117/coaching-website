@@ -88,9 +88,15 @@ exports.fetchVideoWithCourseName = async (req, res) => {
 exports.removeVideoByURL = async (req, res) => {
     try {
         const vidurl = req.body.vidurl;
-        console.log(req.body)
+        // console.log(req.body)
         const data = await Video.findOneAndDelete({ "vidurl": vidurl })
-        res.status(200).json(data)
+        console.log(data)
+        if(data){
+            res.status(200).json({success:true, data})
+        }else[
+            res.status(404).json({success:false, message:"No such video found"})
+        ]
+
     } catch (error) {
         res.status(500).send({
             success: false,

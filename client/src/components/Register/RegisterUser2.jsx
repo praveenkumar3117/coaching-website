@@ -1,24 +1,25 @@
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { storage } from '../../firebase';
+import { v4 as uuidv4 } from 'uuid';
 
 const RegisterUser2 = () => {
 
   const role = "Student";
 
-//   const [batch, setBatch] = useState('JEE');
   const [name, setUserName] = useState('');
-//   const [fatherName, setUserFatherName] = useState('');
   const [email, setUserEmail] = useState('');
   const [password, setUserPassword] = useState('');
   const [confirmeduserpassword, setConfirmedUserPassword] = useState('');
-//   const [enRoll, setEnrollNum] = useState('');
   const [phone, setPhoneNumber] = useState(0);
   const [category, setCategory] = useState(0);
-//   const [year, setYear] = useState(0);
   const [DOB, setDOB] = useState(new Date());
   const [warning, setWarning]=useState("");
-  
+  const [profilepic, setProfilePic] = useState(null);
+  const [profilepicurl, setProfilePicURL] = useState(null);
+
   const batches = ['JEE', 'NEET', 'Foundation'];
 
   const handleDOB = (event)=>{
@@ -33,14 +34,23 @@ const RegisterUser2 = () => {
     // Prevent Reloading of the page
     event.preventDefault();
 
-    // first we need token of the admin
-    //   const user = JSON.parse(localStorage.getItem("data"));
-    //   const Token = user.result.token;
-    //   console.log(Token); // token fetch successful
-    //   console.log(category)
-
     // check if the password and confirmed password are same of not
     if(password===confirmeduserpassword && password.length >= 5){
+
+      // if upload a profile picture then upload it to firebase storage
+      if(profilepic){
+        const profilePicRef = ref(storage, `profile-images/user2-images/${profilepic.name + uuidv4()}`)
+        await uploadBytes(profilePicRef, profilepic).then((snapshot) => {
+          console.log(snapshot)
+          getDownloadURL(snapshot.ref).then((URL) => {
+            setProfilePicURL(URL);
+          })
+        }).catch((er)=>{
+          window.alert("Couldn't upload your profile picture")
+          console.log(er);
+        })
+      }
+    
 
         // Now check if the token is of admin or not
         let result = await fetch("http://localhost:5000/api/User2/register/user2",
@@ -49,7 +59,7 @@ const RegisterUser2 = () => {
           headers:{
             'Content-Type':'application/json'
           },
-          body:JSON.stringify({name, email, password, phone, DOB})
+          body:JSON.stringify({name, email, password, phone, DOB, pic:profilepicurl})
 
         });
 
@@ -71,64 +81,18 @@ const RegisterUser2 = () => {
             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
               <h1 className="mb-8 text-3xl text-center">Sign up</h1>
 
-              {/* for selecting batch  */}
-              {/* <label for="user" class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">Batch</label>
+              {/* for getting image upload */}
 
-              <select id="user" onChange={(event)=>{setBatch(event.target.value)}}
-              class="block border border-grey-light w-full p-3 rounded mb-4" >
-
-                  {batches.map((sBatch, index)=>{
-                    return <option className='h-80' value = {sBatch} key={index}>{sBatch}</option>
-                  })}
-
-              </select> */}
-
-              {/* for Category */}
-              {/* <div className='w-full my-4 flex justify-center flex-col md:flex-row lg:flex-row'>
-                  <label for="batchlabel" class="form-label inline-block mb-2 text-gray-700"
-                      > Select Category </label>
-                      <div className='mx-2 px-2'>  
-                      <label className='mx-2' htmlFor="1">1</label>
-                      <input type="radio" onChange={(e)=>{setCategory(1)}} name="category" id="1" value={'1'} />
-                      </div>
-
-                      <div className='mx-2 px-2'>
-                      <label htmlFor="NEET" className='mx-2'>2</label>
-                      <input type="radio" onChange={(e)=>{setCategory(2)}} name="category" id="2" value={'2'}/>
-                      </div>
-
-                      <div className='mx-2 px-2'>
-                      <label htmlFor="NEET" className='mx-2'>2</label>
-                      <input type="radio" onChange={(e)=>{setCategory(3)}} name="category" id="3" value={'3'}/>
-                      </div>
-
-                      <div className='mx-2 px-2'>
-                      <label htmlFor="NEET" className='mx-2'>4</label>
-                      <input type="radio" onChange={(e)=>{setCategory(4)}} name="category" id="4" value={'4'}/>
-                      </div>
-
-                      <div className='mx-2 px-2'>
-                      <label htmlFor="NEET" className='mx-2'>5</label>
-                      <input type="radio" onChange={(e)=>{setCategory(5)}} name="category" id="5" value={'5'}/>
-                      </div>
-              </div> */}
-
-
+              <div className='p-2 m-2'>
+                <label htmlFor="file" className='text-left mr-64 font-bold text-gray-500'>Profile Photo </label>
+                <input onChange={(e)=>{setProfilePic(e.target.files[0])}} id="file-upload" type="file" accept='image/*'/>
+              </div>
 
               {/* for Username  */}
               <input required type="text" onChange={(event)=>{setUserName(event.target.value)}} className="block border border-grey-light w-full p-3 rounded mb-4" name="fullname" placeholder="Full Name" />
 
-              {/* for Father's Name  */}
-              {/* <input required type="text" onChange={(event)=>{setUserFatherName(event.target.value)}} className="block border border-grey-light w-full p-3 rounded mb-4" name="fullname" placeholder="Father's Name" /> */}
-
               {/* for Email  */}
               <input required onChange={(event)=>{setUserEmail(event.target.value)}} type="email" className="block border border-grey-light w-full p-3 rounded mb-4" name="email" placeholder="Email" />
-
-              {/* for Enrollment Number  */}
-              {/* <input required onChange={(event)=>{setEnrollNum(event.target.value)}} type="text" className="block border border-grey-light w-full p-3 rounded mb-4" name="enRoll" placeholder="Enrollment Number" /> */}
-
-              {/* for Year of Joining  */}
-              {/* <input required onChange={(event)=>{setYear(event.target.value)}} type="text" className="block border border-grey-light w-full p-3 rounded mb-4" name="text" placeholder="Year of Joining" /> */}
 
               {/* For DOB */}
               <label htmlFor="dob" className='text-left mr-64 font-bold text-gray-500'>DOB</label>

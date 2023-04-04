@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {AiOutlineSearch} from 'react-icons/ai'
 
 const DeleteUser2 = () => {
@@ -51,10 +51,45 @@ const DeleteUser2 = () => {
     }
   }
 
-  useEffect(()=>{
-    searchUser();
+
+  const removeUser= useCallback((e, email)=>{
+    e.preventDefault();
+
+    // ask for confirmation
+    const confirmation = window.confirm('Are you sure you want to delete this user?')
+    if(!confirmation){
+      return;
+    }
+
+    // get the data from the database
+    fetch(`http://localhost:5000/api/User2/remove`, {
+      method:'delete',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({email:email})
+    }).then(response=>{
+      response.json().then((data)=>{
+        if(data.success){
+          setError(null);
+          window.location.reload(true)
+        }else{
+          setError(data.message);
+        }
+        searchUser();
+      })
+    })
+    
   }, [])
 
+
+
+  useEffect(()=>{
+    // search at the start of the component for all the users
+    searchUser();
+
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div className='z-40 justify-center'>
@@ -107,8 +142,8 @@ const DeleteUser2 = () => {
                                 </tr>
                             </tbody></table>
 
-                            <div class="text-center my-3">
-                                <a class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" href="#">View Profile</a>
+                            <div className="text-center my-3">
+                                <button onClick={(e)=>{removeUser(e,user.email)}} className="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium">Remove</button>
                             </div>
 
                         </div>

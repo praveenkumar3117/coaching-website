@@ -3,7 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import shortid from 'shortid'
-import { storage } from '../../firebase'
+import { storage } from '../../firebase';
+
 
 const RemoveSliderImages = ({setProgress}) => {
 
@@ -28,9 +29,17 @@ const RemoveSliderImages = ({setProgress}) => {
   }
 
   const deleteImage = async(id, url)=>{
+
     try{
+      const confirmation = window.confirm("Are you sure you want to delete this image?");
+      if(!confirmation){
+        return;
+      }
       setProgress(10);
+      // delete the image from firebase storage
       await deleteObject(ref(storage, url));
+
+      // delete the image from the database
       fetch(`http://localhost:5000/api/images/remove-slider-images`, {
         method:'delete',
         headers:{
