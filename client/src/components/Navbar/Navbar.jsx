@@ -47,7 +47,7 @@ const Navbar = () => {
       {/* -----------------SIDE BAR--------------------- */}
               
        {open?
-       <div className={`z-40 fixed mr-4 w-64`}>
+       <div className={`transition ease-in-out delay-150 z-40 fixed mr-4 w-64`}>
          <aside
            class={`relative h-screen ease-in-out duration-1000`}
            aria-label="Sidebar"
@@ -173,7 +173,7 @@ const Navbar = () => {
           </div>
         </aside>
       </div>
-      :""}
+      :null}
 
 
      </div>

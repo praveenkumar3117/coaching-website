@@ -32,9 +32,10 @@ const Student = () => {
                 batch: data.result.batch
             }))
             console.log(data.result.email)
-            console.log(userinfo)
+            console.log("userinfo is ", userinfo)
         }
         findData();
+        console.log(userinfo)
     }, [])
 
 

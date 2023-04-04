@@ -23,7 +23,6 @@ const Lectures = () => {
 
       if(ans){
         if(url){
-          console.log("YES INSIDE HERE")
 
           let videoRef = ref(storage, url);
           deleteObject(videoRef).then(()=>{

@@ -25,10 +25,18 @@ const RemoveTeacherImages = ({setProgress}) => {
   }
 
   const deleteImage = async(id, url)=>{
+
+    // ask for confirmation
+    const confirmation = window.confirm("Are you sure you want to delete this image?");
+    if(!confirmation){
+      return;
+    }
     try{
       setProgress(10);
-
+      // delete the image from firebase storage
       await deleteObject(ref(storage, url));
+
+      // delete the image from the database
       fetch(`http://localhost:5000/api/images/remove-teacher-images`, {
         method:'delete',
         headers:{
